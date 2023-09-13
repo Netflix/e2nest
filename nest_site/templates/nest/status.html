@@ -1,0 +1,25 @@
+{% extends "nest/generic.html" %}
+
+{% block content %}
+<div id="content-main">
+
+    {% if tests %}
+    <p>Here are the tests assigned to you:</p>
+    <table>
+        <tr><th>Title</th><th>Session ID</th><th>Status</th><th>Action</th></tr>
+        {% for test in tests %}
+        <tr>
+            <td>{{ test.title }}</td>
+            <td>{{ test.session }}</td>
+            <td>{{ test.status }}</td>
+            <td>{% if test.action %}<a href="{{ test.action_url }}">{{ test.action }}</a>{% endif %}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% else %}
+    <p> There are no tests assigned to you at this moment.</p>
+    <p> Please come back later.</p>
+    {% endif %}
+
+</div>
+{% endblock %}

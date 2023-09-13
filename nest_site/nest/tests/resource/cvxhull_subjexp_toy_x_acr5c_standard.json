@@ -1,0 +1,81 @@
+{
+    "stimulus_config": {
+        "contents": [
+            {
+                "content_id": 0,
+                "name": "CTS3E1_B__15_55_16_0"
+            }
+        ],
+        "stimuli": [
+            {
+                "path": "/media/mp4/samples/Meridian/Meridian_A__8_18_8_23__SdrVvhevce2pVE__3840_2160__6000_enable_audio_False_vmaf103.58_phonevmaf104.85_psnr50.40_kbps6702.77.mp4",
+                "stimulus_id": 0,
+                "type": "video/mp4",
+                "content_id": 0
+            },
+            {
+                "path": "/media/mp4/samples/Meridian/Meridian_A__8_18_8_23__SdrVvhevce2pVE__960_540__500_enable_audio_False_vmaf87.25_phonevmaf98.62_psnr45.35_kbps559.20.mp4",
+                "stimulus_id": 1,
+                "type": "video/mp4",
+                "content_id": 0
+            }
+        ],
+        "stimulusvotegroups": [
+            {
+                "stimulus_ids": [
+                    0
+                ],
+                "stimulusvotegroup_id": 0
+            },
+            {
+                "stimulus_ids": [
+                    1
+                ],
+                "stimulusvotegroup_id": 1
+            }
+        ],
+        "stimulusgroups": [
+            {
+                "stimulusvotegroup_ids": [
+                    0
+                ],
+                "stimulusgroup_id": 0
+            },
+            {
+                "stimulusvotegroup_ids": [
+                    1
+                ],
+                "stimulusgroup_id": 1
+            }
+        ]
+    },
+    "experiment_config": {
+        "title": "cvxhull_subjexp_acr5c",
+        "description": "convex hull subject test",
+        "methodology": "acr5c",
+        "vote_scale": "0_TO_100",
+        "rounds_per_session": 2,
+        "random_seed": null,
+        "prioritized": [],
+        "blocklist_stimulusgroup_ids": [],
+        "additions": [
+            {
+                "position": {
+                    "round_id": 0,
+                    "before_or_after": "before"
+                },
+                "context": {
+                    "title": "Instruction",
+                    "text_html": " <p> In this session, you will be asked to evaluate the annoyance caused by presence of banding artifact in a set of videos. </p>  <p> If you don't know what banding artifacts are, it would be good idea to contact the author <b>ptandon@catflix.com</b> before proceeding with the test. </p>  <p> There are two phases, a training and a testing phase. In the training, you will see 6 videos and will be asked to rate the presence of banding artifacts. The videos are chosen to span the scale and there is an expected score for each of the video to provide an anchor for the testing videos. </p>  <p> Next, the testing phase will start and at this point, your scores will be recorded.</b> </p>  <p> To play a video, click on the <b>\"Play Video\"</b> button. </p>  <p> <b style='color:red !important;'>Please, maintain the viewing distance of approximately 1.5 times the monitor height.</b> </p>  <p> Video clips will loop over, <b>press \"space\" key or double click mouse </b> to terminate the video. A slider will appear and you will be able to rate annoyance caused by the presence of banding in the video on the 0-100 scale, qualitatively from unwatchable to imperceptible. Please try to focus only on the banding artifacts. For all clips rate the worst case banding seen during video playback, even for videos with multiple scenes. </p>   <p> Once you have scored the video, click the \"Next\" button to fetch next video and repeat. </p>  <p> Progress is shown for training and testing cases on top, near instructions. </p> ",
+                    "actions_html": "\n            <p>\n                <a class=\"button\" href=\"{action_url}\"  id=\"start\">Start Test</a>\n            </p>\n            "
+                }
+            }
+        ],
+        "round_context": {
+            "template_version": "standard",
+            "num_plays": 2,
+            "t_gray": 2000,
+            "instruction_html": ""
+        }
+    }
+}

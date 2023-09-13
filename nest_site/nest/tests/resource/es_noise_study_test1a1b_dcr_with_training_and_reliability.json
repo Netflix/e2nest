@@ -1,0 +1,208 @@
+{
+    "stimulus_config": {
+        "contents": [
+            {
+                "content_id": 0,
+                "name": "false-as-water"
+            },
+            {
+                "content_id": 1,
+                "name": "breaking-bad-season-1-gray-mat"
+            },
+            {
+                "content_id": 2,
+                "name": "PeeWeeS2Store-underVMAF-A"
+            }
+        ],
+        "stimuli": [
+            {
+                "path": "/media/mp4/es_noise_study/test1a1b/false-as-water-filmgrain-subj-test-prep-101-beamr5-20211020aopalach-__beamr5__3840_2160__none__qp18_vmaf89.76_psnr37.13_kbps211044.19_fps24.0.mp4",
+                "stimulus_id": 0,
+                "type": "video/mp4",
+                "content_id": 0
+            },
+            {
+                "path": "/media/mp4/es_noise_study/test1a1b/false-as-water-filmgrain-subj-test-prep-101-beamr5-20211020aopalach-__beamr5__3840_2160__ni_denoise_filter_before_scale__qp18_vmaf64.77_psnr32.28_kbps54491.76_fps24.0.mp4",
+                "stimulus_id": 1,
+                "type": "video/mp4",
+                "content_id": 0
+            },
+            {
+                "path": "/media/mp4/es_noise_study/test1a1b/false-as-water-filmgrain-subj-test-prep-101b-beamr5-20211020aopalach-__beamr5__3840_2160__ni_denoise_with_target_noise_rmse_5_filter_before_scale__qp18_vmaf68.47_psnr33.67_kbps90682.35_fps24.0.mp4",
+                "stimulus_id": 2,
+                "type": "video/mp4",
+                "content_id": 0
+            },
+            {
+                "path": "/media/mp4/es_noise_study/test1a1b/breaking-bad-season-1-gray-mat-filmgrain-subj-test-prep-101-beamr5-20211020aopalach-__beamr5__3840_2160__none__qp18_vmaf93.08_psnr36.88_kbps115614.98_fps23.976023976023978.mp4",
+                "stimulus_id": 3,
+                "type": "video/mp4",
+                "content_id": 1,
+                "info": {
+                    "flavors": [
+                        "training"
+                    ]
+                }
+            },
+            {
+                "path": "/media/mp4/es_noise_study/test1a1b/breaking-bad-season-1-gray-mat-filmgrain-subj-test-prep-101-beamr5-20211020aopalach-__beamr5__3840_2160__ni_denoise_filter_before_scale__qp18_vmaf83.17_psnr34.15_kbps28163.51_fps23.976023976023978.mp4",
+                "stimulus_id": 4,
+                "type": "video/mp4",
+                "content_id": 1,
+                "info": {
+                    "flavors": [
+                        "training"
+                    ]
+                }
+            },
+            {
+                "path": "/media/mp4/es_noise_study/test1a1b/PeeWeeS2Store-underVMAF-A-filmgrain-subj-test-prep-101c-beamr5-20211020aopalach-__beamr5__1920_1080__ni_denoise_with_target_noise_rmse_3_filter_before_scale__qp18_vmaf95.22_psnr35.48_kbps27620.95_fps29.97002997002997.mp4",
+                "stimulus_id": 5,
+                "type": "video/mp4",
+                "content_id": 2,
+                "info": {
+                    "flavors": [
+                        "reliability"
+                    ]
+                }
+            },
+            {
+                "path": "/media/mp4/es_noise_study/test1a1b/PeeWeeS2Store-underVMAF-A-filmgrain-subj-test-prep-26-beamr5-20211007-__beamr5__960_540__none__qp37_vmaf26.91_psnr27.9_kbps283.91_fps29.97002997002997",
+                "stimulus_id": 6,
+                "type": "video/mp4",
+                "content_id": 2,
+                "info": {
+                    "flavors": [
+                        "reliability"
+                    ]
+                }
+            }
+        ],
+        "stimulusvotegroups": [
+            {
+                "stimulus_ids": [
+                    0, 0
+                ],
+                "stimulusvotegroup_id": 0
+            },
+            {
+                "stimulus_ids": [
+                    1, 0
+                ],
+                "stimulusvotegroup_id": 1
+            },
+            {
+                "stimulus_ids": [
+                    2, 0
+                ],
+                "stimulusvotegroup_id": 2
+            },
+            {
+                "stimulus_ids": [
+                    3, 3
+                ],
+                "stimulusvotegroup_id": 3
+            },
+            {
+                "stimulus_ids": [
+                    4, 3
+                ],
+                "stimulusvotegroup_id": 4
+            },
+            {
+                "stimulus_ids": [
+                    5, 6
+                ],
+                "stimulusvotegroup_id": 5
+            }
+        ],
+        "stimulusgroups": [
+            {
+                "stimulusvotegroup_ids": [
+                    0
+                ],
+                "stimulusgroup_id": 0
+            },
+            {
+                "stimulusvotegroup_ids": [
+                    1
+                ],
+                "stimulusgroup_id": 1
+            },
+            {
+                "stimulusvotegroup_ids": [
+                    2
+                ],
+                "stimulusgroup_id": 2
+            },
+            {
+                "stimulusvotegroup_ids": [
+                    3
+                ],
+                "stimulusgroup_id": 3
+            },
+            {
+                "stimulusvotegroup_ids": [
+                    4
+                ],
+                "stimulusgroup_id": 4
+            },
+            {
+                "stimulusvotegroup_ids": [
+                    5
+                ],
+                "stimulusgroup_id": 5
+            }
+        ]
+    },
+    "experiment_config": {
+        "title": "es_noise_study_test1a1b_with_train_and_reliability",
+        "description": "ES noise study test 1A and 1B DCR with training and reliability",
+        "vote_scale": "FIVE_POINT",
+        "methodology": "dcr",
+        "rounds_per_session": 6,
+        "random_seed": null,
+        "prioritized": [
+            {"session_idx": null, "round_id": 0, "stimulusgroup_id": 3},
+            {"session_idx": null, "round_id": 1, "stimulusgroup_id": 4},
+            {"session_idx": null, "round_id": null, "stimulusgroup_id": 5}
+        ],
+        "blocklist_stimulusgroup_ids": [3, 4, 5],
+        "training_round_ids": [0, 1],
+        "additions": [
+            {
+                "position": {
+                    "round_id": 0,
+                    "before_or_after": "before"
+                },
+                "context": {
+                    "title": "Instruction",
+                    "text_html": " <p> In this session, you will be asked to evaluate the annoyance caused by presence of banding artifact in a set of videos. </p>  <p> If you don't know what banding artifacts are, it would be good idea to contact the author <b>ptandon@catflix.com</b> before proceeding with the test. </p>  <p> There are two phases, a training and a testing phase. In the training, you will see 6 videos and will be asked to rate the presence of banding artifacts. The videos are chosen to span the scale and there is an expected score for each of the video to provide an anchor for the testing videos. </p>  <p> Next, the testing phase will start and at this point, your scores will be recorded.</b> </p>  <p> To play a video, click on the <b>\"Play Video\"</b> button. </p>  <p> <b style='color:red !important;'>Please, maintain the viewing distance of approximately 1.5 times the monitor height.</b> </p>  <p> Video clips will loop over, <b>press \"space\" key or double click mouse </b> to terminate the video. A slider will appear and you will be able to rate annoyance caused by the presence of banding in the video on the 0-100 scale, qualitatively from unwatchable to imperceptible. Please try to focus only on the banding artifacts. For all clips rate the worst case banding seen during video playback, even for videos with multiple scenes. </p>   <p> Once you have scored the video, click the \"Next\" button to fetch next video and repeat. </p>  <p> Progress is shown for training and testing cases on top, near instructions. </p> ",
+                    "actions_html": "\n            <p>\n                <a class=\"button\" href=\"{action_url}\"  id=\"start\">Next</a>\n            </p>\n            "
+                }
+            },
+            {
+                "position": {
+                    "round_id": 0,
+                    "before_or_after": "before"
+                },
+                "context": {
+                    "title": "Training",
+                    "text_html": " <p> To get you familiar with the test procedure, let's start with some training before kicking off the test officially. </p> ",
+                    "actions_html": "\n            <p>\n                <a class=\"button\" href=\"{action_url}\"  id=\"start\">Start Training</a>\n            </p>\n            "
+                }
+            },
+            {
+                "position": {
+                    "round_id": 2,
+                    "before_or_after": "before"
+                },
+                "context": {
+                    "title": "Start the test",
+                    "text_html": " <p> Now let's officially start the test. </p> ",
+                    "actions_html": "\n            <p>\n                <a class=\"button\" href=\"{action_url}\"  id=\"start\">Start Test</a>\n            </p>\n            "
+                }
+            }
+        ]
+    }
+}

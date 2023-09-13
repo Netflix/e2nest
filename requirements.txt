@@ -1,0 +1,10 @@
+Django
+django-polymorphic
+sureal
+pandas
+django-mathfilters
+python-slugify
+tzdata
+lxml
+selenium
+tox

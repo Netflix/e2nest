@@ -1,0 +1,35 @@
+{% extends "admin/base_site.html" %}
+{% load i18n static %}
+
+{% block coltype %}colMS{% endblock %}
+
+{% block bodyclass %}{{ block.super }} dashboard{% endblock %}
+
+{% block breadcrumbs %}{% endblock %}
+
+{% block content %}
+<div id="content-main">
+
+{% if experiments %}
+    <table>
+        <tr><th>ID</th><th>Title</th><th>Description</th><th>Experimenters</th><th>Dataset</th></tr>
+        {% for experiment in experiments %}
+            <tr>
+                <td>{{ experiment.id}}</td>
+                <td><a href="{% url 'admin:nest_experiment_change' experiment.id %}">{{ experiment.title}}</a></td>
+                <td>{% if experiment.description %} {{ experiment.description}} {% endif %}</td>
+                <td>
+                    {% if experiment.experimenters.all %}
+                        {% for who in experiment.experimenters.all %} <p> {{ who.user.username }} </p> {% endfor %}
+                    {% endif %}
+                </td>
+                <td><a href="{% url 'admin:download_sureal' experiment.id %}">Download</a></td>
+
+            </tr>
+        {% endfor %}
+    </table>
+{% else %}
+    <p>{% trans 'Empty experiment list.' %}</p>
+{% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends "nest/base.html" %}
+{% load i18n static %}
+
+{% block extrastyle %} {% if extrastyle_html %} <style> {{ extrastyle_html|safe }} </style> {% endif %} {% endblock %}
+
+{% block extrahead %}
+    {% if script_html %} <script> {{ script_html|safe }}</script> {% endif %}
+    {% if extrahead_html %} {{ extrahead_html|safe }} {% endif %}
+{% endblock %}
+
+{% block coltype %}colMS{% endblock %}
+
+{% block bodyclass %}{{ block.super }} dashboard{% endblock %}
+
+{% block breadcrumbs %}{% endblock %}
+
+{% block content_title %} {% if title %}<h1>{{ title }}</h1>{% endif %} {% endblock %}
+
+{% block content %}
+<div id="content-main">
+    {% if text_html %} {{ text_html|safe }} {% endif %}
+    {% if actions_html %} {{ actions_html|safe }} {% endif %}
+</div>
+{% endblock %}
+
+{% block extrabody %} {% if extrabody_html %} {{ extrabody_html|safe }} {% endif %} {% endblock %}

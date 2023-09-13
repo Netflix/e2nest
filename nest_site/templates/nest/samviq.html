@@ -1,0 +1,339 @@
+{% extends "nest/base.html" %}
+{% load i18n static %}
+{% load mathfilters %}
+{% load nest_extras %}
+
+{% block extrastyle %}
+<style>
+    video { position:fixed; top:{{ 100|sub:video_display_percentage|div:2 }}%; left:{{ 100|sub:video_display_percentage|div:2  }}%; height:{{ video_display_percentage }}%; width:{{ video_display_percentage }}%; display:none; }
+    #qa { margin: 30px 0; display:none; }
+
+    {% if preload_videos %}
+
+    /* progress bar */
+    .progress-circle {
+        position: absolute;
+        width: 100px;
+        height: 100px;
+    }
+
+    .progress-svg {
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+
+    .progress-bg,
+    .progress-bar {
+        fill: none;
+        stroke-width: 10;
+    }
+
+    .progress-bg {
+        stroke: #ccc;
+    }
+
+    .progress-bar {
+        stroke: #4caf50;
+        stroke-dasharray: 283;
+        stroke-dashoffset: 283;
+    }
+
+    .progress-text {
+        position: absolute;
+        width: 100%;
+        text-align: center;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 18px;
+    }
+
+    .progress-modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+    }
+
+    {% endif %}
+
+</style>
+{% endblock %}
+
+{% block extrahead %}
+<link rel="stylesheet" href="{% static "nest/css/forms.css" %}">
+{% endblock %}
+
+{% block coltype %}colMS{% endblock %}
+
+{% block bodyclass %}{{ block.super }} dashboard{% endblock %}
+
+{% block breadcrumbs %}{% endblock %}
+
+{% block content_title %} {% if title %}<h1>{{ title }}</h1>{% endif %} {% endblock %}
+
+{% block content %}
+<div id="content-main">
+    {% if instruction_html %} {{ instruction_html|safe }} {% endif %}
+
+    <div id=qa>
+        <p id="question">
+            {{ question }}
+        </p>
+        <p>
+        <form id="samviq" {% if session_id %} action="{% url 'nest:step_session' session_id %}" {% endif %} method="post">
+            {% csrf_token %}
+
+            <table>
+                <tr>
+                    <th style="width:20%"><a class="button button_in_table" id="video_ref" onclick="showVideo(0)">{{ button_ref }}</a></th>
+                    <th style="width:65%"> </th>
+                    <th style="text-align:center;width:15%"> Score </th>
+                </tr>
+
+                {% for b, svgid in buttons|zip:stimulusvotegroup_ids %}
+                <tr>
+
+                    <td style="width:20%"><a class="button button_in_table" id="video_{{ forloop.counter0 }}" onclick="showVideo({{ forloop.counter }})">{{ b }}</a></td>
+
+                    <td style="width:65%">
+                        <div class="slidecontainer">
+                            <div class="sliderticks">
+                                <p>{{ labels.4 }}</p>
+                                <p>{{ labels.3 }}</p>
+                                <p>{{ labels.2 }}</p>
+                                <p>{{ labels.1 }}</p>
+                                <p>{{ labels.0 }}</p>
+                            </div>
+                            <input type="range" name="samviq_{{ svgid }}" min="0" max="100" value="50" class="slider" step="1" id="myRange_{{ svgid }}">
+                        </div>
+                    </td>
+
+                    <td style="text-align:center;width:15%"> <span id="score_{{ svgid }}"></span> </td>
+
+                </tr>
+                {% endfor %}
+
+            </table>
+            <br>
+            <div>
+                <button type="submit" style="float:right" class="button" id="submit">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block extrabody %}
+<video {% if video_show_controls %} controls {% endif %} loop controlsList="nodownload nofullscreen noremoteplayback"></video>
+
+{% if preload_videos %}
+<!-- Popup for showing loading progress -->
+<div id="progressModal" class="progress-modal">
+    <div class="progress-circle">
+        <svg class="progress-svg" width="100" height="100">
+            <circle class="progress-bg" cx="50" cy="50" r="45"></circle>
+            <circle class="progress-bar" cx="50" cy="50" r="45"></circle>
+        </svg>
+        <div class="progress-text">
+            <span class="progress-percentage">0%</span>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+<script>
+    // Global variable to store preloaded Blob URLs
+    const preloadedVideos = [];
+
+    // Video urls: put the reference video first
+    const videoUrls = [];
+    videoUrls.push('{{ video_ref }}');
+    {% for vid in videos %}
+        videoUrls.push('{{ vid }}');
+    {% endfor %}
+
+    let showVideo;
+    let video;
+
+    window.addEventListener('load', function () {
+        container = document.getElementById("container");
+        qa = document.getElementById("qa");
+        {% for svgid in stimulusvotegroup_ids %}
+            slider_{{ svgid }} = document.getElementById("myRange_{{ svgid }}");
+            output_{{ svgid }} = document.getElementById("score_{{ svgid }}");
+            output_{{ svgid }}.innerHTML = slider_{{ svgid }}.value; // Display the default slider value
+        {% endfor %}
+        container.style.display = "block";
+        qa.style.display = "block";
+        video = document.getElementsByTagName("video")[0];
+
+        {% if not preload_videos %}
+        document.getElementById("video_ref").addEventListener("click", function() {
+            showVideo(0); // _showVideoWithoutPreload
+        });
+        {% for b in buttons %}
+        document.getElementById("video_{{ forloop.counter0 }}").addEventListener("click", function () {
+            showVideo({{ forloop.counter }}); // _showVideoWithoutPreload
+        });
+        {% endfor %}
+        {% endif %}
+
+        {% for svgid in stimulusvotegroup_ids %}
+            slider_{{ svgid }}.oninput = function() {
+                output_{{ svgid }}.innerHTML = this.value;
+            }
+        {% endfor %}
+
+        {% if preload_videos %}
+
+        function _showVideoWithPreload(index) {
+            console.log('_showVideoWithPreload called');
+            if (preloadedVideos.length === videoUrls.length) {
+                const blobUrl = preloadedVideos[index];
+                container.style.display = "none";
+                video.style.display = "block";
+                document.body.style.backgroundColor = "black";
+                video.setAttribute('src', blobUrl);
+                video.play();
+            } else {
+                console.log('The videos have not loaded yet');
+            }
+        }
+
+        // set the global variable
+        showVideo = _showVideoWithPreload;
+
+        // We will preload and wait till all videos are loaded
+        console.log('Preloading videos');
+
+        // progress bar
+        const progressBar = document.querySelector('.progress-bar');
+        const progressText = document.querySelector('.progress-percentage');
+        const progressModal = document.getElementById('progressModal');
+
+        // set the location of the progress bar
+        const x = window.innerWidth / 2 - 50; // progressCircle is 100px wide
+        const y = window.innerHeight * 0.4;
+
+        const progressCircle = document.querySelector('.progress-circle');
+        progressCircle.style.position = 'absolute';
+        progressCircle.style.left = `${x}px`;
+        progressCircle.style.top = `${y}px`;
+
+        const maxProgress = 100; // Max progress
+        const totalLength = 2 * Math.PI * 45; // 2 * Math.PI * radius
+        downloadPercentages = new Array(videoUrls.length).fill(0);
+
+        // Show the progress modal
+        progressModal.style.display = 'flex';
+
+        function hideProgressModal() {
+            progressModal.style.display = 'none';
+        }
+        function updateProgress(progress) {
+            progressBar.style.strokeDashoffset = Math.round(totalLength - (progress / maxProgress) * totalLength);
+            progressText.textContent = `${progress}%`;
+        }
+
+        const preloadPromises = videoUrls.map((url, index) => preloadVideoXHR(url, index, updateProgress));
+
+        Promise.all(preloadPromises)
+            .then((blobUrls) => {
+                // Store the preloaded Blob URLs in the global variable
+                blobUrls.forEach(blobUrl => preloadedVideos.push(blobUrl));
+
+                console.log('All videos preloaded successfully');
+
+                // Hide the popup
+                hideProgressModal();
+            })
+            .catch((error) => {
+                // Handle error
+                console.error(error);
+
+                // Hide the popup
+                hideProgressModal();
+            });
+
+        {% else %}
+
+        function _showVideoWithoutPreload(index) {
+            console.log('_showVideoWithoutPreload called');
+            const url = videoUrls[index];
+            container.style.display = "none";
+            video.style.display = "block";
+            document.body.style.backgroundColor = "black";
+            video.setAttribute('src', url);
+            video.play();
+        }
+
+        // set the global variable
+        showVideo = _showVideoWithoutPreload;
+
+        {% endif %}
+    })
+    document.addEventListener("keydown", (e) => {
+        if ((e.key === " ") && (video.style.display === "block")) {
+            video.pause()
+            video.style.display = "none";
+            document.body.style.backgroundColor = "white";
+            container.style.display = "block";
+            qa.style.display = "block";
+        }
+    });
+    document.addEventListener("dblclick", (e) => {
+        if (video.style.display === "block") {
+            video.pause()
+            video.style.display = "none";
+            document.body.style.backgroundColor = "white";
+            container.style.display = "block";
+            qa.style.display = "block";
+        }
+    });
+
+    {% if preload_videos %}
+
+    let downloadPercentages = [];
+
+    function preloadVideoXHR(src, index, progressBarUpdate) {
+        return new Promise((resolve, reject) => {
+            const xhr = new XMLHttpRequest();
+            xhr.open('GET', src, true);
+            xhr.responseType = 'blob';
+
+            xhr.onprogress = (event) => {
+                if (event.lengthComputable) {
+                    downloadPercentages[index] = (event.loaded / event.total) * 100;
+                    progressBarUpdate(Math.round(Math.min.apply(null, downloadPercentages)));
+                }
+            };
+
+            xhr.onload = () => {
+                if (xhr.status === 200) {
+                    const blobUrl = URL.createObjectURL(xhr.response);
+                    resolve(blobUrl);
+                } else {
+                    reject(new Error(`Failed to preload video: ${xhr.statusText}`));
+                }
+            };
+
+            xhr.onerror = () => {
+                reject(new Error('Network error occurred'));
+            };
+
+            xhr.send();
+        });
+    }
+
+    {% endif %}
+
+</script>
+
+{% endblock %}
+

@@ -1,0 +1,1379 @@
+{
+  "stimulus_config": {
+    "contents": [
+      {
+        "content_id": 0,
+        "name": "taxi-driver"
+      },
+      {
+        "content_id": 1,
+        "name": "false-as-water"
+      },
+      {
+        "content_id": 2,
+        "name": "boys-over-flowers-vol-1-episod"
+      },
+      {
+        "content_id": 3,
+        "name": "groundhog-day"
+      },
+      {
+        "content_id": 4,
+        "name": "oishinbo-season-2-episode-43"
+      }
+    ],
+    "stimuli": [
+      {
+        "path": "/Users/zli/Data/noise_study/projects_6sec_07262021/other/encode_selection/test2/training/taxi-driver-filmgrain-subj-test-prep-102-beamr5-20211020aopalach-__beamr5__3840_2160__none__qp25_vmaf90.48_psnr35.28_kbps20330.72_fps23.976023976023978.mp4",
+        "stimulus_id": 0,
+        "type": "video/mp4",
+        "content_id": 0
+      },
+      {
+        "path": "/Users/zli/Data/noise_study/projects_6sec_07262021/other/encode_selection/test2/training/reference/taxi-driver-filmgrain-subj-test-prep-102-4-beamr5-20211020aopalach-__beamr5__3840_2160__none__qp20_vmaf96.07_psnr37.97_kbps78842.2_fps23.976023976023978.mp4",
+        "stimulus_id": 1,
+        "type": "video/mp4",
+        "content_id": 0
+      },
+      {
+        "path": "/Users/zli/Data/noise_study/projects_6sec_07262021/other/encode_selection/test2/training/taxi-driver-filmgrain-subj-test-prep-102-beamr5-20211020aopalach-__beamr5__3840_2160__none__qp28_vmaf85.76_psnr34.37_kbps6643.19_fps23.976023976023978.mp4",
+        "stimulus_id": 2,
+        "type": "video/mp4",
+        "content_id": 0
+      },
+      {
+        "path": "/Users/zli/Data/noise_study/projects_6sec_07262021/other/encode_selection/test2/training/taxi-driver-filmgrain-subj-test-prep-102-beamr5-20211020aopalach-__beamr5__3840_2160__none__qp31_vmaf81.11_psnr33.89_kbps2924.92_fps23.976023976023978.mp4",
+        "stimulus_id": 3,
+        "type": "video/mp4",
+        "content_id": 0
+      },
+      {
+        "path": "/Users/zli/Data/noise_study/projects_6sec_07262021/other/encode_selection/test2/training/taxi-driver-filmgrain-subj-test-prep-102-beamr5-20211020aopalach-__beamr5__3840_2160__none__qp37_vmaf70.18_psnr32.6_kbps1203.85_fps23.976023976023978.mp4",
+        "stimulus_id": 4,
+        "type": "video/mp4",
+        "content_id": 0
+      },
+      {
+        "path": "/Users/zli/Data/noise_study/projects_6sec_07262021/other/encode_selection/test2/training/false-as-water-filmgrain-subj-test-prep-102-beamr5-20211020aopalach-__beamr5__3840_2160__none__qp25_vmaf76.59_psnr31.97_kbps44965.31_fps24.0.mp4",
+        "stimulus_id": 5,
+        "type": "video/mp4",
+        "content_id": 1
+      },
+      {
+        "path": "/Users/zli/Data/noise_study/projects_6sec_07262021/other/encode_selection/test2/training/reference/false-as-water-filmgrain-subj-test-prep-102-4-beamr5-20211020aopalach-__beamr5__3840_2160__none__qp23_vmaf81.22_psnr33.32_kbps79997.4_fps24.0.mp4",
+        "stimulus_id": 6,
+        "type": "video/mp4",
+        "content_id": 1
+      },
+      {
+        "path": "/Users/zli/Data/noise_study/projects_6sec_07262021/other/encode_selection/test2/training/false-as-water-filmgrain-subj-test-prep-102-beamr5-20211020aopalach-__beamr5__3840_2160__none__qp28_vmaf67.33_psnr30.93_kbps10584.95_fps24.0.mp4",
+        "stimulus_id": 7,
+        "type": "video/mp4",
+        "content_id": 1
+      },
+      {
+        "path": "/Users/zli/Data/noise_study/projects_6sec_07262021/other/encode_selection/test2/training/false-as-water-filmgrain-subj-test-prep-102-beamr5-20211020aopalach-__beamr5__3840_2160__none__qp31_vmaf61.22_psnr30.87_kbps3067.39_fps24.0.mp4",
+        "stimulus_id": 8,
+        "type": "video/mp4",
+        "content_id": 1
+      },
+      {
+        "path": "/Users/zli/Data/noise_study/projects_6sec_07262021/other/encode_selection/test2/training/false-as-water-filmgrain-subj-test-prep-102-beamr5-20211020aopalach-__beamr5__3840_2160__none__qp37_vmaf53.24_psnr30.84_kbps544.62_fps24.0.mp4",
+        "stimulus_id": 9,
+        "type": "video/mp4",
+        "content_id": 1
+      },
+      {
+        "path": "/Users/zli/Data/noise_study/projects_6sec_07262021/other/encode_selection/test2/reliability/boys_over_flowers_vol_1_episode_9__43_34.8_43_40.8__SdrX264MainCrfVE__1920_1080__qp22_enable_audio_False_vmaf91.34_phonevmaf99.83_psnr38.15_kbps5849.45.mp4",
+        "stimulus_id": 10,
+        "type": "video/mp4",
+        "content_id": 2
+      },
+      {
+        "path": "/Users/zli/Data/noise_study/projects_6sec_07262021/other/encode_selection/test2/reliability/reference/boys-over-flowers-vol-1-episod-filmgrain-subj-test-prep-102a-2-beamr5-20211020aopalach-__beamr5__1920_1080__none__qp16_vmaf98.08_psnr41.87_kbps30605.85_fps29.97002997002997.mp4",
+        "stimulus_id": 11,
+        "type": "video/mp4",
+        "content_id": 2
+      },
+      {
+        "path": "/Users/zli/Data/noise_study/projects_6sec_07262021/other/encode_selection/test2/reliability/boys_over_flowers_vol_1_episode_9__43_34.8_43_40.8__SdrX264MainCrfVE__1920_1080__qp25_enable_audio_False_vmaf87.43_phonevmaf98.64_psnr37.33_kbps2591.13.mp4",
+        "stimulus_id": 12,
+        "type": "video/mp4",
+        "content_id": 2
+      },
+      {
+        "path": "/Users/zli/Data/noise_study/projects_6sec_07262021/other/encode_selection/test2/reliability/boys_over_flowers_vol_1_episode_9__43_34.8_43_40.8__SdrX264MainCrfVE__1920_1080__qp31_enable_audio_False_vmaf75.59_phonevmaf91.86_psnr35.59_kbps1045.68.mp4",
+        "stimulus_id": 13,
+        "type": "video/mp4",
+        "content_id": 2
+      },
+      {
+        "path": "/Users/zli/Data/noise_study/projects_6sec_07262021/other/encode_selection/test2/reliability/boys_over_flowers_vol_1_episode_9__43_34.8_43_40.8__SdrX264MainCrfVE__1920_1080__qp37_enable_audio_False_vmaf58.21_phonevmaf78.25_psnr33.45_kbps565.97.mp4",
+        "stimulus_id": 14,
+        "type": "video/mp4",
+        "content_id": 2
+      },
+      {
+        "path": "/Users/zli/Data/noise_study/projects_6sec_07262021/other/encode_selection/test2/testing/groundhog-day-filmgrain-subj-test-prep-102-beamr5-20211020aopalach-__beamr5__3840_2160__none__qp22_vmaf86.72_psnr35.41_kbps19096.14_fps23.976023976023978.mp4",
+        "stimulus_id": 15,
+        "type": "video/mp4",
+        "content_id": 3
+      },
+      {
+        "path": "/Users/zli/Data/noise_study/projects_6sec_07262021/other/encode_selection/test2/testing/reference/groundhog-day-filmgrain-subj-test-prep-102-3-beamr5-20211020aopalach-__beamr5__3840_2160__none__qp18_vmaf93.49_psnr37.44_kbps86656.13_fps23.976023976023978.mp4",
+        "stimulus_id": 16,
+        "type": "video/mp4",
+        "content_id": 3
+      },
+      {
+        "path": "/Users/zli/Data/noise_study/projects_6sec_07262021/other/encode_selection/test2/testing/groundhog-day-filmgrain-subj-test-prep-102-beamr5-20211020aopalach-__beamr5__3840_2160__none__qp25_vmaf81.89_psnr35.28_kbps5834.53_fps23.976023976023978.mp4",
+        "stimulus_id": 17,
+        "type": "video/mp4",
+        "content_id": 3
+      },
+      {
+        "path": "/Users/zli/Data/noise_study/projects_6sec_07262021/other/encode_selection/test2/testing/groundhog-day-filmgrain-subj-test-prep-102-beamr5-20211020aopalach-__beamr5__3840_2160__none__qp28_vmaf77.9_psnr35.06_kbps3134.26_fps23.976023976023978.mp4",
+        "stimulus_id": 18,
+        "type": "video/mp4",
+        "content_id": 3
+      },
+      {
+        "path": "/Users/zli/Data/noise_study/projects_6sec_07262021/other/encode_selection/test2/testing/groundhog-day-filmgrain-subj-test-prep-102-beamr5-20211020aopalach-__beamr5__3840_2160__none__qp37_vmaf63.01_psnr33.66_kbps1072.15_fps23.976023976023978.mp4",
+        "stimulus_id": 19,
+        "type": "video/mp4",
+        "content_id": 3
+      },
+      {
+        "path": "/Users/zli/Data/noise_study/projects_6sec_07262021/other/encode_selection/test2/testing/groundhog-day-filmgrain-subj-test-prep-102-1-beamr5-20211020aopalach-__beamr5__1920_1080__none__qp19_vmaf83.4_psnr35.43_kbps6259.83_fps23.976023976023978.mp4",
+        "stimulus_id": 20,
+        "type": "video/mp4",
+        "content_id": 3
+      },
+      {
+        "path": "/Users/zli/Data/noise_study/projects_6sec_07262021/other/encode_selection/test2/testing/groundhog-day-filmgrain-subj-test-prep-102-1-beamr5-20211020aopalach-__beamr5__1920_1080__none__qp22_vmaf79.47_psnr35.25_kbps2873.39_fps23.976023976023978.mp4",
+        "stimulus_id": 21,
+        "type": "video/mp4",
+        "content_id": 3
+      },
+      {
+        "path": "/Users/zli/Data/noise_study/projects_6sec_07262021/other/encode_selection/test2/testing/groundhog-day-filmgrain-subj-test-prep-102-1-beamr5-20211020aopalach-__beamr5__1920_1080__none__qp25_vmaf75.17_psnr34.98_kbps1777.32_fps23.976023976023978.mp4",
+        "stimulus_id": 22,
+        "type": "video/mp4",
+        "content_id": 3
+      },
+      {
+        "path": "/Users/zli/Data/noise_study/projects_6sec_07262021/other/encode_selection/test2/testing/groundhog-day-filmgrain-subj-test-prep-102-1-beamr5-20211020aopalach-__beamr5__1920_1080__none__qp37_vmaf53.98_psnr32.85_kbps447.94_fps23.976023976023978.mp4",
+        "stimulus_id": 23,
+        "type": "video/mp4",
+        "content_id": 3
+      },
+      {
+        "path": "/Users/zli/Data/noise_study/projects_6sec_07262021/other/encode_selection/test2/testing/groundhog-day-filmgrain-subj-test-prep-102-2-beamr5-20211020aopalach-__beamr5__960_540__none__qp16_vmaf78.43_psnr35.0_kbps2428.88_fps23.976023976023978.mp4",
+        "stimulus_id": 24,
+        "type": "video/mp4",
+        "content_id": 3
+      },
+      {
+        "path": "/Users/zli/Data/noise_study/projects_6sec_07262021/other/encode_selection/test2/testing/groundhog-day-filmgrain-subj-test-prep-102-1-beamr5-20211020aopalach-__beamr5__960_540__none__qp19_vmaf74.61_psnr34.77_kbps1529.18_fps23.976023976023978.mp4",
+        "stimulus_id": 25,
+        "type": "video/mp4",
+        "content_id": 3
+      },
+      {
+        "path": "/Users/zli/Data/noise_study/projects_6sec_07262021/other/encode_selection/test2/testing/groundhog-day-filmgrain-subj-test-prep-102-1-beamr5-20211020aopalach-__beamr5__960_540__none__qp22_vmaf69.9_psnr34.47_kbps1019.01_fps23.976023976023978.mp4",
+        "stimulus_id": 26,
+        "type": "video/mp4",
+        "content_id": 3
+      },
+      {
+        "path": "/Users/zli/Data/noise_study/projects_6sec_07262021/other/encode_selection/test2/testing/groundhog-day-filmgrain-subj-test-prep-102-1-beamr5-20211020aopalach-__beamr5__960_540__none__qp37_vmaf42.63_psnr31.1_kbps187.83_fps23.976023976023978.mp4",
+        "stimulus_id": 27,
+        "type": "video/mp4",
+        "content_id": 3
+      },
+      {
+        "path": "/Users/zli/Data/noise_study/projects_6sec_07262021/other/encode_selection/test2/testing/groundhog-day-filmgrain-subj-test-prep-102b-beamr5-20211020aopalach-__beamr5__3840_2160__ni_denoise_with_target_noise_rmse_10_filter_before_scale__qp22_vmaf87.6_psnr35.62_kbps22715.48_fps23.976023976023978.mp4",
+        "stimulus_id": 28,
+        "type": "video/mp4",
+        "content_id": 3
+      },
+      {
+        "path": "/Users/zli/Data/noise_study/projects_6sec_07262021/other/encode_selection/test2/testing/groundhog-day-filmgrain-subj-test-prep-102b-beamr5-20211020aopalach-__beamr5__3840_2160__ni_denoise_with_target_noise_rmse_10_filter_before_scale__qp25_vmaf82.71_psnr35.42_kbps6302.04_fps23.976023976023978.mp4",
+        "stimulus_id": 29,
+        "type": "video/mp4",
+        "content_id": 3
+      },
+      {
+        "path": "/Users/zli/Data/noise_study/projects_6sec_07262021/other/encode_selection/test2/testing/groundhog-day-filmgrain-subj-test-prep-102b-beamr5-20211020aopalach-__beamr5__3840_2160__ni_denoise_with_target_noise_rmse_10_filter_before_scale__qp28_vmaf79.0_psnr35.2_kbps3413.76_fps23.976023976023978.mp4",
+        "stimulus_id": 30,
+        "type": "video/mp4",
+        "content_id": 3
+      },
+      {
+        "path": "/Users/zli/Data/noise_study/projects_6sec_07262021/other/encode_selection/test2/testing/groundhog-day-filmgrain-subj-test-prep-102b-beamr5-20211020aopalach-__beamr5__3840_2160__ni_denoise_with_target_noise_rmse_10_filter_before_scale__qp37_vmaf64.52_psnr33.87_kbps1167.29_fps23.976023976023978.mp4",
+        "stimulus_id": 31,
+        "type": "video/mp4",
+        "content_id": 3
+      },
+      {
+        "path": "/Users/zli/Data/noise_study/projects_6sec_07262021/other/encode_selection/test2/testing/groundhog-day-filmgrain-subj-test-prep-102b-1-beamr5-20211020aopalach-__beamr5__1920_1080__ni_denoise_with_target_noise_rmse_10_filter_before_scale__qp19_vmaf83.0_psnr35.47_kbps5366.98_fps23.976023976023978.mp4",
+        "stimulus_id": 32,
+        "type": "video/mp4",
+        "content_id": 3
+      },
+      {
+        "path": "/Users/zli/Data/noise_study/projects_6sec_07262021/other/encode_selection/test2/testing/groundhog-day-filmgrain-subj-test-prep-102b-1-beamr5-20211020aopalach-__beamr5__1920_1080__ni_denoise_with_target_noise_rmse_10_filter_before_scale__qp22_vmaf79.31_psnr35.27_kbps2763.27_fps23.976023976023978.mp4",
+        "stimulus_id": 33,
+        "type": "video/mp4",
+        "content_id": 3
+      },
+      {
+        "path": "/Users/zli/Data/noise_study/projects_6sec_07262021/other/encode_selection/test2/testing/groundhog-day-filmgrain-subj-test-prep-102b-1-beamr5-20211020aopalach-__beamr5__1920_1080__ni_denoise_with_target_noise_rmse_10_filter_before_scale__qp25_vmaf75.11_psnr35.0_kbps1754.52_fps23.976023976023978.mp4",
+        "stimulus_id": 34,
+        "type": "video/mp4",
+        "content_id": 3
+      },
+      {
+        "path": "/Users/zli/Data/noise_study/projects_6sec_07262021/other/encode_selection/test2/testing/groundhog-day-filmgrain-subj-test-prep-102b-1-beamr5-20211020aopalach-__beamr5__1920_1080__ni_denoise_with_target_noise_rmse_10_filter_before_scale__qp37_vmaf54.15_psnr32.88_kbps444.7_fps23.976023976023978.mp4",
+        "stimulus_id": 35,
+        "type": "video/mp4",
+        "content_id": 3
+      },
+      {
+        "path": "/Users/zli/Data/noise_study/projects_6sec_07262021/other/encode_selection/test2/testing/groundhog-day-filmgrain-subj-test-prep-102b-2-beamr5-20211020aopalach-__beamr5__960_540__ni_denoise_with_target_noise_rmse_10_filter_before_scale__qp16_vmaf78.33_psnr35.0_kbps2375.93_fps23.976023976023978.mp4",
+        "stimulus_id": 36,
+        "type": "video/mp4",
+        "content_id": 3
+      },
+      {
+        "path": "/Users/zli/Data/noise_study/projects_6sec_07262021/other/encode_selection/test2/testing/groundhog-day-filmgrain-subj-test-prep-102b-1-beamr5-20211020aopalach-__beamr5__960_540__ni_denoise_with_target_noise_rmse_10_filter_before_scale__qp19_vmaf74.57_psnr34.78_kbps1517.78_fps23.976023976023978.mp4",
+        "stimulus_id": 37,
+        "type": "video/mp4",
+        "content_id": 3
+      },
+      {
+        "path": "/Users/zli/Data/noise_study/projects_6sec_07262021/other/encode_selection/test2/testing/groundhog-day-filmgrain-subj-test-prep-102b-1-beamr5-20211020aopalach-__beamr5__960_540__ni_denoise_with_target_noise_rmse_10_filter_before_scale__qp22_vmaf69.94_psnr34.48_kbps1017.48_fps23.976023976023978.mp4",
+        "stimulus_id": 38,
+        "type": "video/mp4",
+        "content_id": 3
+      },
+      {
+        "path": "/Users/zli/Data/noise_study/projects_6sec_07262021/other/encode_selection/test2/testing/groundhog-day-filmgrain-subj-test-prep-102b-1-beamr5-20211020aopalach-__beamr5__960_540__ni_denoise_with_target_noise_rmse_10_filter_before_scale__qp37_vmaf42.39_psnr31.13_kbps188.84_fps23.976023976023978.mp4",
+        "stimulus_id": 39,
+        "type": "video/mp4",
+        "content_id": 3
+      },
+      {
+        "path": "/Users/zli/Data/noise_study/projects_6sec_07262021/other/encode_selection/test2/testing/groundhog-day-filmgrain-subj-test-prep-102b-beamr5-20211020aopalach-__beamr5__3840_2160__ni_denoise_with_target_noise_rmse_5_filter_before_scale__qp19_vmaf88.92_psnr36.38_kbps34892.78_fps23.976023976023978.mp4",
+        "stimulus_id": 40,
+        "type": "video/mp4",
+        "content_id": 3
+      },
+      {
+        "path": "/Users/zli/Data/noise_study/projects_6sec_07262021/other/encode_selection/test2/testing/groundhog-day-filmgrain-subj-test-prep-102b-beamr5-20211020aopalach-__beamr5__3840_2160__ni_denoise_with_target_noise_rmse_5_filter_before_scale__qp22_vmaf85.23_psnr35.77_kbps10325.38_fps23.976023976023978.mp4",
+        "stimulus_id": 41,
+        "type": "video/mp4",
+        "content_id": 3
+      },
+      {
+        "path": "/Users/zli/Data/noise_study/projects_6sec_07262021/other/encode_selection/test2/testing/groundhog-day-filmgrain-subj-test-prep-102b-beamr5-20211020aopalach-__beamr5__3840_2160__ni_denoise_with_target_noise_rmse_5_filter_before_scale__qp25_vmaf82.18_psnr35.6_kbps5044.0_fps23.976023976023978.mp4",
+        "stimulus_id": 42,
+        "type": "video/mp4",
+        "content_id": 3
+      },
+      {
+        "path": "/Users/zli/Data/noise_study/projects_6sec_07262021/other/encode_selection/test2/testing/groundhog-day-filmgrain-subj-test-prep-102b-beamr5-20211020aopalach-__beamr5__3840_2160__ni_denoise_with_target_noise_rmse_5_filter_before_scale__qp37_vmaf65.82_psnr34.13_kbps1176.6_fps23.976023976023978.mp4",
+        "stimulus_id": 43,
+        "type": "video/mp4",
+        "content_id": 3
+      },
+      {
+        "path": "/Users/zli/Data/noise_study/projects_6sec_07262021/other/encode_selection/test2/testing/groundhog-day-filmgrain-subj-test-prep-102b-2-beamr5-20211020aopalach-__beamr5__1920_1080__ni_denoise_with_target_noise_rmse_5_filter_before_scale__qp16_vmaf84.83_psnr35.73_kbps8293.13_fps23.976023976023978.mp4",
+        "stimulus_id": 44,
+        "type": "video/mp4",
+        "content_id": 3
+      },
+      {
+        "path": "/Users/zli/Data/noise_study/projects_6sec_07262021/other/encode_selection/test2/testing/groundhog-day-filmgrain-subj-test-prep-102b-1-beamr5-20211020aopalach-__beamr5__1920_1080__ni_denoise_with_target_noise_rmse_5_filter_before_scale__qp19_vmaf82.33_psnr35.55_kbps4344.24_fps23.976023976023978.mp4",
+        "stimulus_id": 45,
+        "type": "video/mp4",
+        "content_id": 3
+      },
+      {
+        "path": "/Users/zli/Data/noise_study/projects_6sec_07262021/other/encode_selection/test2/testing/groundhog-day-filmgrain-subj-test-prep-102b-1-beamr5-20211020aopalach-__beamr5__1920_1080__ni_denoise_with_target_noise_rmse_5_filter_before_scale__qp22_vmaf79.31_psnr35.35_kbps2672.3_fps23.976023976023978.mp4",
+        "stimulus_id": 46,
+        "type": "video/mp4",
+        "content_id": 3
+      },
+      {
+        "path": "/Users/zli/Data/noise_study/projects_6sec_07262021/other/encode_selection/test2/testing/groundhog-day-filmgrain-subj-test-prep-102b-1-beamr5-20211020aopalach-__beamr5__1920_1080__ni_denoise_with_target_noise_rmse_5_filter_before_scale__qp37_vmaf55.37_psnr33.16_kbps477.81_fps23.976023976023978.mp4",
+        "stimulus_id": 47,
+        "type": "video/mp4",
+        "content_id": 3
+      },
+      {
+        "path": "/Users/zli/Data/noise_study/projects_6sec_07262021/other/encode_selection/test2/testing/groundhog-day-filmgrain-subj-test-prep-102b-2-beamr5-20211020aopalach-__beamr5__960_540__ni_denoise_with_target_noise_rmse_5_filter_before_scale__qp16_vmaf78.11_psnr35.03_kbps2307.33_fps23.976023976023978.mp4",
+        "stimulus_id": 48,
+        "type": "video/mp4",
+        "content_id": 3
+      },
+      {
+        "path": "/Users/zli/Data/noise_study/projects_6sec_07262021/other/encode_selection/test2/testing/groundhog-day-filmgrain-subj-test-prep-102b-1-beamr5-20211020aopalach-__beamr5__960_540__ni_denoise_with_target_noise_rmse_5_filter_before_scale__qp19_vmaf74.62_psnr34.83_kbps1527.91_fps23.976023976023978.mp4",
+        "stimulus_id": 49,
+        "type": "video/mp4",
+        "content_id": 3
+      },
+      {
+        "path": "/Users/zli/Data/noise_study/projects_6sec_07262021/other/encode_selection/test2/testing/groundhog-day-filmgrain-subj-test-prep-102b-1-beamr5-20211020aopalach-__beamr5__960_540__ni_denoise_with_target_noise_rmse_5_filter_before_scale__qp22_vmaf70.3_psnr34.56_kbps1044.78_fps23.976023976023978.mp4",
+        "stimulus_id": 50,
+        "type": "video/mp4",
+        "content_id": 3
+      },
+      {
+        "path": "/Users/zli/Data/noise_study/projects_6sec_07262021/other/encode_selection/test2/testing/groundhog-day-filmgrain-subj-test-prep-102b-1-beamr5-20211020aopalach-__beamr5__960_540__ni_denoise_with_target_noise_rmse_5_filter_before_scale__qp37_vmaf43.22_psnr31.35_kbps201.34_fps23.976023976023978.mp4",
+        "stimulus_id": 51,
+        "type": "video/mp4",
+        "content_id": 3
+      },
+      {
+        "path": "/Users/zli/Data/noise_study/projects_6sec_07262021/other/encode_selection/test2/testing/groundhog_day__21_46.5_21_52.5__SdrX264MainCrfVE__1920_1080__qp19_enable_audio_False_vmaf95.98_phonevmaf99.99_psnr39.23_kbps12242.40.mp4",
+        "stimulus_id": 52,
+        "type": "video/mp4",
+        "content_id": 3
+      },
+      {
+        "path": "/Users/zli/Data/noise_study/projects_6sec_07262021/other/encode_selection/test2/testing/groundhog_day__21_46.5_21_52.5__SdrX264MainCrfVE__1920_1080__qp22_enable_audio_False_vmaf91.71_phonevmaf99.87_psnr38.69_kbps4567.06.mp4",
+        "stimulus_id": 53,
+        "type": "video/mp4",
+        "content_id": 3
+      },
+      {
+        "path": "/Users/zli/Data/noise_study/projects_6sec_07262021/other/encode_selection/test2/testing/groundhog_day__21_46.5_21_52.5__SdrX264MainCrfVE__1920_1080__qp25_enable_audio_False_vmaf86.24_phonevmaf98.07_psnr38.04_kbps2607.98.mp4",
+        "stimulus_id": 54,
+        "type": "video/mp4",
+        "content_id": 3
+      },
+      {
+        "path": "/Users/zli/Data/noise_study/projects_6sec_07262021/other/encode_selection/test2/testing/groundhog_day__21_46.5_21_52.5__SdrX264MainCrfVE__1920_1080__qp37_enable_audio_False_vmaf49.53_phonevmaf69.76_psnr33.96_kbps741.56.mp4",
+        "stimulus_id": 55,
+        "type": "video/mp4",
+        "content_id": 3
+      },
+      {
+        "path": "/Users/zli/Data/noise_study/projects_6sec_07262021/other/encode_selection/test2/testing/groundhog_day__21_46.5_21_52.5__SdrX264MainCrfVE__960_540__qp16_enable_audio_False_vmaf92.84_phonevmaf99.92_psnr38.37_kbps3805.86.mp4",
+        "stimulus_id": 56,
+        "type": "video/mp4",
+        "content_id": 3
+      },
+      {
+        "path": "/Users/zli/Data/noise_study/projects_6sec_07262021/other/encode_selection/test2/testing/groundhog_day__21_46.5_21_52.5__SdrX264MainCrfVE__960_540__qp19_enable_audio_False_vmaf89.03_phonevmaf99.17_psnr37.91_kbps2216.85.mp4",
+        "stimulus_id": 57,
+        "type": "video/mp4",
+        "content_id": 3
+      },
+      {
+        "path": "/Users/zli/Data/noise_study/projects_6sec_07262021/other/encode_selection/test2/testing/groundhog_day__21_46.5_21_52.5__SdrX264MainCrfVE__960_540__qp22_enable_audio_False_vmaf83.71_phonevmaf96.71_psnr37.37_kbps1414.24.mp4",
+        "stimulus_id": 58,
+        "type": "video/mp4",
+        "content_id": 3
+      },
+      {
+        "path": "/Users/zli/Data/noise_study/projects_6sec_07262021/other/encode_selection/test2/testing/groundhog_day__21_46.5_21_52.5__SdrX264MainCrfVE__960_540__qp37_enable_audio_False_vmaf35.54_phonevmaf53.99_psnr32.30_kbps271.31.mp4",
+        "stimulus_id": 59,
+        "type": "video/mp4",
+        "content_id": 3
+      },
+      {
+        "path": "/Users/zli/Data/noise_study/projects_6sec_07262021/other/encode_selection/test2/testing/oishinbo-season-2-episode-43-filmgrain-subj-test-prep-102a-beamr5-20211020aopalach-__beamr5__1920_1080__none__qp22_vmaf94.94_psnr42.12_kbps4990.16_fps23.976023976023978.mp4",
+        "stimulus_id": 60,
+        "type": "video/mp4",
+        "content_id": 4
+      },
+      {
+        "path": "/Users/zli/Data/noise_study/projects_6sec_07262021/other/encode_selection/test2/testing/reference/oishinbo-season-2-episode-43-filmgrain-subj-test-prep-102a-2-beamr5-20211020aopalach-__beamr5__1920_1080__none__qp16_vmaf97.17_psnr45.57_kbps25513.18_fps23.976023976023978.mp4",
+        "stimulus_id": 61,
+        "type": "video/mp4",
+        "content_id": 4
+      },
+      {
+        "path": "/Users/zli/Data/noise_study/projects_6sec_07262021/other/encode_selection/test2/testing/oishinbo-season-2-episode-43-filmgrain-subj-test-prep-102a-beamr5-20211020aopalach-__beamr5__1920_1080__none__qp25_vmaf92.71_psnr41.46_kbps1530.15_fps23.976023976023978.mp4",
+        "stimulus_id": 62,
+        "type": "video/mp4",
+        "content_id": 4
+      },
+      {
+        "path": "/Users/zli/Data/noise_study/projects_6sec_07262021/other/encode_selection/test2/testing/oishinbo-season-2-episode-43-filmgrain-subj-test-prep-102a-beamr5-20211020aopalach-__beamr5__1920_1080__none__qp28_vmaf89.84_psnr41.0_kbps543.64_fps23.976023976023978.mp4",
+        "stimulus_id": 63,
+        "type": "video/mp4",
+        "content_id": 4
+      },
+      {
+        "path": "/Users/zli/Data/noise_study/projects_6sec_07262021/other/encode_selection/test2/testing/oishinbo-season-2-episode-43-filmgrain-subj-test-prep-102a-beamr5-20211020aopalach-__beamr5__1920_1080__none__qp37_vmaf77.34_psnr38.99_kbps136.06_fps23.976023976023978.mp4",
+        "stimulus_id": 64,
+        "type": "video/mp4",
+        "content_id": 4
+      },
+      {
+        "path": "/Users/zli/Data/noise_study/projects_6sec_07262021/other/encode_selection/test2/testing/oishinbo-season-2-episode-43-filmgrain-subj-test-prep-102a-2-beamr5-20211020aopalach-__beamr5__960_540__none__qp16_vmaf93.12_psnr40.9_kbps3065.49_fps23.976023976023978.mp4",
+        "stimulus_id": 65,
+        "type": "video/mp4",
+        "content_id": 4
+      },
+      {
+        "path": "/Users/zli/Data/noise_study/projects_6sec_07262021/other/encode_selection/test2/testing/oishinbo-season-2-episode-43-filmgrain-subj-test-prep-102a-1-beamr5-20211020aopalach-__beamr5__960_540__none__qp19_vmaf90.87_psnr40.4_kbps1060.08_fps23.976023976023978.mp4",
+        "stimulus_id": 66,
+        "type": "video/mp4",
+        "content_id": 4
+      },
+      {
+        "path": "/Users/zli/Data/noise_study/projects_6sec_07262021/other/encode_selection/test2/testing/oishinbo-season-2-episode-43-filmgrain-subj-test-prep-102a-1-beamr5-20211020aopalach-__beamr5__960_540__none__qp22_vmaf87.86_psnr40.0_kbps383.7_fps23.976023976023978.mp4",
+        "stimulus_id": 67,
+        "type": "video/mp4",
+        "content_id": 4
+      },
+      {
+        "path": "/Users/zli/Data/noise_study/projects_6sec_07262021/other/encode_selection/test2/testing/oishinbo-season-2-episode-43-filmgrain-subj-test-prep-102a-1-beamr5-20211020aopalach-__beamr5__960_540__none__qp37_vmaf57.55_psnr36.05_kbps63.39_fps23.976023976023978.mp4",
+        "stimulus_id": 68,
+        "type": "video/mp4",
+        "content_id": 4
+      },
+      {
+        "path": "/Users/zli/Data/noise_study/projects_6sec_07262021/other/encode_selection/test2/testing/oishinbo-season-2-episode-43-filmgrain-subj-test-prep-102c-beamr5-20211020aopalach-__beamr5__1920_1080__ni_denoise_with_target_noise_rmse_5_filter_before_scale__qp22_vmaf94.58_psnr42.08_kbps3282.0_fps23.976023976023978.mp4",
+        "stimulus_id": 69,
+        "type": "video/mp4",
+        "content_id": 4
+      },
+      {
+        "path": "/Users/zli/Data/noise_study/projects_6sec_07262021/other/encode_selection/test2/testing/oishinbo-season-2-episode-43-filmgrain-subj-test-prep-102c-beamr5-20211020aopalach-__beamr5__1920_1080__ni_denoise_with_target_noise_rmse_5_filter_before_scale__qp25_vmaf92.38_psnr41.49_kbps1139.73_fps23.976023976023978.mp4",
+        "stimulus_id": 70,
+        "type": "video/mp4",
+        "content_id": 4
+      },
+      {
+        "path": "/Users/zli/Data/noise_study/projects_6sec_07262021/other/encode_selection/test2/testing/oishinbo-season-2-episode-43-filmgrain-subj-test-prep-102c-beamr5-20211020aopalach-__beamr5__1920_1080__ni_denoise_with_target_noise_rmse_5_filter_before_scale__qp28_vmaf89.61_psnr41.02_kbps468.57_fps23.976023976023978.mp4",
+        "stimulus_id": 71,
+        "type": "video/mp4",
+        "content_id": 4
+      },
+      {
+        "path": "/Users/zli/Data/noise_study/projects_6sec_07262021/other/encode_selection/test2/testing/oishinbo-season-2-episode-43-filmgrain-subj-test-prep-102c-beamr5-20211020aopalach-__beamr5__1920_1080__ni_denoise_with_target_noise_rmse_5_filter_before_scale__qp37_vmaf77.24_psnr38.97_kbps134.38_fps23.976023976023978.mp4",
+        "stimulus_id": 72,
+        "type": "video/mp4",
+        "content_id": 4
+      },
+      {
+        "path": "/Users/zli/Data/noise_study/projects_6sec_07262021/other/encode_selection/test2/testing/oishinbo-season-2-episode-43-filmgrain-subj-test-prep-102c-2-beamr5-20211020aopalach-__beamr5__960_540__ni_denoise_with_target_noise_rmse_5_filter_before_scale__qp16_vmaf92.9_psnr40.86_kbps2394.9_fps23.976023976023978.mp4",
+        "stimulus_id": 73,
+        "type": "video/mp4",
+        "content_id": 4
+      },
+      {
+        "path": "/Users/zli/Data/noise_study/projects_6sec_07262021/other/encode_selection/test2/testing/oishinbo-season-2-episode-43-filmgrain-subj-test-prep-102c-1-beamr5-20211020aopalach-__beamr5__960_540__ni_denoise_with_target_noise_rmse_5_filter_before_scale__qp19_vmaf90.75_psnr40.43_kbps898.75_fps23.976023976023978.mp4",
+        "stimulus_id": 74,
+        "type": "video/mp4",
+        "content_id": 4
+      },
+      {
+        "path": "/Users/zli/Data/noise_study/projects_6sec_07262021/other/encode_selection/test2/testing/oishinbo-season-2-episode-43-filmgrain-subj-test-prep-102c-1-beamr5-20211020aopalach-__beamr5__960_540__ni_denoise_with_target_noise_rmse_5_filter_before_scale__qp22_vmaf87.84_psnr40.04_kbps369.15_fps23.976023976023978.mp4",
+        "stimulus_id": 75,
+        "type": "video/mp4",
+        "content_id": 4
+      },
+      {
+        "path": "/Users/zli/Data/noise_study/projects_6sec_07262021/other/encode_selection/test2/testing/oishinbo-season-2-episode-43-filmgrain-subj-test-prep-102c-1-beamr5-20211020aopalach-__beamr5__960_540__ni_denoise_with_target_noise_rmse_5_filter_before_scale__qp37_vmaf58.75_psnr36.18_kbps65.05_fps23.976023976023978.mp4",
+        "stimulus_id": 76,
+        "type": "video/mp4",
+        "content_id": 4
+      },
+      {
+        "path": "/Users/zli/Data/noise_study/projects_6sec_07262021/other/encode_selection/test2/testing/oishinbo-season-2-episode-43-filmgrain-subj-test-prep-102c-beamr5-20211020aopalach-__beamr5__1920_1080__ni_denoise_with_target_noise_rmse_2_filter_before_scale__qp22_vmaf94.45_psnr42.22_kbps2451.64_fps23.976023976023978.mp4",
+        "stimulus_id": 77,
+        "type": "video/mp4",
+        "content_id": 4
+      },
+      {
+        "path": "/Users/zli/Data/noise_study/projects_6sec_07262021/other/encode_selection/test2/testing/oishinbo-season-2-episode-43-filmgrain-subj-test-prep-102c-beamr5-20211020aopalach-__beamr5__1920_1080__ni_denoise_with_target_noise_rmse_2_filter_before_scale__qp25_vmaf92.86_psnr41.78_kbps1204.14_fps23.976023976023978.mp4",
+        "stimulus_id": 78,
+        "type": "video/mp4",
+        "content_id": 4
+      },
+      {
+        "path": "/Users/zli/Data/noise_study/projects_6sec_07262021/other/encode_selection/test2/testing/oishinbo-season-2-episode-43-filmgrain-subj-test-prep-102c-beamr5-20211020aopalach-__beamr5__1920_1080__ni_denoise_with_target_noise_rmse_2_filter_before_scale__qp28_vmaf90.76_psnr41.35_kbps593.61_fps23.976023976023978.mp4",
+        "stimulus_id": 79,
+        "type": "video/mp4",
+        "content_id": 4
+      },
+      {
+        "path": "/Users/zli/Data/noise_study/projects_6sec_07262021/other/encode_selection/test2/testing/oishinbo-season-2-episode-43-filmgrain-subj-test-prep-102c-beamr5-20211020aopalach-__beamr5__1920_1080__ni_denoise_with_target_noise_rmse_2_filter_before_scale__qp37_vmaf80.53_psnr39.58_kbps155.77_fps23.976023976023978.mp4",
+        "stimulus_id": 80,
+        "type": "video/mp4",
+        "content_id": 4
+      },
+      {
+        "path": "/Users/zli/Data/noise_study/projects_6sec_07262021/other/encode_selection/test2/testing/oishinbo_season_2_episode_43__4_3_4_9__SdrX264MainCrfVE__1920_1080__qp22_enable_audio_False_vmaf90.64_phonevmaf99.79_psnr41.30_kbps2456.31.mp4",
+        "stimulus_id": 81,
+        "type": "video/mp4",
+        "content_id": 4
+      },
+      {
+        "path": "/Users/zli/Data/noise_study/projects_6sec_07262021/other/encode_selection/test2/testing/oishinbo_season_2_episode_43__4_3_4_9__SdrX264MainCrfVE__1920_1080__qp25_enable_audio_False_vmaf88.06_phonevmaf99.00_psnr40.66_kbps921.02.mp4",
+        "stimulus_id": 82,
+        "type": "video/mp4",
+        "content_id": 4
+      },
+      {
+        "path": "/Users/zli/Data/noise_study/projects_6sec_07262021/other/encode_selection/test2/testing/oishinbo_season_2_episode_43__4_3_4_9__SdrX264MainCrfVE__1920_1080__qp28_enable_audio_False_vmaf84.83_phonevmaf97.38_psnr40.09_kbps453.92.mp4",
+        "stimulus_id": 83,
+        "type": "video/mp4",
+        "content_id": 4
+      },
+      {
+        "path": "/Users/zli/Data/noise_study/projects_6sec_07262021/other/encode_selection/test2/testing/oishinbo_season_2_episode_43__4_3_4_9__SdrX264MainCrfVE__1920_1080__qp37_enable_audio_False_vmaf68.49_phonevmaf86.77_psnr37.55_kbps146.53.mp4",
+        "stimulus_id": 84,
+        "type": "video/mp4",
+        "content_id": 4
+      },
+      {
+        "path": "/Users/zli/Data/noise_study/projects_6sec_07262021/other/encode_selection/test2/testing/oishinbo_season_2_episode_43__4_3_4_9__SdrX264MainCrfVE__960_540__qp16_enable_audio_False_vmaf89.48_phonevmaf99.26_psnr41.32_kbps3070.93.mp4",
+        "stimulus_id": 85,
+        "type": "video/mp4",
+        "content_id": 4
+      },
+      {
+        "path": "/Users/zli/Data/noise_study/projects_6sec_07262021/other/encode_selection/test2/testing/oishinbo_season_2_episode_43__4_3_4_9__SdrX264MainCrfVE__960_540__qp19_enable_audio_False_vmaf87.58_phonevmaf98.66_psnr40.75_kbps1066.79.mp4",
+        "stimulus_id": 86,
+        "type": "video/mp4",
+        "content_id": 4
+      },
+      {
+        "path": "/Users/zli/Data/noise_study/projects_6sec_07262021/other/encode_selection/test2/testing/oishinbo_season_2_episode_43__4_3_4_9__SdrX264MainCrfVE__960_540__qp22_enable_audio_False_vmaf85.14_phonevmaf97.53_psnr40.31_kbps439.29.mp4",
+        "stimulus_id": 87,
+        "type": "video/mp4",
+        "content_id": 4
+      },
+      {
+        "path": "/Users/zli/Data/noise_study/projects_6sec_07262021/other/encode_selection/test2/testing/oishinbo_season_2_episode_43__4_3_4_9__SdrX264MainCrfVE__960_540__qp37_enable_audio_False_vmaf56.92_phonevmaf77.00_psnr36.10_kbps56.34.mp4",
+        "stimulus_id": 88,
+        "type": "video/mp4",
+        "content_id": 4
+      }
+    ],
+    "stimulusvotegroups": [
+      {
+        "stimulus_ids": [
+          0,
+          1
+        ],
+        "stimulusvotegroup_id": 0
+      },
+      {
+        "stimulus_ids": [
+          2,
+          1
+        ],
+        "stimulusvotegroup_id": 1
+      },
+      {
+        "stimulus_ids": [
+          3,
+          1
+        ],
+        "stimulusvotegroup_id": 2
+      },
+      {
+        "stimulus_ids": [
+          4,
+          1
+        ],
+        "stimulusvotegroup_id": 3
+      },
+      {
+        "stimulus_ids": [
+          5,
+          6
+        ],
+        "stimulusvotegroup_id": 4
+      },
+      {
+        "stimulus_ids": [
+          7,
+          6
+        ],
+        "stimulusvotegroup_id": 5
+      },
+      {
+        "stimulus_ids": [
+          8,
+          6
+        ],
+        "stimulusvotegroup_id": 6
+      },
+      {
+        "stimulus_ids": [
+          9,
+          6
+        ],
+        "stimulusvotegroup_id": 7
+      },
+      {
+        "stimulus_ids": [
+          10,
+          11
+        ],
+        "stimulusvotegroup_id": 8
+      },
+      {
+        "stimulus_ids": [
+          12,
+          11
+        ],
+        "stimulusvotegroup_id": 9
+      },
+      {
+        "stimulus_ids": [
+          13,
+          11
+        ],
+        "stimulusvotegroup_id": 10
+      },
+      {
+        "stimulus_ids": [
+          14,
+          11
+        ],
+        "stimulusvotegroup_id": 11
+      },
+      {
+        "stimulus_ids": [
+          15,
+          16
+        ],
+        "stimulusvotegroup_id": 12
+      },
+      {
+        "stimulus_ids": [
+          17,
+          16
+        ],
+        "stimulusvotegroup_id": 13
+      },
+      {
+        "stimulus_ids": [
+          18,
+          16
+        ],
+        "stimulusvotegroup_id": 14
+      },
+      {
+        "stimulus_ids": [
+          19,
+          16
+        ],
+        "stimulusvotegroup_id": 15
+      },
+      {
+        "stimulus_ids": [
+          20,
+          16
+        ],
+        "stimulusvotegroup_id": 16
+      },
+      {
+        "stimulus_ids": [
+          21,
+          16
+        ],
+        "stimulusvotegroup_id": 17
+      },
+      {
+        "stimulus_ids": [
+          22,
+          16
+        ],
+        "stimulusvotegroup_id": 18
+      },
+      {
+        "stimulus_ids": [
+          23,
+          16
+        ],
+        "stimulusvotegroup_id": 19
+      },
+      {
+        "stimulus_ids": [
+          24,
+          16
+        ],
+        "stimulusvotegroup_id": 20
+      },
+      {
+        "stimulus_ids": [
+          25,
+          16
+        ],
+        "stimulusvotegroup_id": 21
+      },
+      {
+        "stimulus_ids": [
+          26,
+          16
+        ],
+        "stimulusvotegroup_id": 22
+      },
+      {
+        "stimulus_ids": [
+          27,
+          16
+        ],
+        "stimulusvotegroup_id": 23
+      },
+      {
+        "stimulus_ids": [
+          28,
+          16
+        ],
+        "stimulusvotegroup_id": 24
+      },
+      {
+        "stimulus_ids": [
+          29,
+          16
+        ],
+        "stimulusvotegroup_id": 25
+      },
+      {
+        "stimulus_ids": [
+          30,
+          16
+        ],
+        "stimulusvotegroup_id": 26
+      },
+      {
+        "stimulus_ids": [
+          31,
+          16
+        ],
+        "stimulusvotegroup_id": 27
+      },
+      {
+        "stimulus_ids": [
+          32,
+          16
+        ],
+        "stimulusvotegroup_id": 28
+      },
+      {
+        "stimulus_ids": [
+          33,
+          16
+        ],
+        "stimulusvotegroup_id": 29
+      },
+      {
+        "stimulus_ids": [
+          34,
+          16
+        ],
+        "stimulusvotegroup_id": 30
+      },
+      {
+        "stimulus_ids": [
+          35,
+          16
+        ],
+        "stimulusvotegroup_id": 31
+      },
+      {
+        "stimulus_ids": [
+          36,
+          16
+        ],
+        "stimulusvotegroup_id": 32
+      },
+      {
+        "stimulus_ids": [
+          37,
+          16
+        ],
+        "stimulusvotegroup_id": 33
+      },
+      {
+        "stimulus_ids": [
+          38,
+          16
+        ],
+        "stimulusvotegroup_id": 34
+      },
+      {
+        "stimulus_ids": [
+          39,
+          16
+        ],
+        "stimulusvotegroup_id": 35
+      },
+      {
+        "stimulus_ids": [
+          40,
+          16
+        ],
+        "stimulusvotegroup_id": 36
+      },
+      {
+        "stimulus_ids": [
+          41,
+          16
+        ],
+        "stimulusvotegroup_id": 37
+      },
+      {
+        "stimulus_ids": [
+          42,
+          16
+        ],
+        "stimulusvotegroup_id": 38
+      },
+      {
+        "stimulus_ids": [
+          43,
+          16
+        ],
+        "stimulusvotegroup_id": 39
+      },
+      {
+        "stimulus_ids": [
+          44,
+          16
+        ],
+        "stimulusvotegroup_id": 40
+      },
+      {
+        "stimulus_ids": [
+          45,
+          16
+        ],
+        "stimulusvotegroup_id": 41
+      },
+      {
+        "stimulus_ids": [
+          46,
+          16
+        ],
+        "stimulusvotegroup_id": 42
+      },
+      {
+        "stimulus_ids": [
+          47,
+          16
+        ],
+        "stimulusvotegroup_id": 43
+      },
+      {
+        "stimulus_ids": [
+          48,
+          16
+        ],
+        "stimulusvotegroup_id": 44
+      },
+      {
+        "stimulus_ids": [
+          49,
+          16
+        ],
+        "stimulusvotegroup_id": 45
+      },
+      {
+        "stimulus_ids": [
+          50,
+          16
+        ],
+        "stimulusvotegroup_id": 46
+      },
+      {
+        "stimulus_ids": [
+          51,
+          16
+        ],
+        "stimulusvotegroup_id": 47
+      },
+      {
+        "stimulus_ids": [
+          52,
+          16
+        ],
+        "stimulusvotegroup_id": 48
+      },
+      {
+        "stimulus_ids": [
+          53,
+          16
+        ],
+        "stimulusvotegroup_id": 49
+      },
+      {
+        "stimulus_ids": [
+          54,
+          16
+        ],
+        "stimulusvotegroup_id": 50
+      },
+      {
+        "stimulus_ids": [
+          55,
+          16
+        ],
+        "stimulusvotegroup_id": 51
+      },
+      {
+        "stimulus_ids": [
+          56,
+          16
+        ],
+        "stimulusvotegroup_id": 52
+      },
+      {
+        "stimulus_ids": [
+          57,
+          16
+        ],
+        "stimulusvotegroup_id": 53
+      },
+      {
+        "stimulus_ids": [
+          58,
+          16
+        ],
+        "stimulusvotegroup_id": 54
+      },
+      {
+        "stimulus_ids": [
+          59,
+          16
+        ],
+        "stimulusvotegroup_id": 55
+      },
+      {
+        "stimulus_ids": [
+          60,
+          61
+        ],
+        "stimulusvotegroup_id": 56
+      },
+      {
+        "stimulus_ids": [
+          62,
+          61
+        ],
+        "stimulusvotegroup_id": 57
+      },
+      {
+        "stimulus_ids": [
+          63,
+          61
+        ],
+        "stimulusvotegroup_id": 58
+      },
+      {
+        "stimulus_ids": [
+          64,
+          61
+        ],
+        "stimulusvotegroup_id": 59
+      },
+      {
+        "stimulus_ids": [
+          65,
+          61
+        ],
+        "stimulusvotegroup_id": 60
+      },
+      {
+        "stimulus_ids": [
+          66,
+          61
+        ],
+        "stimulusvotegroup_id": 61
+      },
+      {
+        "stimulus_ids": [
+          67,
+          61
+        ],
+        "stimulusvotegroup_id": 62
+      },
+      {
+        "stimulus_ids": [
+          68,
+          61
+        ],
+        "stimulusvotegroup_id": 63
+      },
+      {
+        "stimulus_ids": [
+          69,
+          61
+        ],
+        "stimulusvotegroup_id": 64
+      },
+      {
+        "stimulus_ids": [
+          70,
+          61
+        ],
+        "stimulusvotegroup_id": 65
+      },
+      {
+        "stimulus_ids": [
+          71,
+          61
+        ],
+        "stimulusvotegroup_id": 66
+      },
+      {
+        "stimulus_ids": [
+          72,
+          61
+        ],
+        "stimulusvotegroup_id": 67
+      },
+      {
+        "stimulus_ids": [
+          73,
+          61
+        ],
+        "stimulusvotegroup_id": 68
+      },
+      {
+        "stimulus_ids": [
+          74,
+          61
+        ],
+        "stimulusvotegroup_id": 69
+      },
+      {
+        "stimulus_ids": [
+          75,
+          61
+        ],
+        "stimulusvotegroup_id": 70
+      },
+      {
+        "stimulus_ids": [
+          76,
+          61
+        ],
+        "stimulusvotegroup_id": 71
+      },
+      {
+        "stimulus_ids": [
+          77,
+          61
+        ],
+        "stimulusvotegroup_id": 72
+      },
+      {
+        "stimulus_ids": [
+          78,
+          61
+        ],
+        "stimulusvotegroup_id": 73
+      },
+      {
+        "stimulus_ids": [
+          79,
+          61
+        ],
+        "stimulusvotegroup_id": 74
+      },
+      {
+        "stimulus_ids": [
+          80,
+          61
+        ],
+        "stimulusvotegroup_id": 75
+      },
+      {
+        "stimulus_ids": [
+          81,
+          61
+        ],
+        "stimulusvotegroup_id": 76
+      },
+      {
+        "stimulus_ids": [
+          82,
+          61
+        ],
+        "stimulusvotegroup_id": 77
+      },
+      {
+        "stimulus_ids": [
+          83,
+          61
+        ],
+        "stimulusvotegroup_id": 78
+      },
+      {
+        "stimulus_ids": [
+          84,
+          61
+        ],
+        "stimulusvotegroup_id": 79
+      },
+      {
+        "stimulus_ids": [
+          85,
+          61
+        ],
+        "stimulusvotegroup_id": 80
+      },
+      {
+        "stimulus_ids": [
+          86,
+          61
+        ],
+        "stimulusvotegroup_id": 81
+      },
+      {
+        "stimulus_ids": [
+          87,
+          61
+        ],
+        "stimulusvotegroup_id": 82
+      },
+      {
+        "stimulus_ids": [
+          88,
+          61
+        ],
+        "stimulusvotegroup_id": 83
+      }
+    ],
+    "stimulusgroups": [
+      {
+        "stimulusvotegroup_ids": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "stimulusgroup_id": 0
+      },
+      {
+        "stimulusvotegroup_ids": [
+          4,
+          5,
+          6,
+          7
+        ],
+        "stimulusgroup_id": 1
+      },
+      {
+        "stimulusvotegroup_ids": [
+          8,
+          9,
+          10,
+          11
+        ],
+        "stimulusgroup_id": 2
+      },
+      {
+        "stimulusvotegroup_ids": [
+          12,
+          13,
+          14,
+          15
+        ],
+        "stimulusgroup_id": 3
+      },
+      {
+        "stimulusvotegroup_ids": [
+          16,
+          17,
+          18,
+          19
+        ],
+        "stimulusgroup_id": 4
+      },
+      {
+        "stimulusvotegroup_ids": [
+          20,
+          21,
+          22,
+          23
+        ],
+        "stimulusgroup_id": 5
+      },
+      {
+        "stimulusvotegroup_ids": [
+          24,
+          25,
+          26,
+          27
+        ],
+        "stimulusgroup_id": 6
+      },
+      {
+        "stimulusvotegroup_ids": [
+          28,
+          29,
+          30,
+          31
+        ],
+        "stimulusgroup_id": 7
+      },
+      {
+        "stimulusvotegroup_ids": [
+          32,
+          33,
+          34,
+          35
+        ],
+        "stimulusgroup_id": 8
+      },
+      {
+        "stimulusvotegroup_ids": [
+          36,
+          37,
+          38,
+          39
+        ],
+        "stimulusgroup_id": 9
+      },
+      {
+        "stimulusvotegroup_ids": [
+          40,
+          41,
+          42,
+          43
+        ],
+        "stimulusgroup_id": 10
+      },
+      {
+        "stimulusvotegroup_ids": [
+          44,
+          45,
+          46,
+          47
+        ],
+        "stimulusgroup_id": 11
+      },
+      {
+        "stimulusvotegroup_ids": [
+          48,
+          49,
+          50,
+          51
+        ],
+        "stimulusgroup_id": 12
+      },
+      {
+        "stimulusvotegroup_ids": [
+          52,
+          53,
+          54,
+          55
+        ],
+        "stimulusgroup_id": 13
+      },
+      {
+        "stimulusvotegroup_ids": [
+          56,
+          57,
+          58,
+          59
+        ],
+        "stimulusgroup_id": 14
+      },
+      {
+        "stimulusvotegroup_ids": [
+          60,
+          61,
+          62,
+          63
+        ],
+        "stimulusgroup_id": 15
+      },
+      {
+        "stimulusvotegroup_ids": [
+          64,
+          65,
+          66,
+          67
+        ],
+        "stimulusgroup_id": 16
+      },
+      {
+        "stimulusvotegroup_ids": [
+          68,
+          69,
+          70,
+          71
+        ],
+        "stimulusgroup_id": 17
+      },
+      {
+        "stimulusvotegroup_ids": [
+          72,
+          73,
+          74,
+          75
+        ],
+        "stimulusgroup_id": 18
+      },
+      {
+        "stimulusvotegroup_ids": [
+          76,
+          77,
+          78,
+          79
+        ],
+        "stimulusgroup_id": 19
+      },
+      {
+        "stimulusvotegroup_ids": [
+          80,
+          81,
+          82,
+          83
+        ],
+        "stimulusgroup_id": 20
+      }
+    ]
+  },
+  "experiment_config": {
+    "title": "es_noise_study_test2",
+    "description": "ES noise study test 2",
+    "vote_scale": "0_TO_100",
+    "methodology": "samviq",
+    "rounds_per_session": 4,
+    "random_seed": null,
+    "prioritized": [
+      {
+        "session_idx": null,
+        "round_id": 0,
+        "stimulusgroup_id": 0
+      },
+      {
+        "session_idx": null,
+        "round_id": 1,
+        "stimulusgroup_id": 1
+      },
+      {
+        "session_idx": null,
+        "round_id": null,
+        "stimulusgroup_id": 2
+      }
+    ],
+    "blocklist_stimulusgroup_ids": [
+      0,
+      1,
+      2
+    ],
+    "training_round_ids": [
+      0,
+      1
+    ],
+    "additions": [],
+    "round_context": {}
+  }
+}

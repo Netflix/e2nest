@@ -1,0 +1,115 @@
+{% extends "nest/base.html" %}
+{% load i18n static %}
+{% load mathfilters %}
+{% load nest_extras %}
+
+{% block extrastyle %}
+<style>
+    video { position:fixed; top:{{ 100|sub:video_display_percentage|div:2 }}%; left:{{ 100|sub:video_display_percentage|div:2  }}%; height:{{ video_display_percentage }}%; width:{{ video_display_percentage }}%; display:none; }
+    #qa { margin: 30px 0; display:none; }
+</style>
+{% endblock %}
+
+{% block extrahead %}
+<script>
+    function play_video(url) {
+        container.style.display = "none";
+        video.style.display = "block";
+        document.body.style.backgroundColor = "black";
+        video.setAttribute('src', url);
+        video.play();
+    }
+    window.addEventListener('load', function () {
+        container = document.getElementById("container");
+        qa = document.getElementById("qa");
+        container.style.display = "block";
+        qa.style.display = "block";
+        video = document.getElementsByTagName("video")[0];
+        document.getElementById("video_ref").addEventListener("click", function() {
+            play_video('{{ video_ref }}');
+        });
+
+        {% for vid in videos %}
+
+            document.getElementById("video_{{ forloop.counter0 }}").addEventListener("click", function () {
+                play_video('{{ vid }}');
+            });
+
+        {% endfor %}
+    })
+    document.addEventListener("keydown", (e) => {
+        if ((e.key === " ") && (video.style.display === "block")) {
+            video.pause()
+            video.style.display = "none";
+            document.body.style.backgroundColor = "white";
+            container.style.display = "block";
+            qa.style.display = "block";
+        }
+    });
+    document.addEventListener("dblclick", (e) => {
+        if (video.style.display === "block") {
+            video.pause()
+            video.style.display = "none";
+            document.body.style.backgroundColor = "white";
+            container.style.display = "block";
+            qa.style.display = "block";
+        }
+    });
+</script>
+<link rel="stylesheet" href="{% static "nest/css/forms.css" %}">
+{% endblock %}
+
+{% block coltype %}colMS{% endblock %}
+
+{% block bodyclass %}{{ block.super }} dashboard{% endblock %}
+
+{% block breadcrumbs %}{% endblock %}
+
+{% block content_title %} {% if title %}<h1>{{ title }}</h1>{% endif %} {% endblock %}
+
+{% block content %}
+<div id="content-main">
+    {% if instruction_html %} {{ instruction_html|safe }} {% endif %}
+
+    <div id=qa>
+        <p id="question">
+            {{ question }}
+        </p>
+        <p>
+        <form id="samviq5d" {% if session_id %} action="{% url 'nest:step_session' session_id %}" {% endif %} method="post">
+            {% csrf_token %}
+            <table>
+                <tr>
+                    <th><a class="button button_in_table" id="video_ref" onclick="onClick()">{{ button_ref }}</a></th>
+                    <th style="text-align: center;width:20%">{{ choices.4 }}</th>
+                    <th style="text-align: center;width:20%">{{ choices.3 }}</th>
+                    <th style="text-align: center;width:20%">{{ choices.2 }}</th>
+                    <th style="text-align: center;width:20%">{{ choices.1 }}</th>
+                    <th style="text-align: center;width:20%">{{ choices.0 }}</th>
+                </tr>
+
+                {% for b, svgid in buttons|zip:stimulusvotegroup_ids %}
+                <tr>
+                    <td><a class="button button_in_table" id="video_{{ forloop.counter0 }}" onclick="onClick()">{{ b }}</a></td>
+                    <td style="text-align: center;width:20%"> <input type="radio" name="samviq5d_{{ svgid }}" id="radio_{{ svgid }}_1" value="1" required> </td>
+                    <td style="text-align: center;width:20%"> <input type="radio" name="samviq5d_{{ svgid }}" id="radio_{{ svgid }}_2" value="2" required> </td>
+                    <td style="text-align: center;width:20%"> <input type="radio" name="samviq5d_{{ svgid }}" id="radio_{{ svgid }}_3" value="3" required> </td>
+                    <td style="text-align: center;width:20%"> <input type="radio" name="samviq5d_{{ svgid }}" id="radio_{{ svgid }}_4" value="4" required> </td>
+                    <td style="text-align: center;width:20%"> <input type="radio" name="samviq5d_{{ svgid }}" id="radio_{{ svgid }}_5" value="5" required> </td>
+                </tr>
+                {% endfor %}
+
+            </table>
+            <br>
+            <div>
+                <button type="submit" style="float:right" class="button" id="submit">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block extrabody %}
+<video {% if video_show_controls %} controls {% endif %} loop controlsList="nodownload nofullscreen noremoteplayback"></video>
+{% endblock %}
+

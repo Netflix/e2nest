@@ -1,0 +1,82 @@
+{
+    "stimulus_config": {
+        "contents": [
+            {
+                "content_id": 0,
+                "name": "CTS3E1_B__15_55_16_0"
+            }
+        ],
+        "stimuli": [
+            {
+                "path": "/media/mp4/samples/Meridian/Meridian_A__8_18_8_23__SdrVvhevce2pVE__3840_2160__6000_enable_audio_False_vmaf103.58_phonevmaf104.85_psnr50.40_kbps6702.77.mp4",
+                "stimulus_id": 0,
+                "type": "video/mp4",
+                "content_id": 0
+            },
+            {
+                "path": "/media/mp4/samples/Meridian/Meridian_A__8_18_8_23__SdrVvhevce2pVE__960_540__500_enable_audio_False_vmaf87.25_phonevmaf98.62_psnr45.35_kbps559.20.mp4",
+                "stimulus_id": 1,
+                "type": "video/mp4",
+                "content_id": 0
+            }
+        ],
+        "stimulusvotegroups": [
+            {
+                "stimulus_ids": [
+                    1, 0
+                ],
+                "stimulusvotegroup_id": 0
+            },
+            {
+                "stimulus_ids": [
+                    1, 0
+                ],
+                "stimulusvotegroup_id": 1
+            }
+        ],
+        "stimulusgroups": [
+            {
+                "stimulusvotegroup_ids": [
+                    0
+                ],
+                "stimulusgroup_id": 0
+            },
+            {
+                "stimulusvotegroup_ids": [
+                    1
+                ],
+                "stimulusgroup_id": 1
+            }
+        ]
+    },
+    "experiment_config": {
+        "title": "cvxhull_subjexp_dcr11d",
+        "description": "convex hull subjective test with dcr 11-point scale",
+        "methodology": "dcr",
+        "vote_scale": "ELEVEN_POINT",
+        "rounds_per_session": 2,
+        "random_seed": null,
+        "prioritized": [],
+        "blocklist_stimulusgroup_ids": [],
+        "additions": [
+            {
+                "position": {
+                    "round_id": 0,
+                    "before_or_after": "before"
+                },
+                "context": {
+                    "title": "Instruction",
+                    "text_html": " <p> In this session, you will be asked to evaluate the quality of a distored version with respect to its reference on an 11-point scale. Both reference and the distorted video will be played twice, followed by an evaluation page. </p>",
+                    "actions_html": "\n            <p>\n                <a class=\"button\" href=\"{action_url}\"  id=\"start\">Start Test</a>\n            </p>\n            "
+                }
+            }
+        ],
+        "round_context": {
+            "template_version": "standard",
+            "num_plays": 2,
+            "min_num_plays": 0,
+            "t_gray": 1000,
+            "instruction_html": ""
+        }
+    }
+}

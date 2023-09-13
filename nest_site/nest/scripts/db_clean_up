@@ -1,0 +1,10 @@
+#!/bin/sh
+
+rm db.sqlite3
+rm nest/migrations/0*.py
+rm -r media/experiment_config
+
+python manage.py makemigrations
+python manage.py migrate
+
+python manage.py createsuperuser
