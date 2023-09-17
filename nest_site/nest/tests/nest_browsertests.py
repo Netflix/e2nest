@@ -275,6 +275,7 @@ class TestBrowserWithWriteDataset(StaticLiveServerTestCase, LoginMixin):
         sleep(0.5)  # 0.5 sec buffer
         self.browser.find_element(by='tag name', value="body").send_keys(Keys.SPACE)
 
+        sleep(0.2)
         self.browser.find_element(by='id', value='radio_dcr1').click()
         sleep(0.2)
         self.browser.find_element(by='id', value='submit').click()
