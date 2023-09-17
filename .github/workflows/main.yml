@@ -21,6 +21,14 @@ jobs:
         uses: actions/setup-python@v3
         with:
           python-version: 3.9
+      - name: Add browser test dependency
+        run: |
+          sudo apt-get update && sudo apt-get install -y wget unzip chromium-browser
+          sudo wget -O chromedriver_linux64.zip https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/116.0.5845.96/linux64/chromedriver-linux64.zip
+          sudo unzip -o chromedriver_linux64.zip
+          sudo rm -f chromedriver_linux64.zip
+          sudo mv ./chromedriver-linux64/chromedriver /var/chromedriver
+          sudo rm -rf ./chromedriver-linux64
       - uses: actions/checkout@v2
       - name: Run tox tests
         run: |
