@@ -8,3 +8,6 @@ tzdata
 lxml
 selenium
 tox
+setupmeta
+pytest
+pytest-cov
