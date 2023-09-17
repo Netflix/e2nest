@@ -1,5 +1,7 @@
 # e2nest - Web-based Media Subjective Testing
 
+[![main](https://github.com/Netflix/e2nest/workflows/main/badge.svg)](https://github.com/Netflix/e2nest/actions?query=workflow%3Amain)
+
 e2nest is a web-based platform for media-centric (video, audio and images) subjective testing. Originally developed at Netflix for internal use, e2nest is now open-sourced under the [BSD 3-clause](LICENSE) license. The name e2nest was derived from "EarnEst NEtflix Subjective Testing".
 
 e2nest is built on the [Django](https://www.djangoproject.com/) web framework. The server end hosts the test media files, a database to log the test scores (currently configured to SQLite, but can be changed to MySQL, PostgreSQL or others), and the business logic to run the tests (e.g. when to serve which media files). The client end is a web browser with proper decoder support on the test subject's computer (for example, for a test with AV1-encoded videos, a proper browser supporting AV1 decoding is required).
