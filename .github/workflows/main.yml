@@ -1,0 +1,28 @@
+name: main
+on:
+  push:
+  pull_request:
+
+jobs:
+  main:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-20.04
+            CC: gcc
+            CXX: g++
+    runs-on: ${{ matrix.os }}
+    env:
+      CC: ${{ matrix.CC }}
+      CXX: ${{ matrix.CXX }}
+    steps:
+      - name: Setup python
+        uses: actions/setup-python@v3
+        with:
+          python-version: 3.9
+      - uses: actions/checkout@v2
+      - name: Run tox tests
+        run: |
+          pip install 'tox'
+          tox
