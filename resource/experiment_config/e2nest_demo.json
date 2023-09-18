@@ -1,0 +1,197 @@
+{
+  "stimulus_config": {
+    "_comment": "video clips can be downloaded at: https://drive.google.com/drive/folders/1euvhgrO3S6j_hM7fPuDzwZZJeT6KAw4G?usp=sharing",
+    "contents": [
+      {
+        "content_id": 0,
+        "name": "Meridian"
+      },
+      {
+        "content_id": 1,
+        "name": "SolLevante"
+      },
+      {
+        "content_id": 2,
+        "name": "Sparks"
+      }
+    ],
+    "stimuli": [
+      {
+        "path": "http://localhost:8093/Meridian/Meridian_A__8_18_8_23__SdrVvhevce2pVE__960_540__500_enable_audio_False_vmaf87.25_phonevmaf98.62_psnr45.35_kbps559.20.mp4",
+        "stimulus_id": 0,
+        "type": "video/mp4",
+        "content_id": 0
+      },
+      {
+        "path": "http://localhost:8093/Meridian/Meridian_A__8_18_8_23__SdrVvhevce2pVE__1920_1080__3000_enable_audio_False_vmaf95.93_phonevmaf100.00_psnr50.59_kbps3092.62.mp4",
+        "stimulus_id": 1,
+        "type": "video/mp4",
+        "content_id": 0
+      },
+      {
+        "path": "http://localhost:8093/Meridian/Meridian_A__8_18_8_23__SdrVvhevce2pVE__3840_2160__4000_enable_audio_False_vmaf103.13_phonevmaf104.73_psnr49.95_kbps4495.94.mp4",
+        "stimulus_id": 2,
+        "type": "video/mp4",
+        "content_id": 0
+      },
+      {
+        "path": "http://localhost:8093/Meridian/Meridian_A__8_18_8_23__SdrVvhevce2pVE__3840_2160__8000_enable_audio_False_vmaf103.84_phonevmaf104.92_psnr50.72_kbps8737.15.mp4",
+        "stimulus_id": 3,
+        "type": "video/mp4",
+        "content_id": 0
+      },
+      {
+        "path": "http://localhost:8093/SolLevante/SolLevante10k_B__0_7_0_12__SdrVvhevce2pVE__960_540__500_enable_audio_False_vmaf27.22_phonevmaf42.03_psnr25.61_kbps642.42.mp4",
+        "stimulus_id": 4,
+        "type": "video/mp4",
+        "content_id": 1
+      },
+      {
+        "path": "http://localhost:8093/SolLevante/SolLevante10k_B__0_7_0_12__SdrVvhevce2pVE__1920_1080__3000_enable_audio_False_vmaf69.73_phonevmaf81.88_psnr26.71_kbps3699.96.mp4",
+        "stimulus_id": 5,
+        "type": "video/mp4",
+        "content_id": 1
+      },
+      {
+        "path": "http://localhost:8093/SolLevante/SolLevante10k_B__0_7_0_12__SdrVvhevce2pVE__3840_2160__4000_enable_audio_False_vmaf76.57_phonevmaf90.99_psnr26.77_kbps4850.49.mp4",
+        "stimulus_id": 6,
+        "type": "video/mp4",
+        "content_id": 1
+      },
+      {
+        "path": "http://localhost:8093/SolLevante/SolLevante10k_B__0_7_0_12__SdrVvhevce2pVE__3840_2160__8000_enable_audio_False_vmaf91.09_phonevmaf98.23_psnr27.11_kbps9513.09.mp4",
+        "stimulus_id": 7,
+        "type": "video/mp4",
+        "content_id": 1
+      },
+      {
+        "path": "http://localhost:8093/Sparks/Sparks_A__2_0_2_5__SdrVvhevce2pVE__960_540__500_enable_audio_False_vmaf49.65_phonevmaf70.00_psnr31.50_kbps541.32.mp4",
+        "stimulus_id": 8,
+        "type": "video/mp4",
+        "content_id": 2
+      },
+      {
+        "path": "http://localhost:8093/Sparks/Sparks_A__2_0_2_5__SdrVvhevce2pVE__1920_1080__3000_enable_audio_False_vmaf76.41_phonevmaf92.39_psnr35.21_kbps3088.96.mp4",
+        "stimulus_id": 9,
+        "type": "video/mp4",
+        "content_id": 2
+      },
+      {
+        "path": "http://localhost:8093/Sparks/Sparks_A__2_0_2_5__SdrVvhevce2pVE__3840_2160__4000_enable_audio_False_vmaf77.81_phonevmaf93.29_psnr34.18_kbps4014.82.mp4",
+        "stimulus_id": 10,
+        "type": "video/mp4",
+        "content_id": 2
+      },
+      {
+        "path": "http://localhost:8093/Sparks/Sparks_A__2_0_2_5__SdrVvhevce2pVE__3840_2160__4000_enable_audio_False_vmaf77.81_phonevmaf93.29_psnr34.18_kbps4014.82.mp4",
+        "stimulus_id": 11,
+        "type": "video/mp4",
+        "content_id": 2
+      }
+
+    ],
+    "stimulusvotegroups": [
+      {
+        "stimulus_ids": [
+          0, 3
+        ],
+        "stimulusvotegroup_id": 0
+      },
+      {
+        "stimulus_ids": [
+          1, 3
+        ],
+        "stimulusvotegroup_id": 1
+      },
+      {
+        "stimulus_ids": [
+          2, 3
+        ],
+        "stimulusvotegroup_id": 2
+      },
+      {
+        "stimulus_ids": [
+          4, 7
+        ],
+        "stimulusvotegroup_id": 3
+      },
+      {
+        "stimulus_ids": [
+          5, 7
+        ],
+        "stimulusvotegroup_id": 4
+      },
+      {
+        "stimulus_ids": [
+          6, 7
+        ],
+        "stimulusvotegroup_id": 5
+      },
+      {
+        "stimulus_ids": [
+          8, 11
+        ],
+        "stimulusvotegroup_id": 6
+      },
+      {
+        "stimulus_ids": [
+          9, 11
+        ],
+        "stimulusvotegroup_id": 7
+      },
+      {
+        "stimulus_ids": [
+          10, 11
+        ],
+        "stimulusvotegroup_id": 8
+      }
+    ],
+    "stimulusgroups": [
+      {
+        "stimulusvotegroup_ids": [
+          0, 1, 2
+        ],
+        "stimulusgroup_id": 0
+      },
+      {
+        "stimulusvotegroup_ids": [
+          3, 4, 5
+        ],
+        "stimulusgroup_id": 1
+      },
+      {
+        "stimulusvotegroup_ids": [
+          6, 7, 8
+        ],
+        "stimulusgroup_id": 2
+      }
+    ]
+  },
+  "experiment_config": {
+    "title": "e2nest_demo",
+    "description": "e2nest demo",
+    "methodology": "samviq",
+    "vote_scale": "0_TO_100",
+    "rounds_per_session": 3,
+    "random_seed": null,
+    "prioritized": [],
+    "blocklist_stimulusgroup_ids": [],
+    "additions": [
+      {
+        "position": {
+          "round_id": 0,
+          "before_or_after": "before"
+        },
+        "context": {
+          "title": "Instruction",
+          "text_html": "<p> In each round, you are presented with a reference video and its compressed versions. Watch each video and vote. </p> <p> Video clips will loop over, <b>press \"space\" key or double click mouse </b> to terminate. </p>  <p> Please vote each video based on your experience of the <b> video quality </b>. </p>",
+          "actions_html": "\n            <p>\n                <a class=\"button\" href=\"{action_url}\"  id=\"start\">Start Test</a>\n            </p>\n            "
+        }
+      }
+    ],
+    "round_context": {
+      "instruction_html": "<p> Video clips will loop over, <b>press \"space\" key or double click mouse </b> to terminate. </p>",
+      "question": "Comparing to the reference, how would you rate the quality of the video?"
+    }
+  }
+}
