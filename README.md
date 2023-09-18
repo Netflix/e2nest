@@ -73,3 +73,16 @@ or simply
 ```shell
 tox -e browser
 ```
+
+## Run server
+
+Before running server, first create a super-user:
+```
+python manage.py createsuperuser
+```
+Note that the above command is for creating a superuser with admin permissions. For creating username/password for test subjects, please see [User command line tools](#user-command-line-tools) section.
+
+Run server locally by:
+```
+python manage.py runserver 8000
+```
