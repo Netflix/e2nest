@@ -34,7 +34,9 @@ Currently, SQLite3 is configured as the database type.
 
 ```python manage.py makemigrations```: create database migration files under `migrations/`.
 
-```python manage.py migrate --run-syncdb```: The migrate command looks at the INSTALLED_APPS setting and creates any necessary database tables according to the migration files.
+```python manage.py migrate```: The migrate command looks at the INSTALLED_APPS setting and creates any necessary database tables according to the migration files.
+
+Note: if `python manage.py migrate` fails with message "table ... doesn't exist ("no such table")", try to run `python manage.py migrate --run-syncdb` instead.
 
 ## Run tests in command line
 
