@@ -29,7 +29,7 @@ jobs:
           sudo rm -f chromedriver_linux64.zip
           sudo mv ./chromedriver-linux64/chromedriver /var/chromedriver
           sudo rm -rf ./chromedriver-linux64
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Run tox tests
         run: |
           pip install 'tox'
