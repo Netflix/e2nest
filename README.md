@@ -8,7 +8,7 @@ e2nest is built on the [Django](https://www.djangoproject.com/) web framework. T
 
 For subjective tests with large media files (for example, some tests could require 50GB media files per test session), a special configuration is available where the media files are pre-downloaded and locally hosted on the test subject's computer.
 
-For additional information, refer to our [instruction memo](https://docs.google.com/document/d/123XoaD7jXAypWTSzX4KaVSapaHAeNMq-UUj-WpGpE_0/edit).
+For additional information, refer to our [instruction memo](https://docs.google.com/document/d/123XoaD7jXAypWTSzX4KaVSapaHAeNMq-UUj-WpGpE_0/edit). For a presentation overview, see [this slide deck](https://docs.google.com/presentation/d/1rCQg4TlfEdwA1kpoIZ1m0oxOxMoYB-Z8RyUaf3RG2bc/edit#slide=id.p).
 
 ## Virtual environment setup
 
