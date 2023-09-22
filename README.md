@@ -22,7 +22,7 @@ python3 -m pip install -r requirements.txt
 
 For all instructions below, assume you have `cd` into `./nest_site`.
 
-## Provide secret key and host address in `nest_site/settings.py`
+## Provide secret key and host address in [`nest_site/settings.py`](https://github.com/Netflix/e2nest/blob/c3a8eddba911d433ccacd34dc51b191e77ba63f2/nest_site/nest_site/settings.py)
 
 You need to replace `"PUT_YOUR_SECRET_KEY_HERE"` with your own [secret key](https://docs.djangoproject.com/en/2.2/ref/settings/#secret-key). The secret key is used mostly to provide cryptographic signing for session cookies. This can be any string of your choice, but the longer and more random the better.
 
