@@ -13,9 +13,8 @@ from django.db.utils import IntegrityError
 from nest.config import ExperimentConfig, NestConfig, StimulusConfig
 from nest.control import ExperimentController, SessionStatus
 from nest.helpers import empty_object, map_path_to_noise_rmse, override
-from nest.models import Content, DiscreteVote, Experiment, Experimenter, \
-    ExperimentRegister, Round, Session, Stimulus, StimulusGroup, \
-    StimulusVoteGroup, Subject, Vote, VoteRegister
+from nest.models import CcrThreePointVote, Content, DiscreteVote, Experiment, Experimenter, ExperimentRegister, Round, \
+    Session, Stimulus, StimulusGroup, StimulusVoteGroup, Subject, TafcVote, Vote, VoteRegister
 from nest.pages import map_methodology_to_page_class
 from nest.sites import NestSite
 from sureal.dataset_reader import PairedCompDatasetReader as \
@@ -768,7 +767,8 @@ class ExperimentUtils(object):
             'title': None,
             'video': None, 'video_a': None, 'video_b': None,
             'button': None, 'button_a': None, 'button_b': None,
-            'video_a_value': 0, 'video_b_value': 1,
+            'video_a_value': TafcVote.support[0], 'video_b_value': TafcVote.support[1],
+            'video_a_to_b_values': CcrThreePointVote.support,
             'videos': [None], 'video_ref': None,
             'buttons': [None], 'button_ref': None,
             'stimulusvotegroup_ids': [None],

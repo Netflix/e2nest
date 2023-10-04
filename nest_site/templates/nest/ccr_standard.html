@@ -1,0 +1,147 @@
+{% extends "nest/base.html" %}
+{% load i18n static %}
+{% load mathfilters %}
+{% load nest_extras %}
+
+{% block extrastyle %}
+<style>
+    video { position:fixed; top:{{ 100|sub:video_display_percentage|div:2 }}%; left:{{ 100|sub:video_display_percentage|div:2  }}%; height:{{ video_display_percentage }}%; width:{{ video_display_percentage }}%; display:none; }
+    #qa { margin: 30px 0; display:none; }
+    #a_tag { position:absolute; left:50%; top:{% if text_vert_perc %}{{text_vert_perc}}{% else %}33{% endif %}%; width:800px; height:100px; margin-left:-400px; margin-top:-50px; text-align:center; font-size:100px; display:none; color: {% if text_color %} {{ text_color }} {% else %} #a40404 {% endif %}}
+    #b_tag { position:absolute; left:50%; top:{% if text_vert_perc %}{{text_vert_perc}}{% else %}33{% endif %}%; width:800px; height:100px; margin-left:-400px; margin-top:-50px; text-align:center; font-size:100px; display:none; color: {% if text_color %} {{ text_color }} {% else %} #a40404 {% endif %}}
+</style>
+{% endblock %}
+
+{% block extrahead %}
+<script>
+    var t_gray = {{ t_gray }}; {# time of gray screen in ms #}
+    var plays = {{ num_plays }};  {# how many times to play each video #}
+    var a_played = 0;
+    var b_played = 0;
+    function play_video(url) {
+        return function() {
+            if ((a.style.display === "none" && b.style.display === "none")) {
+                // do nothing if already skipped to qa screen
+            }
+            else {
+                container.style.display = "none";
+                a.style.display = "none";
+                b.style.display = "none";
+                video.style.display = "block";
+                document.body.style.backgroundColor = "black";
+                video.setAttribute('src', url);
+                video.play();
+            }
+        }
+    }
+    function show_gray_and_play(tag_id, t) {
+        container.style.display = "none";
+        document.body.style.backgroundColor = "gray";
+        tag_id.style.display = "block";
+        if(tag_id === a){
+            a_played = a_played + 1;
+            url = '{{ video_a }}';
+        }else{
+            b_played = b_played + 1;
+            url = '{{ video_b }}';
+        }
+        setTimeout(play_video(url), t);
+    }
+    function decide_whats_next(){
+        video.style.display = "none";
+        if((a_played === plays) && (b_played === plays)){ {# both videos played required number of times #}
+            document.body.style.backgroundColor = "white";
+            container.style.display = "block";
+            qa.style.display = "block";
+        }else{
+            if(a_played > b_played){
+                show_gray_and_play(b, t_gray);
+            }else{
+                show_gray_and_play(a, t_gray);
+            }
+        }
+    }
+    window.addEventListener('load', function () {
+        container = document.getElementById("container");
+        qa = document.getElementById("qa");
+        a = document.getElementById("a_tag");
+        b = document.getElementById("b_tag");
+        video = document.getElementsByTagName("video")[0];
+        video.addEventListener("ended", function() {
+            decide_whats_next();
+        });
+        show_gray_and_play(a, t_gray);
+    })
+    document.addEventListener("keydown", (e) => {
+        if ((e.key === " ") && (video.style.display === "block" || a.style.display === "block" || b.style.display === "block")
+            && a_played > {% if min_num_plays is not None %} {{ min_num_plays }} {% else %} {{ num_plays }} {% endif %}
+            && b_played >= {% if min_num_plays is not None %} {{ min_num_plays }} {% else %} {{ num_plays }} {% endif %}) {
+            video.pause()
+            video.style.display = "none";
+            a.style.display = "none";
+            b.style.display = "none";
+            document.body.style.backgroundColor = "white";
+            container.style.display = "block";
+            qa.style.display = "block";
+        }
+    });
+    document.addEventListener("dblclick", (e) => {
+        if ((video.style.display === "block" || a.style.display === "block" || b.style.display === "block")
+            && a_played > {% if min_num_plays is not None %} {{ min_num_plays }} {% else %} {{ num_plays }} {% endif %}
+            && b_played >= {% if min_num_plays is not None %} {{ min_num_plays }} {% else %} {{ num_plays }} {% endif %}) {
+            video.pause()
+            video.style.display = "none";
+            a.style.display = "none";
+            b.style.display = "none";
+            document.body.style.backgroundColor = "white";
+            container.style.display = "block";
+            qa.style.display = "block";
+        }
+    });
+</script>
+<link rel="stylesheet" href="{% static "nest/css/forms.css" %}">
+{% endblock %}
+
+{% block coltype %}colMS{% endblock %}
+
+{% block bodyclass %}{{ block.super }} dashboard{% endblock %}
+
+{% block breadcrumbs %}{% endblock %}
+
+{% block content_title %} {% if title %}<h1>{{ title }}</h1>{% endif %} {% endblock %}
+
+{% block content %}
+<div id="content-main">
+    {% if instruction_html %} {{ instruction_html|safe }} {% endif %}
+    <div id=qa>
+        <p id="question">
+            {{ question }}
+        </p>
+        <p>
+        <form id="ccr" {% if session_id %} action="{% url 'nest:step_session' session_id %}" {% endif %} method="post">
+            {% csrf_token %}
+            <div>
+                {% for choice, value in choices|zip:video_a_to_b_values %}
+                <div>
+                    <input type="radio" name="ccr_{{stimulusvotegroup_id}}" id="radio_ccr{{ forloop.counter0 }}" value="{{ value }}" required>
+                    <label for="radio_ccr{{ forloop.counter0 }}"> {{ choice }} </label>
+                </div>
+                {% endfor %}
+            </div>
+            <div>
+                <button type="submit" class="button" id="submit">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block extrabody %}
+<video {% if video_show_controls %} controls {% endif %} controlsList="nodownload nofullscreen noremoteplayback"></video>
+<div id="a_tag">
+    <p> {{ button_a }} </p>
+</div>
+<div id="b_tag">
+    <p> {{ button_b }} </p>
+</div>
+{% endblock %}

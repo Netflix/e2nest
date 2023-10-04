@@ -690,6 +690,14 @@ class TestValidateConfig(TestCase):
         ExperimentUtils.validate_config(
             NestConfig.tests_resource_path('cvxhull_subjexp_toy_x_tafc_standard.json'))
 
+    def test_validate_config_ccr(self):
+        ExperimentUtils.validate_config(
+            NestConfig.tests_resource_path('cvxhull_subjexp_toy_x_ccr.json'))
+
+    def test_validate_config_ccr_standard(self):
+        ExperimentUtils.validate_config(
+            NestConfig.tests_resource_path('cvxhull_subjexp_toy_x_ccr_standard.json'))
+
 
 class TestUserUtils(TestCase):
 

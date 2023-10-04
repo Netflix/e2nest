@@ -190,11 +190,11 @@ class ExperimentConfig(object):
         from .models import Vote
         Vote.find_subclass(self.vote_scale)
 
-        assert self.methodology in ['acr', 'acr5c', 'dcr', 'tafc', 'samviq', 'samviq5d']
+        assert self.methodology in ['acr', 'acr5c', 'dcr', 'tafc', 'ccr', 'samviq', 'samviq5d']
         if self.methodology in ['acr', 'acr5c']:
             for svg in self.stimulus_config.stimulusvotegroups:
                 assert len(svg['stimulus_ids']) == 1
-        elif self.methodology in ['dcr', 'tafc']:
+        elif self.methodology in ['dcr', 'tafc', 'ccr']:
             for svg in self.stimulus_config.stimulusvotegroups:
                 assert len(svg['stimulus_ids']) == 2
         elif self.methodology in ['samviq', 'samviq5d']:
@@ -224,6 +224,8 @@ class ExperimentConfig(object):
                 ]
             elif self.methodology == 'tafc':
                 assert self.vote_scale in ['2AFC']
+            elif self.methodology == 'ccr':
+                assert self.vote_scale in ['CCR_THREE_POINT']
             elif self.methodology == 'acr':
                 assert self.vote_scale in ['FIVE_POINT']
             elif self.methodology == 'acr5c':

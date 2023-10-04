@@ -27,8 +27,8 @@ from sureal.dataset_reader import DatasetReader
 
 from .config import ExperimentConfig, NestConfig, StimulusConfig
 from .helpers import override
-from .pages import Acr5cPage, AcrPage, DcrPage, GenericPage, map_methodology_to_page_class, Samviq5dPage, SamviqPage, \
-    StatusPage, TafcPage
+from .pages import Acr5cPage, AcrPage, CcrPage, DcrPage, GenericPage, map_methodology_to_page_class, Samviq5dPage, \
+    SamviqPage, StatusPage, TafcPage
 
 logging.basicConfig()
 logger = logging.getLogger(os.path.splitext(os.path.basename(__file__))[0])
@@ -292,6 +292,8 @@ class NestSite(ExperimentMixin):
             path('hdr_demo_sparks/', self.hdr_demo_sparks, name='hdr_demo_sparks'),
             path('tafc_demo/', self.tafc_demo, name='tafc_demo'),
             path('tafc_standard_demo/', self.tafc_standard_demo, name='tafc_standard_demo'),
+            path('ccr_demo/', self.ccr_demo, name='ccr_demo'),
+            path('ccr_standard_demo/', self.ccr_standard_demo, name='ccr_standard_demo'),
             path('dcr7d_standard_demo/', self.dcr7d_standard_demo, name='dcr7d_standard_demo'),
             path('dcr11d_demo/', self.dcr11d_demo, name='dcr11d_demo'),
             path('dcr11d_standard_demo/', self.dcr11d_standard_demo, name='dcr11d_standard_demo'),
@@ -728,12 +730,13 @@ class NestSite(ExperimentMixin):
 
     @method_decorator(never_cache)
     def tafc_demo(self, request, extra_context=None):
+        from .models import TafcVote
         page = TafcPage({
             'title': 'Round 1 of 10',
             'video_a': os.path.join(MEDIA_URL, "mp4/samples/Meridian/Meridian_A__8_18_8_23__SdrVvhevce2pVE__3840_2160__6000_enable_audio_False_vmaf103.58_phonevmaf104.85_psnr50.40_kbps6702.77.mp4"),  # noqa E501
             'video_b': os.path.join(MEDIA_URL, "mp4/samples/Meridian/Meridian_A__8_18_8_23__SdrVvhevce2pVE__960_540__500_enable_audio_False_vmaf87.25_phonevmaf98.62_psnr45.35_kbps559.20.mp4"),  # noqa E501
-            'video_a_value': 0,
-            'video_b_value': 1,
+            'video_a_value': TafcVote.support[0],
+            'video_b_value': TafcVote.support[1],
             'video_display_percentage': 75,
             'stimulusvotegroup_id': 0,
         })
@@ -746,18 +749,60 @@ class NestSite(ExperimentMixin):
 
     @method_decorator(never_cache)
     def tafc_standard_demo(self, request, extra_context=None):
+        from .models import TafcVote
         page = TafcPage({
             'title': 'Round 1 of 10',
             'instruction_html': "",
             'video_a': os.path.join(MEDIA_URL, "mp4/samples/Meridian/Meridian_A__8_18_8_23__SdrVvhevce2pVE__3840_2160__6000_enable_audio_False_vmaf103.58_phonevmaf104.85_psnr50.40_kbps6702.77.mp4"),  # noqa E501
             'video_b': os.path.join(MEDIA_URL, "mp4/samples/Meridian/Meridian_A__8_18_8_23__SdrVvhevce2pVE__960_540__500_enable_audio_False_vmaf87.25_phonevmaf98.62_psnr45.35_kbps559.20.mp4"),  # noqa E501
-            'video_a_value': 0,
-            'video_b_value': 1,
+            'video_a_value': TafcVote.support[0],
+            'video_b_value': TafcVote.support[1],
             'template_version': 'standard',
             'num_plays': 2, 'min_num_plays': 0,
             't_gray': 1000, 'text_color': '#FFFFFF',
             'text_vert_perc': 45,  # text vertical position percentage
             'video_display_percentage': 75,
+            'stimulusvotegroup_id': 0,
+        })
+        context = {
+            **self.each_context(request),
+            **page.context,
+        }
+        request.current_app = self.name
+        return TemplateResponse(request, page.get_template(), context)
+
+    @method_decorator(never_cache)
+    def ccr_demo(self, request, extra_context=None):
+        from .models import CcrThreePointVote
+        page = CcrPage({
+            'title': 'Round 1 of 10',
+            'video_a': os.path.join(MEDIA_URL, "mp4/samples/Meridian/Meridian_A__8_18_8_23__SdrVvhevce2pVE__3840_2160__6000_enable_audio_False_vmaf103.58_phonevmaf104.85_psnr50.40_kbps6702.77.mp4"),  # noqa E501
+            'video_b': os.path.join(MEDIA_URL, "mp4/samples/Meridian/Meridian_A__8_18_8_23__SdrVvhevce2pVE__960_540__500_enable_audio_False_vmaf87.25_phonevmaf98.62_psnr45.35_kbps559.20.mp4"),  # noqa E501
+            'video_a_to_b_values': CcrThreePointVote.support,
+            'video_display_percentage': 75,
+            'stimulusvotegroup_id': 0,
+        })
+        context = {
+            **self.each_context(request),
+            **page.context,
+        }
+        request.current_app = self.name
+        return TemplateResponse(request, page.get_template(), context)
+
+    @method_decorator(never_cache)
+    def ccr_standard_demo(self, request, extra_context=None):
+        from .models import CcrThreePointVote
+        page = CcrPage({
+            'title': 'Round 1 of 10',
+            'instruction_html': "",
+            'video_a': os.path.join(MEDIA_URL, "mp4/samples/Meridian/Meridian_A__8_18_8_23__SdrVvhevce2pVE__3840_2160__6000_enable_audio_False_vmaf103.58_phonevmaf104.85_psnr50.40_kbps6702.77.mp4"),  # noqa E501
+            'video_b': os.path.join(MEDIA_URL, "mp4/samples/Meridian/Meridian_A__8_18_8_23__SdrVvhevce2pVE__960_540__500_enable_audio_False_vmaf87.25_phonevmaf98.62_psnr45.35_kbps559.20.mp4"),  # noqa E501
+            'video_a_to_b_values': CcrThreePointVote.support,
+            'template_version': 'standard',
+            'num_plays': 2, 'min_num_plays': 0,
+            't_gray': 1000, 'text_color': '#FFFFFF',
+            'text_vert_perc': 45,  # text vertical position percentage
+            'video_display_percentage': 100,
             'stimulusvotegroup_id': 0,
         })
         context = {
@@ -991,6 +1036,7 @@ class NestSite(ExperimentMixin):
                 request.user.get_username())
 
     def step_session(self, request, session_id, extra_context=None):  # noqa C901
+        from .models import CcrThreePointVote, TafcVote
 
         if not self._test_cookie_worked(request):
             title = 'Cookie disabled'
@@ -1095,6 +1141,8 @@ class NestSite(ExperimentMixin):
                          ]) or \
                         (ec.experiment_config.methodology == 'tafc' and
                          ec.experiment_config.vote_scale == '2AFC') or \
+                        (ec.experiment_config.methodology == 'ccr' and
+                         ec.experiment_config.vote_scale == 'CCR_THREE_POINT') or \
                         (ec.experiment_config.methodology == 'samviq' and
                          ec.experiment_config.vote_scale == '0_TO_100') or \
                         (ec.experiment_config.methodology == 'samviq5d' and
@@ -1299,11 +1347,11 @@ class NestSite(ExperimentMixin):
 
                     # randomize the order of stimuli on 2AFC page
                     if random.random() < 0.5:
-                        video_a, video_a_value = s_1st['path'], 0
-                        video_b, video_b_value = s_2nd['path'], 1
+                        video_a, video_a_value = s_1st['path'], TafcVote.support[0]
+                        video_b, video_b_value = s_2nd['path'], TafcVote.support[1]
                     else:
-                        video_b, video_b_value = s_1st['path'], 0
-                        video_a, video_a_value = s_2nd['path'], 1
+                        video_b, video_b_value = s_1st['path'], TafcVote.support[0]
+                        video_a, video_a_value = s_2nd['path'], TafcVote.support[1]
 
                     sgid: int = next_step['context']['stimulusgroup_id']
                     video_display_percentage = ec.experiment_config. \
@@ -1312,6 +1360,44 @@ class NestSite(ExperimentMixin):
                     d = {'title': title,
                          'video_a': video_a, 'video_a_value': video_a_value,
                          'video_b': video_b, 'video_b_value': video_b_value,
+                         'session_id': session_id,
+                         'video_display_percentage': video_display_percentage,
+                         'stimulusvotegroup_id': svgid,
+                         **ec.experiment_config.round_context,
+                         }
+                    PageClass = map_methodology_to_page_class(
+                        ec.experiment_config.methodology)
+                    page = PageClass(d)
+                    context = {**self.each_context(request), **page.context}
+                    request.current_app = self.name
+                    response = TemplateResponse(request, page.get_template(), context)
+                elif ec.experiment_config.methodology == 'ccr' and \
+                        ec.experiment_config.vote_scale == 'CCR_THREE_POINT':
+                    svgid = self._get_matched_single_stimulusvotegroup_id(ec, next_step)
+                    sid_1st, sid_2nd = self._get_matched_double_stimulus_ids(ec, svgid)
+                    s_1st = self._get_matched_stimulus_dict(ec, sid_1st)
+                    s_2nd = self._get_matched_stimulus_dict(ec, sid_2nd)
+                    assert s_1st['type'] == 'video/mp4'
+                    assert s_2nd['type'] == 'video/mp4'
+
+                    # randomize the order of stimuli on 2AFC page
+                    if random.random() < 0.5:
+                        video_a = s_1st['path']
+                        video_b = s_2nd['path']
+                        video_a_to_b_values = CcrThreePointVote.support
+                    else:
+                        video_b = s_1st['path']
+                        video_a = s_2nd['path']
+                        video_a_to_b_values = list(reversed(CcrThreePointVote.support))
+
+                    sgid: int = next_step['context']['stimulusgroup_id']
+                    video_display_percentage = ec.experiment_config. \
+                        stimulus_config.get_video_display_percentage(sgid)
+                    assert video_display_percentage is not None
+                    d = {'title': title,
+                         'video_a': video_a,
+                         'video_b': video_b,
+                         'video_a_to_b_values': video_a_to_b_values,
                          'session_id': session_id,
                          'video_display_percentage': video_display_percentage,
                          'stimulusvotegroup_id': svgid,
@@ -1413,6 +1499,8 @@ class NestSite(ExperimentMixin):
                          ]) or \
                         (ec.experiment_config.methodology == 'tafc' and
                          ec.experiment_config.vote_scale == '2AFC') or \
+                        (ec.experiment_config.methodology == 'ccr' and
+                         ec.experiment_config.vote_scale == 'CCR_THREE_POINT') or \
                         (ec.experiment_config.methodology == 'samviq5d' and
                          ec.experiment_config.vote_scale == 'FIVE_POINT') or \
                         (ec.experiment_config.methodology == 'samviq' and
