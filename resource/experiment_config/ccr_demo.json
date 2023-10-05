@@ -93,55 +93,64 @@
     "stimulusvotegroups": [
       {
         "stimulus_ids": [
-          0, 3
+          0,
+          1
         ],
         "stimulusvotegroup_id": 0
       },
       {
         "stimulus_ids": [
-          1, 3
+          2,
+          3
         ],
         "stimulusvotegroup_id": 1
       },
       {
         "stimulus_ids": [
-          2, 3
+          1,
+          2
         ],
         "stimulusvotegroup_id": 2
       },
       {
         "stimulus_ids": [
-          4, 7
+          4,
+          5
         ],
         "stimulusvotegroup_id": 3
       },
       {
         "stimulus_ids": [
-          5, 7
+          6,
+          7
         ],
         "stimulusvotegroup_id": 4
       },
       {
         "stimulus_ids": [
-          6, 7
+          5,
+          6
         ],
         "stimulusvotegroup_id": 5
       },
       {
         "stimulus_ids": [
-          8, 11
+          8,
+          9
         ],
         "stimulusvotegroup_id": 6
       },
       {
         "stimulus_ids": [
-          9, 11
+          10,
+          11
         ],
         "stimulusvotegroup_id": 7
       },
       {
         "stimulus_ids": [
-          10, 11
+          8,
+          11
         ],
         "stimulusvotegroup_id": 8
       }
@@ -149,33 +158,94 @@
     "stimulusgroups": [
       {
         "stimulusvotegroup_ids": [
-          0, 1, 2
+          0
         ],
         "stimulusgroup_id": 0
       },
       {
         "stimulusvotegroup_ids": [
-          3, 4, 5
+          1
         ],
         "stimulusgroup_id": 1
       },
       {
         "stimulusvotegroup_ids": [
-          6, 7, 8
+          2
         ],
         "stimulusgroup_id": 2
+      },
+      {
+        "stimulusvotegroup_ids": [
+          3
+        ],
+        "stimulusgroup_id": 3
+      },
+      {
+        "stimulusvotegroup_ids": [
+          4
+        ],
+        "stimulusgroup_id": 4
+      },
+      {
+        "stimulusvotegroup_ids": [
+          5
+        ],
+        "stimulusgroup_id": 5
+      },
+      {
+        "stimulusvotegroup_ids": [
+          6
+        ],
+        "stimulusgroup_id": 6
+      },
+      {
+        "stimulusvotegroup_ids": [
+          7
+        ],
+        "stimulusgroup_id": 7
+      },
+      {
+        "stimulusvotegroup_ids": [
+          8
+        ],
+        "stimulusgroup_id": 8
       }
     ]
   },
   "experiment_config": {
-    "title": "e2nest_demo",
-    "description": "e2nest demo",
-    "methodology": "samviq",
-    "vote_scale": "0_TO_100",
-    "rounds_per_session": 3,
+    "title": "ccr_demo",
+    "description": "CCR (Comparison Category Rating) Demo",
+    "vote_scale": "CCR_THREE_POINT",
+    "methodology": "ccr",
+    "rounds_per_session": 9,
     "random_seed": null,
-    "prioritized": [],
-    "blocklist_stimulusgroup_ids": [],
+    "prioritized": [
+      {
+        "session_idx": null,
+        "round_id": 0,
+        "stimulusgroup_id": 0
+      },
+      {
+        "session_idx": null,
+        "round_id": 1,
+        "stimulusgroup_id": 1
+      },
+      {
+        "session_idx": null,
+        "round_id": 2,
+        "stimulusgroup_id": 2
+      }
+    ],
+    "blocklist_stimulusgroup_ids": [
+      0,
+      1,
+      2
+    ],
+    "training_round_ids": [
+      0,
+      1,
+      2
+    ],
     "additions": [
       {
         "position": {
@@ -184,14 +254,43 @@
         },
         "context": {
           "title": "Instruction",
-          "text_html": "<p> In each round, you are presented with a reference video and its compressed versions. Watch each video and vote. </p> <p> Video clips will loop over, <b>press \"space\" key or double click mouse </b> to terminate. </p>  <p> Please vote each video based on your experience of the <b> video quality </b>. </p>",
+          "text_html": "<p> Please find yourself a quiet, uninterruptable environment. Please <b> set your browser in full-screen mode </b>, and place your eyes away from the screen with a rough distance of 1.5 times of your screen height. </p> <p> In each round, you are presented with two videos: Video A and Video B. Watch the videos and vote on <b> which one has the better visual quality </b>. </p> <p> If you cannot decide, you can vote them <b style='color:red !important;'> as having the same visual quality </b>. </p> <p> Videos will loop over, <b> press \"space\" key or double click mouse </b> to terminate. </p>",
+          "actions_html": "\n            <p>\n                <a class=\"button\" href=\"{action_url}\"  id=\"start\">Start Test</a>\n            </p>\n            "
+        }
+      },
+      {
+        "position": {
+          "round_id": 0,
+          "before_or_after": "before"
+        },
+        "context": {
+          "title": "Training",
+          "text_html": " <p> To get you familiar with the test procedure, let's start with some training before kicking off the test officially. </p> ",
+          "actions_html": "\n            <p>\n                <a class=\"button\" href=\"{action_url}\"  id=\"start\">Start Training</a>\n            </p>\n            "
+        }
+      },
+      {
+        "position": {
+          "round_id": 3,
+          "before_or_after": "before"
+        },
+        "context": {
+          "title": "Start the test",
+          "text_html": " <p> Now let's officially start the test. </p> ",
           "actions_html": "\n            <p>\n                <a class=\"button\" href=\"{action_url}\"  id=\"start\">Start Test</a>\n            </p>\n            "
         }
       }
     ],
     "round_context": {
-      "instruction_html": "<p> Video clips will loop over, <b>press \"space\" key or double click mouse </b> to terminate. </p>",
-      "question": "Comparing to the reference, how would you rate the quality of the video?"
+      "instruction_html": "<p> Videos will loop over, <b>press \"space\" key or double click mouse </b> to terminate. </p>",
+      "button_a": "Play Video A",
+      "button_b": "Play Video B",
+      "question": "Between Video A and B, which has the better visual quality?",
+      "choices": [
+        "Video A is better",
+        "Video A and B are the same",
+        "Video B is better"
+      ]
     }
   }
 }
