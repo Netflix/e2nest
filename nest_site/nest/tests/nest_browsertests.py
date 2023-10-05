@@ -7,8 +7,8 @@ from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from django.urls import reverse
 from nest.config import NestConfig
 from nest.io import ExperimentUtils
-from nest.models import ElevenPointVote, FivePointVote, Round, SevenPointVote, \
-    Subject, TafcVote, ThreePointVote, Vote, Zero2HundredVote, CcrThreePointVote
+from nest.models import CcrThreePointVote, ElevenPointVote, FivePointVote, Round, SevenPointVote, Subject, TafcVote, \
+    ThreePointVote, Vote, Zero2HundredVote
 from nest.sites import NestSite
 from nest_site import settings
 from selenium import webdriver

@@ -8,9 +8,8 @@ from django.urls import reverse
 from nest.config import NestConfig
 from nest.control import ExperimentController
 from nest.io import ExperimentUtils, export_sureal_dataset
-from nest.models import ElevenPointVote, FivePointVote, Round, SevenPointVote, \
-    Stimulus, StimulusVoteGroup, Subject, TafcVote, ThreePointVote, Vote, \
-    Zero2HundredVote, CcrThreePointVote
+from nest.models import CcrThreePointVote, ElevenPointVote, FivePointVote, Round, SevenPointVote, Stimulus, \
+    StimulusVoteGroup, Subject, TafcVote, ThreePointVote, Vote, Zero2HundredVote
 from nest.sites import NestSite
 
 
