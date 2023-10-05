@@ -554,10 +554,18 @@ class FivePointVote(DiscreteVote):
 
 class TafcVote(DiscreteVote):
     """
-    Two-alternative forced choice (2AFC) Vote from {0, 1}.
+    Two-alternative forced choice (2AFC) Vote from {0, 1}. aka "CcrTwoPointVote".
     """
     support = [0, 1]
     TYPE = '2AFC'
+
+
+class CcrThreePointVote(DiscreteVote):
+    """
+    CCR (Comparison Category Rating) Three-point vote from {0, 1, 2}.
+    """
+    support = [0, 1, 2]
+    TYPE = 'CCR_THREE_POINT'
 
 
 class Zero2HundredVote(ContinuousVote):

@@ -2,7 +2,7 @@ import os
 
 from django.test import TestCase
 from django.urls import reverse_lazy
-from nest.pages import Acr5cPage, AcrPage, DcrPage, GenericPage, \
+from nest.pages import Acr5cPage, AcrPage, CcrPage, DcrPage, GenericPage, \
     Samviq5dPage, SamviqPage, TafcPage
 
 MEDIA_URL = ""
@@ -122,6 +122,62 @@ class TestPage(TestCase):
         })
         self.assertEqual(p.context['video_show_controls'], False)
         self.assertEqual(p.context['video_display_percentage'], 70)
+
+    def test_ccr_page(self):
+        p = CcrPage({
+            'title': 'Round 1 of 10',
+            'video_a': os.path.join(MEDIA_URL, "mp4/samples/Meridian/Meridian_A__8_18_8_23__SdrVvhevce2pVE__3840_2160__6000_enable_audio_False_vmaf103.58_phonevmaf104.85_psnr50.40_kbps6702.77.mp4"),  # noqa E501
+            'video_b': os.path.join(MEDIA_URL, "mp4/samples/Meridian/Meridian_A__8_18_8_23__SdrVvhevce2pVE__960_540__500_enable_audio_False_vmaf87.25_phonevmaf98.62_psnr45.35_kbps559.20.mp4"),  # noqa E501
+            'video_a_to_b_values': [0, 1, 2],
+            'video_display_percentage': 100,
+            'stimulusvotegroup_id': 0,
+        })
+        self.assertEqual(p.context['video_show_controls'], False)
+        self.assertEqual(p.context['video_display_percentage'], 100)
+
+        with self.assertRaises(AssertionError) as e:
+            _ = CcrPage({
+                'title': 'Round 1 of 10',
+                'video_a': os.path.join(MEDIA_URL, "mp4/samples/Meridian/Meridian_A__8_18_8_23__SdrVvhevce2pVE__3840_2160__6000_enable_audio_False_vmaf103.58_phonevmaf104.85_psnr50.40_kbps6702.77.mp4"),  # noqa E501
+                'video_b': os.path.join(MEDIA_URL, "mp4/samples/Meridian/Meridian_A__8_18_8_23__SdrVvhevce2pVE__960_540__500_enable_audio_False_vmaf87.25_phonevmaf98.62_psnr45.35_kbps559.20.mp4"),  # noqa E501
+                'video_a_to_b_values': [0, 1],
+                'video_display_percentage': 100,
+                'stimulusvotegroup_id': 0,
+            })
+        self.assertTrue('the length of choices and video_a_to_b_values must be equal' in e.exception.args[0])
+
+    def test_ccr_standard_page(self):
+        p = CcrPage({
+            'title': 'Round 1 of 10',
+            'video_a': os.path.join(MEDIA_URL, "mp4/samples/Meridian/Meridian_A__8_18_8_23__SdrVvhevce2pVE__3840_2160__6000_enable_audio_False_vmaf103.58_phonevmaf104.85_psnr50.40_kbps6702.77.mp4"),  # noqa E501
+            'video_b': os.path.join(MEDIA_URL, "mp4/samples/Meridian/Meridian_A__8_18_8_23__SdrVvhevce2pVE__960_540__500_enable_audio_False_vmaf87.25_phonevmaf98.62_psnr45.35_kbps559.20.mp4"),  # noqa E501
+            'video_a_to_b_values': [0, 1, 2],
+            'template_version': "standard",
+            'num_plays': 1,
+            't_gray': 1000,
+            'video_display_percentage': 70,
+            'text_color': "#FFFFFF",
+            'text_vert_perc': 45,
+            'stimulusvotegroup_id': 0,
+        })
+        self.assertEqual(p.context['video_show_controls'], False)
+        self.assertEqual(p.context['video_display_percentage'], 70)
+
+        with self.assertRaises(AssertionError) as e:
+            _ = CcrPage({
+                'title': 'Round 1 of 10',
+                'video_a': os.path.join(MEDIA_URL, "mp4/samples/Meridian/Meridian_A__8_18_8_23__SdrVvhevce2pVE__3840_2160__6000_enable_audio_False_vmaf103.58_phonevmaf104.85_psnr50.40_kbps6702.77.mp4"),  # noqa E501
+                'video_b': os.path.join(MEDIA_URL, "mp4/samples/Meridian/Meridian_A__8_18_8_23__SdrVvhevce2pVE__960_540__500_enable_audio_False_vmaf87.25_phonevmaf98.62_psnr45.35_kbps559.20.mp4"),  # noqa E501
+                'video_a_to_b_values': [0, 1],
+                'template_version': "standard",
+                'num_plays': 1,
+                't_gray': 1000,
+                'video_display_percentage': 70,
+                'text_color': "#FFFFFF",
+                'text_vert_perc': 45,
+                'stimulusvotegroup_id': 0,
+            })
+        self.assertTrue('the length of choices and video_a_to_b_values must be equal' in e.exception.args[0])
 
     def test_dcr11d_page(self):
         p = DcrPage({

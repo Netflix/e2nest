@@ -7,8 +7,8 @@ from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from django.urls import reverse
 from nest.config import NestConfig
 from nest.io import ExperimentUtils
-from nest.models import ElevenPointVote, FivePointVote, Round, SevenPointVote, \
-    Subject, TafcVote, ThreePointVote, Vote, Zero2HundredVote
+from nest.models import CcrThreePointVote, ElevenPointVote, FivePointVote, Round, SevenPointVote, Subject, TafcVote, \
+    ThreePointVote, Vote, Zero2HundredVote
 from nest.sites import NestSite
 from nest_site import settings
 from selenium import webdriver
@@ -534,3 +534,48 @@ class TestBrowserWithWriteDataset(StaticLiveServerTestCase, LoginMixin):
         r2 = Round.objects.get(session=sess, round_id=1)
         self.assertTrue(r1.response_sec > 0)
         self.assertTrue(r2.response_sec > 0)
+
+    def test_step_session_ccr_standard(self):
+        ec = ExperimentUtils._create_experiment_from_config(
+            source_config_filepath=NestConfig.tests_resource_path('cvxhull_subjexp_toy_x_ccr_standard.json'),
+            is_test=False,
+            random_seed=1,
+            experiment_title=self.EXPERIMENT_TITLE)
+
+        subj: Subject = Subject.create_by_username('user')
+        sess = ec.add_session(subj)
+
+        self.login()
+        self.browser.get(self.live_server_url + reverse('nest:start_session', kwargs={'session_id': sess.id}))
+        self.browser.find_element(by='id', value='start').click()
+        self.assertTrue('Round 1 of 2' in self.browser.page_source)
+
+        sleep(0.5)  # 0.5 sec buffer
+        self.browser.find_element(by='tag name', value="body").send_keys(Keys.SPACE)
+
+        button = self.browser.find_element(by='id', value='radio_ccr0')
+        value = int(button.get_attribute("value"))
+        button.click()
+        self.browser.find_element(by='id', value='submit').click()
+        self.assertTrue('Round 2 of 2' in self.browser.page_source)
+
+        self.assertEqual(Vote.objects.count(), 0)
+
+        sleep(0.5)  # 0.5 sec buffer
+        self.browser.find_element(by='tag name', value="body").send_keys(Keys.SPACE)
+
+        button2 = self.browser.find_element(by='id', value='radio_ccr1')
+        value2 = int(button2.get_attribute("value"))
+        button2.click()
+        self.browser.find_element(by='id', value='submit').click()
+        self.assertTrue('Test done' in self.browser.page_source)
+
+        self.assertEqual(Vote.objects.count(), 2)
+        self.assertEqual(FivePointVote.objects.count(), 0)
+        self.assertEqual(Zero2HundredVote.objects.count(), 0)
+        self.assertEqual(CcrThreePointVote.objects.count(), 2)
+
+        self.assertEqual(Vote.objects.first().score, value)
+        self.assertEqual(Vote.objects.all()[1].score, value2)
+        self.assertEqual(CcrThreePointVote.objects.first().score, value)
+        self.assertEqual(CcrThreePointVote.objects.all()[1].score, value2)
