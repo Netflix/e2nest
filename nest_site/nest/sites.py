@@ -27,9 +27,8 @@ from sureal.dataset_reader import DatasetReader
 
 from .config import ExperimentConfig, NestConfig, StimulusConfig
 from .helpers import override
-from .pages import Acr5cPage, AcrPage, CcrPage, DcrPage, GenericPage, map_methodology_to_page_class, Samviq5dPage, \
-    SamviqPage, StatusPage
-
+from .pages import Acr5cPage, AcrPage, CcrPage, DcrPage, GenericPage, map_methodology_to_html_id_key, \
+    map_methodology_to_page_class, Samviq5dPage, SamviqPage, StatusPage
 logging.basicConfig()
 logger = logging.getLogger(os.path.splitext(os.path.basename(__file__))[0])
 logger.setLevel('INFO')
@@ -1482,7 +1481,9 @@ class NestSite(ExperimentMixin):
                          ec.experiment_config.vote_scale == '0_TO_100'):
                     score_dict = dict()
                     for key, val in request.POST.items():
-                        mo = re.match(r"^{m}_([0-9]*)$".format(m=ec.experiment_config.methodology), key)
+                        mo = re.match(
+                            r"^{m}_([0-9]*)$".format(m=map_methodology_to_html_id_key(ec.experiment_config.methodology)),
+                            key)
                         if mo is None:
                             continue
                         svgid = int(mo.group(1))

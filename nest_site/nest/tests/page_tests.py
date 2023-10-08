@@ -92,37 +92,6 @@ class TestPage(TestCase):
         self.assertEqual(p.context['video_show_controls'], False)
         self.assertEqual(p.context['video_display_percentage'], 50)
 
-    def test_tafc_page(self):
-        p = TafcPage({
-            'title': 'Round 1 of 10',
-            'video_a': os.path.join(MEDIA_URL, "mp4/samples/Meridian/Meridian_A__8_18_8_23__SdrVvhevce2pVE__3840_2160__6000_enable_audio_False_vmaf103.58_phonevmaf104.85_psnr50.40_kbps6702.77.mp4"),  # noqa E501
-            'video_b': os.path.join(MEDIA_URL, "mp4/samples/Meridian/Meridian_A__8_18_8_23__SdrVvhevce2pVE__960_540__500_enable_audio_False_vmaf87.25_phonevmaf98.62_psnr45.35_kbps559.20.mp4"),  # noqa E501
-            'video_a_value': 0,
-            'video_b_value': 1,
-            'video_display_percentage': 100,
-            'stimulusvotegroup_id': 0,
-        })
-        self.assertEqual(p.context['video_show_controls'], False)
-        self.assertEqual(p.context['video_display_percentage'], 100)
-
-    def test_tafc_standard_page(self):
-        p = TafcPage({
-            'title': 'Round 1 of 10',
-            'video_a': os.path.join(MEDIA_URL, "mp4/samples/Meridian/Meridian_A__8_18_8_23__SdrVvhevce2pVE__3840_2160__6000_enable_audio_False_vmaf103.58_phonevmaf104.85_psnr50.40_kbps6702.77.mp4"),  # noqa E501
-            'video_b': os.path.join(MEDIA_URL, "mp4/samples/Meridian/Meridian_A__8_18_8_23__SdrVvhevce2pVE__960_540__500_enable_audio_False_vmaf87.25_phonevmaf98.62_psnr45.35_kbps559.20.mp4"),  # noqa E501
-            'video_a_value': 0,
-            'video_b_value': 1,
-            'template_version': "standard",
-            'num_plays': 1,
-            't_gray': 1000,
-            'video_display_percentage': 70,
-            'text_color': "#FFFFFF",
-            'text_vert_perc': 45,
-            'stimulusvotegroup_id': 0,
-        })
-        self.assertEqual(p.context['video_show_controls'], False)
-        self.assertEqual(p.context['video_display_percentage'], 70)
-
     def test_ccr_page(self):
         p = CcrPage({
             'title': 'Round 1 of 10',

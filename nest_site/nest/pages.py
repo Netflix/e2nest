@@ -421,7 +421,7 @@ class StatusPage(Page, ABC):
                 assert 'action_url' in test
 
 
-def map_methodology_to_page_class(methodology: str):
+def map_methodology_to_page_class(methodology: str) -> Page.__class__:
     if methodology == 'acr':
         return AcrPage
     elif methodology == 'acr5c':
@@ -438,3 +438,12 @@ def map_methodology_to_page_class(methodology: str):
         return SamviqPage
     else:
         assert False, f'unknown mapping from methodology {methodology} to page class.'
+
+
+def map_methodology_to_html_id_key(methodology: str) -> str:
+    if methodology == 'tafc':
+        return 'ccr'
+    elif methodology in ['acr', 'acr5c', 'dcr', 'ccr', 'samviq5d', 'samviq']:
+        return methodology
+    else:
+        assert False, f'unknown mapping from methodology {methodology} to HTML id key.'
