@@ -78,7 +78,14 @@
             "num_plays": 2, "min_num_plays": 0,
             "t_gray": 2000, "text_color": "#0000FF",
             "text_vert_perc": 45,
-            "instruction_html": ""
+            "instruction_html": "<p> Videos will loop over, <b>press \"space\" key or double click mouse </b> to terminate. </p>",
+            "button_a": "Play Video A",
+            "button_b": "Play Video B",
+            "question": "Between Video A and B, which has the better visual quality?",
+            "choices": [
+                "Video A is better",
+                "Video B is better"
+            ]
         }
     }
 }

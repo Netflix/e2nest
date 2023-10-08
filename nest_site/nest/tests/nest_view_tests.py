@@ -161,6 +161,36 @@ class TestViews(TestCase):
         response = self.client.get(reverse('nest:tafc_demo'))
         self.assertEqual(response.status_code, 200)
 
+    def test_tafc_standard_with_login(self):
+        response = self.client.get(reverse('nest:tafc_standard_demo'))
+        self.assertEqual(response.status_code, 200)
+
+        login = self.client.login(username='user', password='pass')
+        self.assertTrue(login)
+
+        response = self.client.get(reverse('nest:tafc_standard_demo'))
+        self.assertEqual(response.status_code, 200)
+
+    def test_ccr_with_login(self):
+        response = self.client.get(reverse('nest:ccr_demo'))
+        self.assertEqual(response.status_code, 200)
+
+        login = self.client.login(username='user', password='pass')
+        self.assertTrue(login)
+
+        response = self.client.get(reverse('nest:ccr_demo'))
+        self.assertEqual(response.status_code, 200)
+
+    def test_ccr_standard_with_login(self):
+        response = self.client.get(reverse('nest:ccr_standard_demo'))
+        self.assertEqual(response.status_code, 200)
+
+        login = self.client.login(username='user', password='pass')
+        self.assertTrue(login)
+
+        response = self.client.get(reverse('nest:ccr_standard_demo'))
+        self.assertEqual(response.status_code, 200)
+
     def test_dcr11d_with_login(self):
         response = self.client.get(reverse('nest:dcr11d_demo'))
         self.assertEqual(response.status_code, 200)
@@ -1035,7 +1065,7 @@ class TestViewsWithWriteDataset(TestCase):
 
         response = self.client.get(reverse('nest:step_session', kwargs={'session_id': 1}))
         self.assertEqual(response.status_code, 200)
-        response = self.client.post(reverse('nest:step_session', kwargs={'session_id': 1}), {'tafc_1': '1'})
+        response = self.client.post(reverse('nest:step_session', kwargs={'session_id': 1}), {'ccr_1': '1'})
         self.assertEqual(response.status_code, 302)
         steps = self.client.session['steps']
         self.assertEqual(len(steps), 2)
@@ -1044,7 +1074,7 @@ class TestViewsWithWriteDataset(TestCase):
 
         response = self.client.get(reverse('nest:step_session', kwargs={'session_id': 1}))
         self.assertEqual(response.status_code, 200)
-        response = self.client.post(reverse('nest:step_session', kwargs={'session_id': 1}), {'tafc_0': '0'})
+        response = self.client.post(reverse('nest:step_session', kwargs={'session_id': 1}), {'ccr_0': '0'})
         self.assertEqual(response.status_code, 302)
         steps = self.client.session['steps']
         self.assertEqual(len(steps), 3)
@@ -1086,9 +1116,9 @@ class TestViewsWithWriteDataset(TestCase):
         self.client.get(reverse('nest:start_session', kwargs={'session_id': 2}))
         self.client.get(reverse('nest:step_session', kwargs={'session_id': 2}))
         self.client.get(reverse('nest:step_session', kwargs={'session_id': 2}))
-        self.client.post(reverse('nest:step_session', kwargs={'session_id': 2}), {'tafc_0': '1'})
+        self.client.post(reverse('nest:step_session', kwargs={'session_id': 2}), {'ccr_0': '1'})
         self.client.get(reverse('nest:step_session', kwargs={'session_id': 2}))
-        self.client.post(reverse('nest:step_session', kwargs={'session_id': 2}), {'tafc_1': '0'})
+        self.client.post(reverse('nest:step_session', kwargs={'session_id': 2}), {'ccr_1': '0'})
         self.client.get(reverse('nest:step_session', kwargs={'session_id': 2}))
         self.client.login(username='staff', password='pass')
 
@@ -1137,7 +1167,7 @@ class TestViewsWithWriteDataset(TestCase):
 
         response = self.client.get(reverse('nest:step_session', kwargs={'session_id': 1}))
         self.assertEqual(response.status_code, 200)
-        response = self.client.post(reverse('nest:step_session', kwargs={'session_id': 1}), {'tafc_1': '1'})
+        response = self.client.post(reverse('nest:step_session', kwargs={'session_id': 1}), {'ccr_1': '1'})
         self.assertEqual(response.status_code, 302)
         steps = self.client.session['steps']
         self.assertEqual(len(steps), 2)
@@ -1146,7 +1176,7 @@ class TestViewsWithWriteDataset(TestCase):
 
         response = self.client.get(reverse('nest:step_session', kwargs={'session_id': 1}))
         self.assertEqual(response.status_code, 200)
-        response = self.client.post(reverse('nest:step_session', kwargs={'session_id': 1}), {'tafc_0': '0'})
+        response = self.client.post(reverse('nest:step_session', kwargs={'session_id': 1}), {'ccr_0': '0'})
         self.assertEqual(response.status_code, 302)
         steps = self.client.session['steps']
         self.assertEqual(len(steps), 3)

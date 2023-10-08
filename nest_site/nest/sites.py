@@ -27,9 +27,8 @@ from sureal.dataset_reader import DatasetReader
 
 from .config import ExperimentConfig, NestConfig, StimulusConfig
 from .helpers import override
-from .pages import Acr5cPage, AcrPage, CcrPage, DcrPage, GenericPage, map_methodology_to_page_class, Samviq5dPage, \
-    SamviqPage, StatusPage, TafcPage
-
+from .pages import Acr5cPage, AcrPage, CcrPage, DcrPage, GenericPage, map_methodology_to_html_id_key, \
+    map_methodology_to_page_class, Samviq5dPage, SamviqPage, StatusPage
 logging.basicConfig()
 logger = logging.getLogger(os.path.splitext(os.path.basename(__file__))[0])
 logger.setLevel('INFO')
@@ -731,12 +730,15 @@ class NestSite(ExperimentMixin):
     @method_decorator(never_cache)
     def tafc_demo(self, request, extra_context=None):
         from .models import TafcVote
-        page = TafcPage({
+        page = CcrPage({
             'title': 'Round 1 of 10',
             'video_a': os.path.join(MEDIA_URL, "mp4/samples/Meridian/Meridian_A__8_18_8_23__SdrVvhevce2pVE__3840_2160__6000_enable_audio_False_vmaf103.58_phonevmaf104.85_psnr50.40_kbps6702.77.mp4"),  # noqa E501
             'video_b': os.path.join(MEDIA_URL, "mp4/samples/Meridian/Meridian_A__8_18_8_23__SdrVvhevce2pVE__960_540__500_enable_audio_False_vmaf87.25_phonevmaf98.62_psnr45.35_kbps559.20.mp4"),  # noqa E501
-            'video_a_value': TafcVote.support[0],
-            'video_b_value': TafcVote.support[1],
+            'video_a_to_b_values': TafcVote.support,
+            'question': 'Between Video A and Video B, which video has the better visual quality?',
+            'choices':
+                ['Video A is better',
+                 'Video B is better'],
             'video_display_percentage': 75,
             'stimulusvotegroup_id': 0,
         })
@@ -750,13 +752,16 @@ class NestSite(ExperimentMixin):
     @method_decorator(never_cache)
     def tafc_standard_demo(self, request, extra_context=None):
         from .models import TafcVote
-        page = TafcPage({
+        page = CcrPage({
             'title': 'Round 1 of 10',
             'instruction_html': "",
             'video_a': os.path.join(MEDIA_URL, "mp4/samples/Meridian/Meridian_A__8_18_8_23__SdrVvhevce2pVE__3840_2160__6000_enable_audio_False_vmaf103.58_phonevmaf104.85_psnr50.40_kbps6702.77.mp4"),  # noqa E501
             'video_b': os.path.join(MEDIA_URL, "mp4/samples/Meridian/Meridian_A__8_18_8_23__SdrVvhevce2pVE__960_540__500_enable_audio_False_vmaf87.25_phonevmaf98.62_psnr45.35_kbps559.20.mp4"),  # noqa E501
-            'video_a_value': TafcVote.support[0],
-            'video_b_value': TafcVote.support[1],
+            'video_a_to_b_values': TafcVote.support,
+            'question': 'Between Video A and Video B, which video has the better visual quality?',
+            'choices':
+                ['Video A is better',
+                 'Video B is better'],
             'template_version': 'standard',
             'num_plays': 2, 'min_num_plays': 0,
             't_gray': 1000, 'text_color': '#FFFFFF',
@@ -1036,7 +1041,6 @@ class NestSite(ExperimentMixin):
                 request.user.get_username())
 
     def step_session(self, request, session_id, extra_context=None):  # noqa C901
-        from .models import CcrThreePointVote, TafcVote
 
         if not self._test_cookie_worked(request):
             title = 'Cookie disabled'
@@ -1336,43 +1340,13 @@ class NestSite(ExperimentMixin):
                     context = {**self.each_context(request), **page.context}
                     request.current_app = self.name
                     response = TemplateResponse(request, page.get_template(), context)
-                elif ec.experiment_config.methodology == 'tafc' and \
-                        ec.experiment_config.vote_scale == '2AFC':
-                    svgid = self._get_matched_single_stimulusvotegroup_id(ec, next_step)
-                    sid_1st, sid_2nd = self._get_matched_double_stimulus_ids(ec, svgid)
-                    s_1st = self._get_matched_stimulus_dict(ec, sid_1st)
-                    s_2nd = self._get_matched_stimulus_dict(ec, sid_2nd)
-                    assert s_1st['type'] == 'video/mp4'
-                    assert s_2nd['type'] == 'video/mp4'
+                elif (ec.experiment_config.methodology == 'ccr' and
+                      ec.experiment_config.vote_scale == 'CCR_THREE_POINT') \
+                        or (ec.experiment_config.methodology == 'tafc' and
+                            ec.experiment_config.vote_scale == '2AFC'):
 
-                    # randomize the order of stimuli on 2AFC page
-                    if random.random() < 0.5:
-                        video_a, video_a_value = s_1st['path'], TafcVote.support[0]
-                        video_b, video_b_value = s_2nd['path'], TafcVote.support[1]
-                    else:
-                        video_b, video_b_value = s_1st['path'], TafcVote.support[0]
-                        video_a, video_a_value = s_2nd['path'], TafcVote.support[1]
+                    VoteClass = Vote.find_subclass(ec.experiment_config.vote_scale)
 
-                    sgid: int = next_step['context']['stimulusgroup_id']
-                    video_display_percentage = ec.experiment_config. \
-                        stimulus_config.get_video_display_percentage(sgid)
-                    assert video_display_percentage is not None
-                    d = {'title': title,
-                         'video_a': video_a, 'video_a_value': video_a_value,
-                         'video_b': video_b, 'video_b_value': video_b_value,
-                         'session_id': session_id,
-                         'video_display_percentage': video_display_percentage,
-                         'stimulusvotegroup_id': svgid,
-                         **ec.experiment_config.round_context,
-                         }
-                    PageClass = map_methodology_to_page_class(
-                        ec.experiment_config.methodology)
-                    page = PageClass(d)
-                    context = {**self.each_context(request), **page.context}
-                    request.current_app = self.name
-                    response = TemplateResponse(request, page.get_template(), context)
-                elif ec.experiment_config.methodology == 'ccr' and \
-                        ec.experiment_config.vote_scale == 'CCR_THREE_POINT':
                     svgid = self._get_matched_single_stimulusvotegroup_id(ec, next_step)
                     sid_1st, sid_2nd = self._get_matched_double_stimulus_ids(ec, svgid)
                     s_1st = self._get_matched_stimulus_dict(ec, sid_1st)
@@ -1384,11 +1358,11 @@ class NestSite(ExperimentMixin):
                     if random.random() < 0.5:
                         video_a = s_1st['path']
                         video_b = s_2nd['path']
-                        video_a_to_b_values = CcrThreePointVote.support
+                        video_a_to_b_values = VoteClass.support
                     else:
                         video_b = s_1st['path']
                         video_a = s_2nd['path']
-                        video_a_to_b_values = list(reversed(CcrThreePointVote.support))
+                        video_a_to_b_values = list(reversed(VoteClass.support))
 
                     sgid: int = next_step['context']['stimulusgroup_id']
                     video_display_percentage = ec.experiment_config. \
@@ -1507,7 +1481,9 @@ class NestSite(ExperimentMixin):
                          ec.experiment_config.vote_scale == '0_TO_100'):
                     score_dict = dict()
                     for key, val in request.POST.items():
-                        mo = re.match(r"^{m}_([0-9]*)$".format(m=ec.experiment_config.methodology), key)
+                        mo = re.match(
+                            r"^{m}_([0-9]*)$".format(m=map_methodology_to_html_id_key(ec.experiment_config.methodology)),
+                            key)
                         if mo is None:
                             continue
                         svgid = int(mo.group(1))

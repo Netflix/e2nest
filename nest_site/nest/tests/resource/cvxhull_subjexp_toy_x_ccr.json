@@ -72,6 +72,16 @@
                     "actions_html": "\n            <p>\n                <a class=\"button\" href=\"{action_url}\"  id=\"start\">Next</a>\n            </p>\n            "
                 }
             }
-        ]
+        ],
+        "round_context": {
+            "button_a": "Play Video A",
+            "button_b": "Play Video B",
+            "question": "Between Video A and B, which has the better visual quality, or the same?",
+            "choices": [
+                "Video A is better",
+                "They are the same",
+                "Video B is better"
+            ]
+        }
     }
 }
