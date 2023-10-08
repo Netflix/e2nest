@@ -361,7 +361,7 @@ class TestBrowserWithWriteDataset(StaticLiveServerTestCase, LoginMixin):
         sleep(0.5)  # 0.5 sec buffer
         self.browser.find_element(by='tag name', value="body").send_keys(Keys.SPACE)
 
-        button = self.browser.find_element(by='id', value='radio_tafc0')
+        button = self.browser.find_element(by='id', value='radio_ccr0')
         value = int(button.get_attribute("value"))
         button.click()
         self.browser.find_element(by='id', value='submit').click()
@@ -372,7 +372,7 @@ class TestBrowserWithWriteDataset(StaticLiveServerTestCase, LoginMixin):
         sleep(0.5)  # 0.5 sec buffer
         self.browser.find_element(by='tag name', value="body").send_keys(Keys.SPACE)
 
-        button2 = self.browser.find_element(by='id', value='radio_tafc1')
+        button2 = self.browser.find_element(by='id', value='radio_ccr1')
         value2 = int(button2.get_attribute("value"))
         button2.click()
         self.browser.find_element(by='id', value='submit').click()

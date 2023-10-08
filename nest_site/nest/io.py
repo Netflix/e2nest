@@ -13,9 +13,9 @@ from django.db.utils import IntegrityError
 from nest.config import ExperimentConfig, NestConfig, StimulusConfig
 from nest.control import ExperimentController, SessionStatus
 from nest.helpers import empty_object, map_path_to_noise_rmse, override
-from nest.models import CcrThreePointVote, Content, DiscreteVote, Experiment, Experimenter, ExperimentRegister, Round, \
-    Session, Stimulus, StimulusGroup, StimulusVoteGroup, Subject, TafcVote, Vote, VoteRegister
-from nest.pages import map_methodology_to_page_class
+from nest.models import Content, DiscreteVote, Experiment, Experimenter, ExperimentRegister, Round, \
+    Session, Stimulus, StimulusGroup, StimulusVoteGroup, Subject, Vote, VoteRegister
+from nest.pages import CcrPage, map_methodology_to_page_class
 from nest.sites import NestSite
 from sureal.dataset_reader import PairedCompDatasetReader as \
     SurealPairedCompDatasetReader
@@ -767,8 +767,6 @@ class ExperimentUtils(object):
             'title': None,
             'video': None, 'video_a': None, 'video_b': None,
             'button': None, 'button_a': None, 'button_b': None,
-            'video_a_value': TafcVote.support[0], 'video_b_value': TafcVote.support[1],
-            'video_a_to_b_values': CcrThreePointVote.support,
             'videos': [None], 'video_ref': None,
             'buttons': [None], 'button_ref': None,
             'stimulusvotegroup_ids': [None],
@@ -788,12 +786,20 @@ class ExperimentUtils(object):
         ecfg = ExperimentConfig(
             stimulus_config=scfg,
             config=config['experiment_config'])
+
         PageClass = map_methodology_to_page_class(ecfg.methodology)
+        VoteClass = Vote.find_subclass(ecfg.vote_scale)
+
         d = dict()
         d.update(round_context_default_d)
+        if PageClass == CcrPage:
+            assert issubclass(VoteClass, DiscreteVote), \
+                f"expect VoteClass to be subclass of DiscreteVote, but is: {VoteClass}"
+            d['video_a_to_b_values'] = VoteClass.support
         d.update(ecfg.round_context)
+
         _ = PageClass(d)
-        VoteClass = Vote.find_subclass(ecfg.vote_scale)
+
         if 'choices' in d and issubclass(VoteClass, DiscreteVote):
             assert len(d['choices']) == len(VoteClass.support), \
                 f"the length of choices ({len(d['choices'])}) does not match " \

@@ -252,73 +252,6 @@ class DcrPage(Page, PageWithVideoMixin, ABC):
         return self.TEMPLATES[self.context['template_version']]
 
 
-class TafcPage(Page, PageWithVideoMixin):
-    """Two-Alternative Forced Choice (2AFC) page"""
-    TEMPLATES = {'interactive': 'nest/tafc.html',
-                 'standard': 'nest/tafc_standard.html'
-                 }
-    DEFAULT_TEMPLATE = 'interactive'
-
-    DEFAULT_CONTEXT = {
-        'instruction_html':
-            """<p> Watch Video A, followed by Video B. Each video will loop. <b> Press "space" key or double click the mouse </b> to exit. After that, rate the videos by answering the question provided. </p>""",  # noqa E501
-        'button_a': 'Play Video A',
-        'button_b': 'Play Video B',
-        'question':
-            "Between Video A and Video B, which video has the better visual quality?",
-        'choices':
-            ['Video A is better',
-             'Video B is better'],
-    }
-
-    @override(Page)
-    def _assert_context(self):
-        from nest.models import TafcVote
-        if 'template_version' not in self.context:
-            self.context['template_version'] = self.DEFAULT_TEMPLATE
-
-        if self.context['template_version'] == 'interactive':
-            required_fields = ['title', 'instruction_html',
-                               'button_a', 'button_b',
-                               'video_a', 'video_b',
-                               'video_a_value', 'video_b_value',
-                               'question', 'choices',
-                               'stimulusvotegroup_id']
-        elif self.context['template_version'] == 'standard':
-            required_fields = ['title', 'instruction_html',
-                               'num_plays', 't_gray',
-                               'button_a', 'button_b',
-                               'video_a', 'video_b',
-                               'video_a_value', 'video_b_value',
-                               'question', 'choices',
-                               'stimulusvotegroup_id']
-        else:
-            assert False, f"tafc methodology only supports interactive and standard template_version, but " \
-                          f"is: {self.context['template_version']}"
-
-        for e in required_fields:
-            assert e in self.context, f'parameter {e} is required in context'
-
-        assert len(self.context['choices']) == 2
-        assert (self.context['video_a_value'] == TafcVote.support[0] and self.context['video_b_value'] == TafcVote.support[1]) or \
-               (self.context['video_a_value'] == TafcVote.support[1] and self.context['video_b_value'] == TafcVote.support[0])
-
-        if self.context['template_version'] == 'standard':
-            assert self.context['num_plays'] >= 1
-            if 'min_num_plays' in self.context:
-                assert self.context['num_plays'] >= self.context['min_num_plays'] >= 0
-            assert self.context['t_gray'] >= 0
-            if 'text_color' in self.context:
-                assert len(self.context['text_color']) == 7 and self.context['text_color'].startswith('#'), \
-                    'text_color must in the format of #0000FF'
-            if 'text_vert_perc' in self.context:
-                assert 0 <= self.context['text_vert_perc'] <= 100
-
-    @override(Page)
-    def get_template(self):
-        return self.TEMPLATES[self.context['template_version']]
-
-
 class CcrPage(Page, PageWithVideoMixin, ABC):
     """Comparison Category Rating (CCR) page"""
     TEMPLATES = {'interactive': 'nest/ccr.html',
@@ -496,7 +429,7 @@ def map_methodology_to_page_class(methodology: str):
     elif methodology == 'dcr':
         return DcrPage
     elif methodology == 'tafc':
-        return TafcPage
+        return CcrPage
     elif methodology == 'ccr':
         return CcrPage
     elif methodology == 'samviq5d':

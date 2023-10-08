@@ -3,7 +3,7 @@ import os
 from django.test import TestCase
 from django.urls import reverse_lazy
 from nest.pages import Acr5cPage, AcrPage, CcrPage, DcrPage, GenericPage, \
-    Samviq5dPage, SamviqPage, TafcPage
+    Samviq5dPage, SamviqPage
 
 MEDIA_URL = ""
 

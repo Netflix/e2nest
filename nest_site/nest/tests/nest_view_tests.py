@@ -161,6 +161,36 @@ class TestViews(TestCase):
         response = self.client.get(reverse('nest:tafc_demo'))
         self.assertEqual(response.status_code, 200)
 
+    def test_tafc_standard_with_login(self):
+        response = self.client.get(reverse('nest:tafc_standard_demo'))
+        self.assertEqual(response.status_code, 200)
+
+        login = self.client.login(username='user', password='pass')
+        self.assertTrue(login)
+
+        response = self.client.get(reverse('nest:tafc_standard_demo'))
+        self.assertEqual(response.status_code, 200)
+
+    def test_ccr_with_login(self):
+        response = self.client.get(reverse('nest:ccr_demo'))
+        self.assertEqual(response.status_code, 200)
+
+        login = self.client.login(username='user', password='pass')
+        self.assertTrue(login)
+
+        response = self.client.get(reverse('nest:ccr_demo'))
+        self.assertEqual(response.status_code, 200)
+
+    def test_ccr_standard_with_login(self):
+        response = self.client.get(reverse('nest:ccr_standard_demo'))
+        self.assertEqual(response.status_code, 200)
+
+        login = self.client.login(username='user', password='pass')
+        self.assertTrue(login)
+
+        response = self.client.get(reverse('nest:ccr_standard_demo'))
+        self.assertEqual(response.status_code, 200)
+
     def test_dcr11d_with_login(self):
         response = self.client.get(reverse('nest:dcr11d_demo'))
         self.assertEqual(response.status_code, 200)
