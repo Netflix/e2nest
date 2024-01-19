@@ -225,7 +225,7 @@ class ExperimentConfig(object):
             elif self.methodology == 'tafc':
                 assert self.vote_scale in ['2AFC']
             elif self.methodology == 'ccr':
-                assert self.vote_scale in ['CCR_THREE_POINT']
+                assert self.vote_scale in ['CCR_THREE_POINT', 'CCR_FIVE_POINT']
             elif self.methodology == 'acr':
                 assert self.vote_scale in ['FIVE_POINT']
             elif self.methodology == 'acr5c':

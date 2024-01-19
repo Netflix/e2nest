@@ -8,8 +8,8 @@ from django.urls import reverse
 from nest.config import NestConfig
 from nest.control import ExperimentController
 from nest.io import ExperimentUtils, export_sureal_dataset
-from nest.models import CcrThreePointVote, ElevenPointVote, FivePointVote, Round, SevenPointVote, Stimulus, \
-    StimulusVoteGroup, Subject, TafcVote, ThreePointVote, Vote, Zero2HundredVote
+from nest.models import CcrFivePointVote, CcrThreePointVote, ElevenPointVote, FivePointVote, Round, SevenPointVote, \
+    Stimulus, StimulusVoteGroup, Subject, TafcVote, ThreePointVote, Vote, Zero2HundredVote
 from nest.sites import NestSite
 
 
@@ -1469,3 +1469,61 @@ class TestViewsWithWriteDataset(TestCase):
         self.assertEqual(Vote.objects.all()[1].score, 2)
         self.assertEqual(CcrThreePointVote.objects.first().score, 1)
         self.assertEqual(CcrThreePointVote.objects.all()[1].score, 2)
+
+    def test_step_session_ccr5d(self):
+        ec = ExperimentUtils._create_experiment_from_config(
+            source_config_filepath=NestConfig.tests_resource_path('cvxhull_subjexp_toy_x_ccr5d.json'),
+            is_test=True,
+            random_seed=1,
+            experiment_title='nest_view_tests.TestViewsWithWriteDataset.cvxhull_subjexp_toy_x_ccr5d')
+
+        subj: Subject = Subject.create_by_username('user')
+        ec.add_session(subj)
+
+        login = self.client.login(username='user', password='pass')
+        self.assertTrue(login)
+
+        response = self.client.get(reverse('nest:status'))
+        self.assertEqual(response.status_code, 200)
+
+        response = self.client.get(reverse('nest:start_session', kwargs={'session_id': 1}))
+        self.assertEqual(response.status_code, 302)
+
+        response = self.client.get(reverse('nest:step_session', kwargs={'session_id': 1}))
+        self.assertEqual(response.status_code, 200)
+        steps = self.client.session['steps']
+        self.assertEqual(len(steps), 1)
+        self.assertTrue(NestSite._step_is_addition(steps[0]))
+
+        response = self.client.get(reverse('nest:step_session', kwargs={'session_id': 1}))
+        self.assertEqual(response.status_code, 200)
+        response = self.client.post(reverse('nest:step_session', kwargs={'session_id': 1}), {'ccr_1': '1'})
+        self.assertEqual(response.status_code, 302)
+        steps = self.client.session['steps']
+        self.assertEqual(len(steps), 2)
+        self.assertFalse(NestSite._step_is_addition(steps[-1]))
+        self.assertEqual(steps[-1]['context']['score'], {'1': 1})
+
+        response = self.client.get(reverse('nest:step_session', kwargs={'session_id': 1}))
+        self.assertEqual(response.status_code, 200)
+        response = self.client.post(reverse('nest:step_session', kwargs={'session_id': 1}), {'ccr_0': '4'})
+        self.assertEqual(response.status_code, 302)
+        steps = self.client.session['steps']
+        self.assertEqual(len(steps), 3)
+        self.assertFalse(NestSite._step_is_addition(steps[-1]))
+        self.assertEqual(steps[-1]['context']['score'], {'0': 4})
+
+        self.assertEqual(Vote.objects.count(), 0)
+        response = self.client.get(reverse('nest:step_session', kwargs={'session_id': 1}))
+        self.assertEqual(response.status_code, 200)
+
+        self.assertEqual(Vote.objects.count(), 2)
+        self.assertEqual(FivePointVote.objects.count(), 0)
+        self.assertEqual(Zero2HundredVote.objects.count(), 0)
+        self.assertEqual(CcrThreePointVote.objects.count(), 0)
+        self.assertEqual(CcrFivePointVote.objects.count(), 2)
+
+        self.assertEqual(Vote.objects.first().score, 1)
+        self.assertEqual(Vote.objects.all()[1].score, 4)
+        self.assertEqual(CcrFivePointVote.objects.first().score, 1)
+        self.assertEqual(CcrFivePointVote.objects.all()[1].score, 4)

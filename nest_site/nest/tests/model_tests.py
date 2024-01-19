@@ -4,9 +4,9 @@ from django.contrib.auth.models import User
 from django.db.utils import IntegrityError
 from django.test import TestCase
 from django.utils import timezone
-from nest.models import CcrThreePointVote, Condition, Content, ElevenPointVote, Experiment, Experimenter, \
-    ExperimentRegister, FivePointVote, Round, Session, SevenPointVote, Stimulus, StimulusGroup, StimulusVoteGroup, \
-    Subject, TafcVote, VoteRegister, Zero2HundredVote
+from nest.models import CcrFivePointVote, CcrThreePointVote, Condition, Content, ElevenPointVote, Experiment, \
+    Experimenter, ExperimentRegister, FivePointVote, Round, Session, SevenPointVote, Stimulus, StimulusGroup, \
+    StimulusVoteGroup, Subject, TafcVote, VoteRegister, Zero2HundredVote
 
 
 class TestModels(TestCase):
@@ -351,6 +351,17 @@ class TestModels(TestCase):
             CcrThreePointVote(score=0.5)
         with self.assertRaises(AssertionError):
             CcrThreePointVote(score=3)
+
+    def test_ccr5d_vote_validation(self):
+        CcrFivePointVote(score=0)
+        CcrFivePointVote(score=1)
+        CcrFivePointVote(score=2)
+        CcrFivePointVote(score=3)
+        CcrFivePointVote(score=4)
+        with self.assertRaises(AssertionError):
+            CcrThreePointVote(score=0.5)
+        with self.assertRaises(AssertionError):
+            CcrThreePointVote(score=5)
 
     def test_0to100_vote_validation(self):
         Zero2HundredVote(score=45.9)

@@ -1146,7 +1146,7 @@ class NestSite(ExperimentMixin):
                         (ec.experiment_config.methodology == 'tafc' and
                          ec.experiment_config.vote_scale == '2AFC') or \
                         (ec.experiment_config.methodology == 'ccr' and
-                         ec.experiment_config.vote_scale == 'CCR_THREE_POINT') or \
+                         ec.experiment_config.vote_scale in ['CCR_THREE_POINT', 'CCR_FIVE_POINT']) or \
                         (ec.experiment_config.methodology == 'samviq' and
                          ec.experiment_config.vote_scale == '0_TO_100') or \
                         (ec.experiment_config.methodology == 'samviq5d' and
@@ -1341,7 +1341,7 @@ class NestSite(ExperimentMixin):
                     request.current_app = self.name
                     response = TemplateResponse(request, page.get_template(), context)
                 elif (ec.experiment_config.methodology == 'ccr' and
-                      ec.experiment_config.vote_scale == 'CCR_THREE_POINT') \
+                      ec.experiment_config.vote_scale in ['CCR_THREE_POINT', 'CCR_FIVE_POINT']) \
                         or (ec.experiment_config.methodology == 'tafc' and
                             ec.experiment_config.vote_scale == '2AFC'):
 
@@ -1377,6 +1377,15 @@ class NestSite(ExperimentMixin):
                          'stimulusvotegroup_id': svgid,
                          **ec.experiment_config.round_context,
                          }
+                    if ec.experiment_config.vote_scale == 'CCR_FIVE_POINT':
+                        # only if choices not yet overridden by round_context:
+                        if 'choices' not in d:
+                            d['choices'] = \
+                                ['Video A is much better',
+                                 'Video A is better',
+                                 'They are the same',
+                                 'Video B is better',
+                                 'Video B is much better'],
                     PageClass = map_methodology_to_page_class(
                         ec.experiment_config.methodology)
                     page = PageClass(d)
@@ -1474,7 +1483,7 @@ class NestSite(ExperimentMixin):
                         (ec.experiment_config.methodology == 'tafc' and
                          ec.experiment_config.vote_scale == '2AFC') or \
                         (ec.experiment_config.methodology == 'ccr' and
-                         ec.experiment_config.vote_scale == 'CCR_THREE_POINT') or \
+                         ec.experiment_config.vote_scale in ['CCR_THREE_POINT', 'CCR_FIVE_POINT']) or \
                         (ec.experiment_config.methodology == 'samviq5d' and
                          ec.experiment_config.vote_scale == 'FIVE_POINT') or \
                         (ec.experiment_config.methodology == 'samviq' and
