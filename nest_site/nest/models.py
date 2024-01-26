@@ -568,6 +568,14 @@ class CcrThreePointVote(DiscreteVote):
     TYPE = 'CCR_THREE_POINT'
 
 
+class CcrFivePointVote(DiscreteVote):
+    """
+        CCR (Comparison Category Rating) Five-point vote from {0, 1, 2, 3, 4}.
+        """
+    support = [0, 1, 2, 3, 4]
+    TYPE = 'CCR_FIVE_POINT'
+
+
 class Zero2HundredVote(ContinuousVote):
     """
     Continuous Vote from the interval [0, 100].
