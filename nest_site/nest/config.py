@@ -388,7 +388,7 @@ class ExperimentConfig(object):
             if 'done_context' in self.config else dict()
 
     def _assert_additions(self):
-        assert isinstance(self.additions, list)
+        assert isinstance(self.additions, list), f'expect self.additions to be a list, but is: {self.additions}'
         for addition in self.additions:
             assert 'position' in addition
             assert 'round_id' in addition['position']
