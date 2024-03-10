@@ -301,6 +301,9 @@ class NestSite(ExperimentMixin):
             path('aom_demo_with_preload_s3/', self.aom_demo_with_preload_s3, name='aom_demo_with_preload_s3'),
             path('demo_4kplus_with_preload_s3/', self.demo_4kplus_with_preload_s3, name='demo_4kplus_with_preload_s3'),
             path('demo_4kplus_with_preload_s3_b/', self.demo_4kplus_with_preload_s3_b, name='demo_4kplus_with_preload_s3_b'),
+            path('demo_live_a/', self.demo_live_a, name='demo_live_a'),
+            path('demo_live_b/', self.demo_live_b, name='demo_live_b'),
+
         ]
         return urlpatterns
 
@@ -1004,6 +1007,52 @@ class NestSite(ExperimentMixin):
                        ],
             'buttons': ['A', 'B'],
             'stimulusvotegroup_ids': [0, 1],
+            'video_display_percentage': 100,
+            'preload_videos': True,
+        })
+        context = {
+            **self.each_context(request),
+            **page.context,
+        }
+        request.current_app = self.name
+        return TemplateResponse(request, page.get_template(), context)
+
+    @method_decorator(never_cache)
+    def demo_live_a(self, request, extra_context=None):
+        page = SamviqPage({
+            'title': 'Round 1 of 2',
+            'video_ref': 'https://netflix-encoding-subjective-testing.s3.us-west-1.amazonaws.com/media/mp4/live_demo/avc_2024022504_1_stream_1080p_8000_1_video_cat.seinfeld.mp4',  # noqa E501
+            'button_ref': '8Mbps',
+            'videos': ['https://netflix-encoding-subjective-testing.s3.us-west-1.amazonaws.com/media/mp4/live_demo/avc_2024022504_1_stream_1080p_6000_2_video_cat.seinfeld.mp4',  # noqa E501
+                       'https://netflix-encoding-subjective-testing.s3.us-west-1.amazonaws.com/media/mp4/live_demo/avc_2024022504_1_stream_1080p_4000_3_video_cat.seinfeld.mp4',  # noqa E501
+                       'https://netflix-encoding-subjective-testing.s3.us-west-1.amazonaws.com/media/mp4/live_demo/avc_2024022504_1_stream_1080p_2000_4_video_cat.seinfeld.mp4',  # noqa E501
+                       'https://netflix-encoding-subjective-testing.s3.us-west-1.amazonaws.com/media/mp4/live_demo/avc_2024022504_1_stream_1080p_1000_5_video_cat.seinfeld.mp4',  # noqa E501
+                       ],
+            'buttons': ['6Mbps', '4Mbps', '2Mbps', '1Mbps'],
+            'stimulusvotegroup_ids': [0, 1, 2, 3],
+            'video_display_percentage': 100,
+            'preload_videos': True,
+        })
+        context = {
+            **self.each_context(request),
+            **page.context,
+        }
+        request.current_app = self.name
+        return TemplateResponse(request, page.get_template(), context)
+
+    @method_decorator(never_cache)
+    def demo_live_b(self, request, extra_context=None):
+        page = SamviqPage({
+            'title': 'Round 2 of 2',
+            'video_ref': 'https://netflix-encoding-subjective-testing.s3.us-west-1.amazonaws.com/media/mp4/live_demo/avc_2024022504_1_stream_1080p_8000_1_video_cat.buteau.mp4',  # noqa E501
+            'button_ref': '8Mbps',
+            'videos': ['https://netflix-encoding-subjective-testing.s3.us-west-1.amazonaws.com/media/mp4/live_demo/avc_2024022504_1_stream_1080p_6000_2_video_cat.buteau.mp4',  # noqa E501
+                       'https://netflix-encoding-subjective-testing.s3.us-west-1.amazonaws.com/media/mp4/live_demo/avc_2024022504_1_stream_1080p_4000_3_video_cat.buteau.mp4',  # noqa E501
+                       'https://netflix-encoding-subjective-testing.s3.us-west-1.amazonaws.com/media/mp4/live_demo/avc_2024022504_1_stream_1080p_2000_4_video_cat.buteau.mp4',  # noqa E501
+                       'https://netflix-encoding-subjective-testing.s3.us-west-1.amazonaws.com/media/mp4/live_demo/avc_2024022504_1_stream_1080p_1000_5_video_cat.buteau.mp4',  # noqa E501
+                       ],
+            'buttons': ['6Mbps', '4Mbps', '2Mbps', '1Mbps'],
+            'stimulusvotegroup_ids': [0, 1, 2, 3],
             'video_display_percentage': 100,
             'preload_videos': True,
         })
