@@ -1020,15 +1020,25 @@ class NestSite(ExperimentMixin):
     @method_decorator(never_cache)
     def demo_live_a(self, request, extra_context=None):
         page = SamviqPage({
-            'title': 'Round 1 of 2',
+            'title': 'Demo: how video bitrate (Mbps) affects quality - Part A',
+            'instruction_html':
+                """<p> Instruction: Click on the button to begin playing a video. Each video will loop. <em> Press "space" key or double click the mouse </em> to exit.</p>""",  # noqa E501
+            'question':
+                """Using the 8 Mbps video as a reference, how would you rate the quality of each video? "Shameful" means you will be in shame if the video is played on Netflix service; "Acceptable" means you will accept the video to be played on Netflix; "Flawless" means you don't see a visual difference from the 8 Mbps reference.""",  # noqa E501
+            'labels':
+                ['Flawless',
+                 'Great',
+                 'Acceptable',
+                 'Bad',
+                 'Shameful'],
             'video_ref': 'https://netflix-encoding-subjective-testing.s3.us-west-1.amazonaws.com/media/mp4/live_demo/avc_2024022504_1_stream_1080p_8000_1_video_cat.seinfeld.mp4',  # noqa E501
-            'button_ref': '8Mbps',
+            'button_ref': '8 Mbps',
             'videos': ['https://netflix-encoding-subjective-testing.s3.us-west-1.amazonaws.com/media/mp4/live_demo/avc_2024022504_1_stream_1080p_6000_2_video_cat.seinfeld.mp4',  # noqa E501
                        'https://netflix-encoding-subjective-testing.s3.us-west-1.amazonaws.com/media/mp4/live_demo/avc_2024022504_1_stream_1080p_4000_3_video_cat.seinfeld.mp4',  # noqa E501
                        'https://netflix-encoding-subjective-testing.s3.us-west-1.amazonaws.com/media/mp4/live_demo/avc_2024022504_1_stream_1080p_2000_4_video_cat.seinfeld.mp4',  # noqa E501
                        'https://netflix-encoding-subjective-testing.s3.us-west-1.amazonaws.com/media/mp4/live_demo/avc_2024022504_1_stream_1080p_1000_5_video_cat.seinfeld.mp4',  # noqa E501
                        ],
-            'buttons': ['6Mbps', '4Mbps', '2Mbps', '1Mbps'],
+            'buttons': ['6 Mbps', '4 Mbps', '2 Mbps', '1 Mbps'],
             'stimulusvotegroup_ids': [0, 1, 2, 3],
             'video_display_percentage': 100,
             'preload_videos': True,
@@ -1043,15 +1053,25 @@ class NestSite(ExperimentMixin):
     @method_decorator(never_cache)
     def demo_live_b(self, request, extra_context=None):
         page = SamviqPage({
-            'title': 'Round 2 of 2',
+            'title': 'Demo: how video bitrate (Mbps) affects quality - Part B',
+            'instruction_html':
+                """<p> Instruction: Click on button to begin playing a video. Each video will loop. <em> Press "space" key or double click the mouse </em> to exit.</p>""",  # noqa E501
+            'question':
+                """Using the 8 Mbps video as a reference, how would you rate the quality of each video? "Shameful" means you will be in shame if the video is played on Netflix service; "Acceptable" means you will accept the video to be played on Netflix; "Flawless" means you don't see a visual difference from the 8 Mbps reference.""",  # noqa E501
+            'labels':
+                ['Flawless',
+                 'Great',
+                 'Acceptable',
+                 'Bad',
+                 'Shameful'],
             'video_ref': 'https://netflix-encoding-subjective-testing.s3.us-west-1.amazonaws.com/media/mp4/live_demo/avc_2024022504_1_stream_1080p_8000_1_video_cat.buteau.mp4',  # noqa E501
-            'button_ref': '8Mbps',
+            'button_ref': '8 Mbps',
             'videos': ['https://netflix-encoding-subjective-testing.s3.us-west-1.amazonaws.com/media/mp4/live_demo/avc_2024022504_1_stream_1080p_6000_2_video_cat.buteau.mp4',  # noqa E501
                        'https://netflix-encoding-subjective-testing.s3.us-west-1.amazonaws.com/media/mp4/live_demo/avc_2024022504_1_stream_1080p_4000_3_video_cat.buteau.mp4',  # noqa E501
                        'https://netflix-encoding-subjective-testing.s3.us-west-1.amazonaws.com/media/mp4/live_demo/avc_2024022504_1_stream_1080p_2000_4_video_cat.buteau.mp4',  # noqa E501
                        'https://netflix-encoding-subjective-testing.s3.us-west-1.amazonaws.com/media/mp4/live_demo/avc_2024022504_1_stream_1080p_1000_5_video_cat.buteau.mp4',  # noqa E501
                        ],
-            'buttons': ['6Mbps', '4Mbps', '2Mbps', '1Mbps'],
+            'buttons': ['6 Mbps', '4 Mbps', '2 Mbps', '1 Mbps'],
             'stimulusvotegroup_ids': [0, 1, 2, 3],
             'video_display_percentage': 100,
             'preload_videos': True,
