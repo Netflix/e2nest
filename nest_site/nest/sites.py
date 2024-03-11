@@ -1035,11 +1035,12 @@ class NestSite(ExperimentMixin):
             'button_ref': '8 Mbps',
             'videos': ['https://netflix-encoding-subjective-testing.s3.us-west-1.amazonaws.com/media/mp4/live_demo/avc_2024022504_1_stream_1080p_6000_2_video_cat.seinfeld.mp4',  # noqa E501
                        'https://netflix-encoding-subjective-testing.s3.us-west-1.amazonaws.com/media/mp4/live_demo/avc_2024022504_1_stream_1080p_4000_3_video_cat.seinfeld.mp4',  # noqa E501
+                       'https://netflix-encoding-subjective-testing.s3.us-west-1.amazonaws.com/media/mp4/live_demo/avc_2024022632_1_stream_1080p_3000_1_video_cat.seinfeld.mp4',  # noqa E501
                        'https://netflix-encoding-subjective-testing.s3.us-west-1.amazonaws.com/media/mp4/live_demo/avc_2024022504_1_stream_1080p_2000_4_video_cat.seinfeld.mp4',  # noqa E501
                        'https://netflix-encoding-subjective-testing.s3.us-west-1.amazonaws.com/media/mp4/live_demo/avc_2024022504_1_stream_1080p_1000_5_video_cat.seinfeld.mp4',  # noqa E501
                        ],
-            'buttons': ['6 Mbps', '4 Mbps', '2 Mbps', '1 Mbps'],
-            'stimulusvotegroup_ids': [0, 1, 2, 3],
+            'buttons': ['6 Mbps', '4 Mbps', '3 Mbps', '2 Mbps', '1 Mbps'],
+            'stimulusvotegroup_ids': [0, 1, 2, 3, 4],
             'video_display_percentage': 100,
             'preload_videos': True,
         })
@@ -1068,11 +1069,12 @@ class NestSite(ExperimentMixin):
             'button_ref': '8 Mbps',
             'videos': ['https://netflix-encoding-subjective-testing.s3.us-west-1.amazonaws.com/media/mp4/live_demo/avc_2024022504_1_stream_1080p_6000_2_video_cat.buteau.mp4',  # noqa E501
                        'https://netflix-encoding-subjective-testing.s3.us-west-1.amazonaws.com/media/mp4/live_demo/avc_2024022504_1_stream_1080p_4000_3_video_cat.buteau.mp4',  # noqa E501
+                       'https://netflix-encoding-subjective-testing.s3.us-west-1.amazonaws.com/media/mp4/live_demo/avc_2024022632_1_stream_1080p_3000_1_video_cat.buteau.mp4',  # noqa E501
                        'https://netflix-encoding-subjective-testing.s3.us-west-1.amazonaws.com/media/mp4/live_demo/avc_2024022504_1_stream_1080p_2000_4_video_cat.buteau.mp4',  # noqa E501
                        'https://netflix-encoding-subjective-testing.s3.us-west-1.amazonaws.com/media/mp4/live_demo/avc_2024022504_1_stream_1080p_1000_5_video_cat.buteau.mp4',  # noqa E501
                        ],
-            'buttons': ['6 Mbps', '4 Mbps', '2 Mbps', '1 Mbps'],
-            'stimulusvotegroup_ids': [0, 1, 2, 3],
+            'buttons': ['6 Mbps', '4 Mbps', '3 Mbps', '2 Mbps', '1 Mbps'],
+            'stimulusvotegroup_ids': [0, 1, 2, 3, 4],
             'video_display_percentage': 100,
             'preload_videos': True,
         })
