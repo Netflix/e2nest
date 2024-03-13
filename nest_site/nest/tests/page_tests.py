@@ -210,6 +210,7 @@ class TestPage(TestCase):
         })
         self.assertEqual(p.context['video_show_controls'], False)
         self.assertEqual(p.context['video_display_percentage'], 100)
+        self.assertEqual(p.context['preload_videos'], False)
 
     def test_samviq5d_page(self):
         p = Samviq5dPage({
@@ -226,3 +227,4 @@ class TestPage(TestCase):
         })
         self.assertEqual(p.context['video_show_controls'], False)
         self.assertEqual(p.context['video_display_percentage'], 100)
+        self.assertEqual(p.context['preload_videos'], False)

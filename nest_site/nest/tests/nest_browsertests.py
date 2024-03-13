@@ -461,6 +461,82 @@ class TestBrowserWithWriteDataset(StaticLiveServerTestCase, LoginMixin):
         self.assertTrue(r1.response_sec > 0)
         self.assertTrue(r2.response_sec > 0)
 
+    def test_step_session_samviq5d(self):
+        ec = ExperimentUtils._create_experiment_from_config(
+            source_config_filepath=NestConfig.tests_resource_path('cvxhull_subjexp_toy_samviq5d.json'),
+            is_test=False,
+            random_seed=1,
+            experiment_title=self.EXPERIMENT_TITLE)
+
+        subj: Subject = Subject.create_by_username('user')
+        sess = ec.add_session(subj)
+
+        self.login()
+        sleep(0.1)
+        self.browser.get(self.live_server_url + reverse('nest:start_session', kwargs={'session_id': sess.id}))
+        sleep(0.1)
+        self.browser.find_element(by='id', value='start').click()
+        sleep(0.1)
+        self.assertTrue('Round 1 of 2' in self.browser.page_source)
+        self.browser.find_element(by='id', value='video_ref').click()
+        sleep(0.1)
+        self.browser.find_element(by='tag name', value="body").send_keys(Keys.SPACE)
+        sleep(0.1)
+        self.browser.find_element(by='id', value='video_0').click()
+        sleep(0.1)
+        self.browser.find_element(by='tag name', value="body").send_keys(Keys.SPACE)
+        sleep(0.1)
+        self.browser.find_element(by='id', value='video_1').click()
+        sleep(0.1)
+        self.browser.find_element(by='tag name', value="body").send_keys(Keys.SPACE)
+        sleep(0.1)
+
+        self.assertEqual(Vote.objects.count(), 0)
+
+        self.browser.find_element(by='id', value='radio_3_2').click()
+
+        self.browser.find_element(by='id', value='radio_2_2').click()
+
+        self.browser.find_element(by='id', value='submit').click()
+        sleep(0.1)
+
+        self.assertEqual(Vote.objects.count(), 0)
+
+        self.assertTrue('Round 2 of 2' in self.browser.page_source)
+        self.browser.find_element(by='id', value='video_ref').click()
+        sleep(0.1)
+        self.browser.find_element(by='tag name', value="body").send_keys(Keys.SPACE)
+        sleep(0.1)
+        self.browser.find_element(by='id', value='video_0').click()
+        sleep(0.1)
+        self.browser.find_element(by='tag name', value="body").send_keys(Keys.SPACE)
+        sleep(0.1)
+        self.browser.find_element(by='id', value='video_1').click()
+        sleep(0.1)
+        self.browser.find_element(by='tag name', value="body").send_keys(Keys.SPACE)
+        sleep(0.1)
+
+        self.browser.find_element(by='id', value='radio_1_2').click()
+
+        self.browser.find_element(by='id', value='radio_0_2').click()
+
+        self.assertEqual(Vote.objects.count(), 0)
+
+        self.browser.find_element(by='id', value='submit').click()
+        sleep(0.1)
+        self.assertTrue('Test done' in self.browser.page_source, f'page_source: {self.browser.page_source}')
+
+        self.assertEqual(Vote.objects.count(), 4)
+        self.assertEqual(Vote.objects.all()[0].score, 2)
+        self.assertEqual(Vote.objects.all()[1].score, 2)
+        self.assertEqual(Vote.objects.all()[2].score, 2)
+        self.assertEqual(Vote.objects.all()[3].score, 2)
+
+        r1 = Round.objects.get(session=sess, round_id=0)
+        r2 = Round.objects.get(session=sess, round_id=1)
+        self.assertTrue(r1.response_sec > 0)
+        self.assertTrue(r2.response_sec > 0)
+
     def test_step_session_samviq_with_preload(self):
         ec = ExperimentUtils._create_experiment_from_config(
             source_config_filepath=NestConfig.tests_resource_path('cvxhull_subjexp_toy_samviq_with_preload.json'),
@@ -529,6 +605,82 @@ class TestBrowserWithWriteDataset(StaticLiveServerTestCase, LoginMixin):
         self.assertEqual(Vote.objects.all()[1].score, 51)
         self.assertEqual(Vote.objects.all()[2].score, 50)
         self.assertEqual(Vote.objects.all()[3].score, 50)
+
+        r1 = Round.objects.get(session=sess, round_id=0)
+        r2 = Round.objects.get(session=sess, round_id=1)
+        self.assertTrue(r1.response_sec > 0)
+        self.assertTrue(r2.response_sec > 0)
+
+    def test_step_session_samviq5d_with_preload(self):
+        ec = ExperimentUtils._create_experiment_from_config(
+            source_config_filepath=NestConfig.tests_resource_path('cvxhull_subjexp_toy_samviq5d_with_preload.json'),
+            is_test=False,
+            random_seed=1,
+            experiment_title=self.EXPERIMENT_TITLE)
+
+        subj: Subject = Subject.create_by_username('user')
+        sess = ec.add_session(subj)
+
+        self.login()
+        sleep(0.1)
+        self.browser.get(self.live_server_url + reverse('nest:start_session', kwargs={'session_id': sess.id}))
+        sleep(0.1)
+        self.browser.find_element(by='id', value='start').click()
+        sleep(0.1)
+        self.assertTrue('Round 1 of 2' in self.browser.page_source)
+        self.browser.find_element(by='id', value='video_ref').click()
+        sleep(0.1)
+        self.browser.find_element(by='tag name', value="body").send_keys(Keys.SPACE)
+        sleep(0.1)
+        self.browser.find_element(by='id', value='video_0').click()
+        sleep(0.1)
+        self.browser.find_element(by='tag name', value="body").send_keys(Keys.SPACE)
+        sleep(0.1)
+        self.browser.find_element(by='id', value='video_1').click()
+        sleep(0.1)
+        self.browser.find_element(by='tag name', value="body").send_keys(Keys.SPACE)
+        sleep(0.1)
+
+        self.assertEqual(Vote.objects.count(), 0)
+
+        self.browser.find_element(by='id', value='radio_3_5').click()
+
+        self.browser.find_element(by='id', value='radio_2_5').click()
+
+        self.browser.find_element(by='id', value='submit').click()
+        sleep(0.1)
+
+        self.assertEqual(Vote.objects.count(), 0)
+
+        self.assertTrue('Round 2 of 2' in self.browser.page_source)
+        self.browser.find_element(by='id', value='video_ref').click()
+        sleep(0.1)
+        self.browser.find_element(by='tag name', value="body").send_keys(Keys.SPACE)
+        sleep(0.1)
+        self.browser.find_element(by='id', value='video_0').click()
+        sleep(0.1)
+        self.browser.find_element(by='tag name', value="body").send_keys(Keys.SPACE)
+        sleep(0.1)
+        self.browser.find_element(by='id', value='video_1').click()
+        sleep(0.1)
+        self.browser.find_element(by='tag name', value="body").send_keys(Keys.SPACE)
+        sleep(0.1)
+
+        self.browser.find_element(by='id', value='radio_1_5').click()
+
+        self.browser.find_element(by='id', value='radio_0_5').click()
+
+        self.assertEqual(Vote.objects.count(), 0)
+
+        self.browser.find_element(by='id', value='submit').click()
+        sleep(0.1)
+        self.assertTrue('Test done' in self.browser.page_source, f'page_source: {self.browser.page_source}')
+
+        self.assertEqual(Vote.objects.count(), 4)
+        self.assertEqual(Vote.objects.all()[0].score, 5)
+        self.assertEqual(Vote.objects.all()[1].score, 5)
+        self.assertEqual(Vote.objects.all()[2].score, 5)
+        self.assertEqual(Vote.objects.all()[3].score, 5)
 
         r1 = Round.objects.get(session=sess, round_id=0)
         r2 = Round.objects.get(session=sess, round_id=1)
