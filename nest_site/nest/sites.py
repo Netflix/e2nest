@@ -1022,7 +1022,7 @@ class NestSite(ExperimentMixin):
         page = Samviq5dPage({
             'title': 'Demo: how video bitrate (Mbps) affects quality - Part A',
             'instruction_html':
-                """<p> Instruction: Click on the button to begin playing a video. Each video will loop. <em> Press "space" key or double click the mouse </em> to exit.</p>""",  # noqa E501
+                """<p> Instruction: Click on each "x Mbps" button to begin playing a video. Video will loop. <em> Press "space" key or double click the mouse </em> to exit.</p>""",  # noqa E501
             'question':
                 """Using the 8 Mbps video as a reference, how would you rate the quality of each video? "Shameful" means you will be in shame if the video is played on Netflix service; "Acceptable" means you will accept the video to be played on Netflix; "Flawless" means you don't see a visual difference from the 8 Mbps reference.""",  # noqa E501
             'choices':
@@ -1056,7 +1056,7 @@ class NestSite(ExperimentMixin):
         page = Samviq5dPage({
             'title': 'Demo: how video bitrate (Mbps) affects quality - Part B',
             'instruction_html':
-                """<p> Instruction: Click on button to begin playing a video. Each video will loop. <em> Press "space" key or double click the mouse </em> to exit.</p>""",  # noqa E501
+                """<p> Instruction: Click on each "x Mbps" button to begin playing a video. Video will loop. <em> Press "space" key or double click the mouse </em> to exit.</p>""",  # noqa E501
             'question':
                 """Using the 8 Mbps video as a reference, how would you rate the quality of each video? "Shameful" means you will be in shame if the video is played on Netflix service; "Acceptable" means you will accept the video to be played on Netflix; "Flawless" means you don't see a visual difference from the 8 Mbps reference.""",  # noqa E501
             'choices':
