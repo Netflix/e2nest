@@ -65,7 +65,7 @@
         show_gray_and_play(t_gray);
     })
     document.addEventListener("keydown", (e) => {
-        if ((e.key === " ") && (video.style.display === "block")
+        if ((e.key === " " || e.key === "Escape") && (video.style.display === "block")
             && played > {% if min_num_plays is not None %} {{ min_num_plays }} {% else %} {{ num_plays }} {% endif %}) {
             video.pause()
             video.style.display = "none";

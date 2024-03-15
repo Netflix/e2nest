@@ -27,7 +27,7 @@
         });
     })
     document.addEventListener("keydown", (e) => {
-        if ((e.key === " ") && (video.style.display === "block")) {
+        if ((e.key === " " || e.key === "Escape") && (video.style.display === "block")) {
             video.pause()
             video.style.display = "none";
             document.body.style.backgroundColor = "white";
