@@ -122,7 +122,7 @@
             </table>
             <br>
             <div>
-                <button type="submit" style="float:right" class="button" id="submit">Submit</button>
+                <button type="submit" style="float:right" class="button" id="submit">{% if submit_button_text %} {{ submit_button_text}} {% else %} Submit {% endif %}</button>
             </div>
         </form>
     </div>
