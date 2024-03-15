@@ -1027,7 +1027,7 @@ class NestSite(ExperimentMixin):
                 """Using the 8 Mbps video as a reference, how would you rate the quality of each video? "Shameful" means you will be in shame if the video is played on Netflix service; "Acceptable" means you will accept the video to be played on Netflix; "Flawless" means you don't see a visual difference from the 8 Mbps reference.""",  # noqa E501
             'choices':
                 ['Flawless',
-                 'Great',
+                 'Decent',
                  'Acceptable',
                  'Bad',
                  'Shameful'],
@@ -1062,7 +1062,7 @@ class NestSite(ExperimentMixin):
                 """Using the 8 Mbps video as a reference, how would you rate the quality of each video? "Shameful" means you will be in shame if the video is played on Netflix service; "Acceptable" means you will accept the video to be played on Netflix; "Flawless" means you don't see a visual difference from the 8 Mbps reference.""",  # noqa E501
             'choices':
                 ['Flawless',
-                 'Great',
+                 'Decent',
                  'Acceptable',
                  'Bad',
                  'Shameful'],
