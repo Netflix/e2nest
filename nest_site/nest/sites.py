@@ -1043,6 +1043,7 @@ class NestSite(ExperimentMixin):
             'stimulusvotegroup_ids': [0, 1, 2, 3, 4],
             'video_display_percentage': 100,
             'preload_videos': True,
+            'submit_button_text': "Clear & try again",
         })
         context = {
             **self.each_context(request),
@@ -1077,6 +1078,7 @@ class NestSite(ExperimentMixin):
             'stimulusvotegroup_ids': [0, 1, 2, 3, 4],
             'video_display_percentage': 100,
             'preload_videos': True,
+            'submit_button_text': "Clear & try again",
         })
         context = {
             **self.each_context(request),
