@@ -303,6 +303,8 @@ class NestSite(ExperimentMixin):
             path('demo_4kplus_with_preload_s3_b/', self.demo_4kplus_with_preload_s3_b, name='demo_4kplus_with_preload_s3_b'),
             path('demo_live_a/', self.demo_live_a, name='demo_live_a'),
             path('demo_live_b/', self.demo_live_b, name='demo_live_b'),
+            path('demo_football/', self.demo_football, name='demo_football'),
+            path('demo_football_simple/', self.demo_football_simple, name='demo_football_simple'),
 
         ]
         return urlpatterns
@@ -1076,6 +1078,76 @@ class NestSite(ExperimentMixin):
                        ],
             'buttons': ['6 Mbps', '4 Mbps', '3 Mbps', '2 Mbps', '1 Mbps'],
             'stimulusvotegroup_ids': [0, 1, 2, 3, 4],
+            'video_display_percentage': 100,
+            'preload_videos': True,
+            'submit_button_text': "Clear & try again",
+        })
+        context = {
+            **self.each_context(request),
+            **page.context,
+        }
+        request.current_app = self.name
+        return TemplateResponse(request, page.get_template(), context)
+
+    @method_decorator(never_cache)
+    def demo_football(self, request, extra_context=None):
+        page = Samviq5dPage({
+            'title': 'Demo: how bitrate (Mbps) affects video quality',
+            'instruction_html':
+                """<p> Instruction: Click on each "x Mbps" button to begin playing a video. Video will loop. <em> Press "Esc" key or double click the mouse </em> to exit.</p>""",  # noqa E501
+            'question':
+                """Using the 8 Mbps video as a reference, how would you rate the quality of each video? "Shameful" means you will be in shame if the video is played on Netflix service; "Acceptable" means you will accept the video to be played on Netflix; "Flawless" means you don't see a visual difference from the 8 Mbps reference.""",  # noqa E501
+            'choices':
+                ['Flawless',
+                 'Decent',
+                 'Acceptable',
+                 'Bad',
+                 'Shameful'],
+            'video_ref': 'https://netflix-encoding-subjective-testing.s3.us-west-1.amazonaws.com/media/mp4/demo_football/hevc_2024041001_1_stream_1080p_8200_2_video_cat.mp4',  # noqa E501
+            'button_ref': '8 Mbps',
+            'videos': ['https://netflix-encoding-subjective-testing.s3.us-west-1.amazonaws.com/media/mp4/demo_football/hevc_2024041001_1_stream_1080p_6200_3_video_cat.mp4',  # noqa E501
+                       'https://netflix-encoding-subjective-testing.s3.us-west-1.amazonaws.com/media/mp4/demo_football/hevc_2024041002_1_stream_1080p_4125_1_video_cat.mp4',  # noqa E501
+                       'https://netflix-encoding-subjective-testing.s3.us-west-1.amazonaws.com/media/mp4/demo_football/hevc_2024041001_1_stream_1080p_3100_4_video_cat.mp4',  # noqa E501
+                       'https://netflix-encoding-subjective-testing.s3.us-west-1.amazonaws.com/media/mp4/demo_football/hevc_2024041003_1_stream_720p_2075_3_video_cat.mp4',  # noqa E501
+                       'https://netflix-encoding-subjective-testing.s3.us-west-1.amazonaws.com/media/mp4/demo_football/hevc_2024041003_1_stream_720p_1550_4_video_cat.mp4',  # noqa E501
+                       'https://netflix-encoding-subjective-testing.s3.us-west-1.amazonaws.com/media/mp4/demo_football/hevc_2024041003_1_stream_540p_1025_11_video_cat.mp4',  # noqa E501
+                       'https://netflix-encoding-subjective-testing.s3.us-west-1.amazonaws.com/media/mp4/demo_football/hevc_2024041003_1_stream_540p_775_12_video_cat.mp4',  # noqa E501
+                       'https://netflix-encoding-subjective-testing.s3.us-west-1.amazonaws.com/media/mp4/demo_football/hevc_2024041003_1_stream_432p_475_18_video_cat.mp4',  # noqa E501
+                       ],
+            'buttons': ['6 Mbps', '4 Mbps', '3 Mbps', '2 Mbps', '1.5 Mbps', '1 Mbps', '0.75 Mbps', '0.45 Mbps'],
+            'stimulusvotegroup_ids': [0, 1, 2, 3, 4, 5, 6, 7],
+            'video_display_percentage': 100,
+            'preload_videos': True,
+            'submit_button_text': "Clear & try again",
+        })
+        context = {
+            **self.each_context(request),
+            **page.context,
+        }
+        request.current_app = self.name
+        return TemplateResponse(request, page.get_template(), context)
+
+    @method_decorator(never_cache)
+    def demo_football_simple(self, request, extra_context=None):
+        page = Samviq5dPage({
+            'title': 'Demo: how bitrate (Mbps) affects video quality',
+            'instruction_html':
+                """<p> Instruction: Click on each "xD" button to begin playing a video. Video will loop. <em> Press "Esc" key or double click the mouse </em> to exit.</p>""",  # noqa E501
+            'question':
+                """Using the FHD video as a reference, how would you rate the quality of each video? "Shameful" means you will be in shame if the video is played on Netflix service; "Acceptable" means you will accept the video to be played on Netflix; "Flawless" means you don't see a visual difference from the 8 Mbps reference.""",  # noqa E501
+            'choices':
+                ['Flawless',
+                 'Decent',
+                 'Acceptable',
+                 'Bad',
+                 'Shameful'],
+            'video_ref': 'https://netflix-encoding-subjective-testing.s3.us-west-1.amazonaws.com/media/mp4/demo_football/hevc_2024041001_1_stream_1080p_8200_2_video_cat.mp4',  # noqa E501
+            'button_ref': 'FHD',
+            'videos': ['https://netflix-encoding-subjective-testing.s3.us-west-1.amazonaws.com/media/mp4/demo_football/hevc_2024041002_1_stream_1080p_4125_1_video_cat.mp4',  # noqa E501
+                       'https://netflix-encoding-subjective-testing.s3.us-west-1.amazonaws.com/media/mp4/demo_football/hevc_2024041003_1_stream_720p_2075_3_video_cat.mp4',  # noqa E501
+                       ],
+            'buttons': ['HD', 'SD'],
+            'stimulusvotegroup_ids': [0, 1],
             'video_display_percentage': 100,
             'preload_videos': True,
             'submit_button_text': "Clear & try again",
