@@ -342,8 +342,8 @@ class ExperimentController(object):
             return SessionStatus.PARTIALLY_INITIALIZED
 
         # iterate through all StimulusVoteGroups. If all assgined Votes, return
-        # 'done'; if none, return 'initialized'; otherwise, return
-        # 'done_partially'.
+        # 'FINISHED'; if none, return 'INITIALIZED'; otherwise, return
+        # 'PARTIALLY_FINISHED'.
         all_true = None
         all_false = None
         for r in rounds:
