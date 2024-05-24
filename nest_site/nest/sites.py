@@ -306,6 +306,11 @@ class NestSite(ExperimentMixin):
             path('demo_football/', self.demo_football, name='demo_football'),
             path('demo_football_simple/', self.demo_football_simple, name='demo_football_simple'),
             path('demo_football2/', self.demo_football2, name='demo_football2'),
+            path('demo_live_quality_slam', self.demo_live_quality_slam, name='demo_live_quality_slam'),
+            path('demo_live_quality_wwe', self.demo_live_quality_wwe, name='demo_live_quality_wwe'),
+            path('demo_live_quality_libb', self.demo_live_quality_libb, name='demo_live_quality_libb'),
+            path('demo_live_quality_mummers', self.demo_live_quality_mummers, name='demo_live_quality_mummers'),
+            path('demo_live_quality_mummers2', self.demo_live_quality_mummers2, name='demo_live_quality_mummers2'),
 
         ]
         return urlpatterns
@@ -1186,6 +1191,166 @@ class NestSite(ExperimentMixin):
             'video_display_percentage': 100,
             'preload_videos': True,
             'submit_button_text': "Clear & try again",
+        })
+        context = {
+            **self.each_context(request),
+            **page.context,
+        }
+        request.current_app = self.name
+        return TemplateResponse(request, page.get_template(), context)
+
+    @method_decorator(never_cache)
+    def demo_live_quality_slam(self, request, extra_context=None):
+        page = DcrPage({
+            'title': 'The Slam',
+            'instruction_html': """ <p> </p>""",
+            'video_a': 'https://netflix-encoding-subjective-testing.s3.us-west-1.amazonaws.com/media/mp4/live_demo/SLAM1_HEVC_4Mbps.mp4',  # noqa E501
+            'video_b': 'https://netflix-encoding-subjective-testing.s3.us-west-1.amazonaws.com/media/mp4/live_demo/SLAM1_HEVC_8Mbps.mp4',  # noqa E501
+            'template_version': "standard",
+            'num_plays': 1, 'min_num_plays': 0,
+            't_gray': 2000,
+            "text_color": "#FFFFFF",
+            "text_vert_perc": 45,
+            'video_show_controls': False,
+            'video_display_percentage': 100,
+            'stimulusvotegroup_id': 0,
+        'button_a': 'Video A',
+        'button_b': 'Video B',
+        'question':
+            "Between Video A and B, which one has better visual quality?",
+        'choices':
+            ['A is better',
+             'A and B are about the same',
+             'B is better',
+             ]
+        })
+        context = {
+            **self.each_context(request),
+            **page.context,
+        }
+        request.current_app = self.name
+        return TemplateResponse(request, page.get_template(), context)
+
+    @method_decorator(never_cache)
+    def demo_live_quality_wwe(self, request, extra_context=None):
+        page = DcrPage({
+            'title': 'WWE',
+            'instruction_html': """ <p> </p>""",
+            'video_a': 'https://netflix-encoding-subjective-testing.s3.us-west-1.amazonaws.com/media/mp4/live_demo/WWE3_HEVC_8Mbps.mp4',  # noqa E501
+            'video_b': 'https://netflix-encoding-subjective-testing.s3.us-west-1.amazonaws.com/media/mp4/live_demo/WWE3_HEVC_4Mbps.mp4',  # noqa E501
+            'template_version': "standard",
+            'num_plays': 1, 'min_num_plays': 0,
+            't_gray': 2000,
+            "text_color": "#FFFFFF",
+            "text_vert_perc": 45,
+            'video_show_controls': False,
+            'video_display_percentage': 100,
+            'stimulusvotegroup_id': 0,
+        'button_a': 'Video A',
+        'button_b': 'Video B',
+        'question':
+            "Between Video A and B, which one has better visual quality?",
+        'choices':
+            ['A is better',
+             'A and B are about the same',
+             'B is better',
+             ]
+        })
+        context = {
+            **self.each_context(request),
+            **page.context,
+        }
+        request.current_app = self.name
+        return TemplateResponse(request, page.get_template(), context)
+
+    @method_decorator(never_cache)
+    def demo_live_quality_libb(self, request, extra_context=None):
+        page = DcrPage({
+            'title': 'Love Is Blind',
+            'instruction_html': """ <p> </p>""",
+            'video_a': 'https://netflix-encoding-subjective-testing.s3.us-west-1.amazonaws.com/media/mp4/live_demo/LIBB1_HEVC_8Mbps.mp4',  # noqa E501
+            'video_b': 'https://netflix-encoding-subjective-testing.s3.us-west-1.amazonaws.com/media/mp4/live_demo/LIBB1_HEVC_4Mbps.mp4',  # noqa E501
+            'template_version': "standard",
+            'num_plays': 1, 'min_num_plays': 0,
+            't_gray': 2000,
+            "text_color": "#FFFFFF",
+            "text_vert_perc": 45,
+            'video_show_controls': False,
+            'video_display_percentage': 100,
+            'stimulusvotegroup_id': 0,
+        'button_a': 'Video A',
+        'button_b': 'Video B',
+        'question':
+            "Between Video A and B, which one has better visual quality?",
+        'choices':
+            ['A is better',
+             'A and B are about the same',
+             'B is better',
+             ]
+        })
+        context = {
+            **self.each_context(request),
+            **page.context,
+        }
+        request.current_app = self.name
+        return TemplateResponse(request, page.get_template(), context)
+
+    @method_decorator(never_cache)
+    def demo_live_quality_mummers(self, request, extra_context=None):
+        page = DcrPage({
+            'title': 'Mummers',
+            'instruction_html': """ <p> </p>""",
+            'video_a': 'https://netflix-encoding-subjective-testing.s3.us-west-1.amazonaws.com/media/mp4/live_demo/WWE1_AVC_8Mbps.mp4',  # noqa E501
+            'video_b': 'https://netflix-encoding-subjective-testing.s3.us-west-1.amazonaws.com/media/mp4/live_demo/WWE1_AVC_18Mbps.mp4',  # noqa E501
+            'template_version': "standard",
+            'num_plays': 1, 'min_num_plays': 0,
+            't_gray': 2000,
+            "text_color": "#FFFFFF",
+            "text_vert_perc": 45,
+            'video_show_controls': False,
+            'video_display_percentage': 100,
+            'stimulusvotegroup_id': 0,
+        'button_a': 'Video A',
+        'button_b': 'Video B',
+        'question':
+            "Between Video A and B, which one has better visual quality?",
+        'choices':
+            ['A is better',
+             'A and B are about the same',
+             'B is better',
+             ]
+        })
+        context = {
+            **self.each_context(request),
+            **page.context,
+        }
+        request.current_app = self.name
+        return TemplateResponse(request, page.get_template(), context)
+
+    @method_decorator(never_cache)
+    def demo_live_quality_mummers2(self, request, extra_context=None):
+        page = DcrPage({
+            'title': 'Mummers',
+            'instruction_html': """ <p> </p>""",
+            'video_a': 'https://netflix-encoding-subjective-testing.s3.us-west-1.amazonaws.com/media/mp4/live_demo/WWE2_AVC_8Mbps.mp4',  # noqa E501
+            'video_b': 'https://netflix-encoding-subjective-testing.s3.us-west-1.amazonaws.com/media/mp4/live_demo/WWE2_AVC_18Mbps.mp4',  # noqa E501
+            'template_version': "standard",
+            'num_plays': 1, 'min_num_plays': 0,
+            't_gray': 2000,
+            "text_color": "#FFFFFF",
+            "text_vert_perc": 45,
+            'video_show_controls': False,
+            'video_display_percentage': 100,
+            'stimulusvotegroup_id': 0,
+        'button_a': 'Video A',
+        'button_b': 'Video B',
+        'question':
+            "Between Video A and B, which one has better visual quality?",
+        'choices':
+            ['A is better',
+             'A and B are about the same',
+             'B is better',
+             ]
         })
         context = {
             **self.each_context(request),
