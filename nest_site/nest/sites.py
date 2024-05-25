@@ -1214,15 +1214,15 @@ class NestSite(ExperimentMixin):
             'video_show_controls': False,
             'video_display_percentage': 100,
             'stimulusvotegroup_id': 0,
-        'button_a': 'Video A',
-        'button_b': 'Video B',
-        'question':
-            "Between Video A and B, which one has better visual quality?",
-        'choices':
-            ['A is better',
-             'A and B are about the same',
-             'B is better',
-             ]
+            'button_a': 'Video A',
+            'button_b': 'Video B',
+            'question':
+                "Between Video A and B, which one has better visual quality?",
+            'choices':
+                ['A is better',
+                 'A and B are about the same',
+                 'B is better',
+                 ]
         })
         context = {
             **self.each_context(request),
@@ -1246,16 +1246,16 @@ class NestSite(ExperimentMixin):
             'video_show_controls': False,
             'video_display_percentage': 100,
             'stimulusvotegroup_id': 0,
-        'button_a': 'Video A',
-        'button_b': 'Video B',
-        'question':
-            "Between Video A and B, which one has better visual quality?",
-        'choices':
-            ['A is better',
-             'A and B are about the same',
-             'B is better',
-             ]
-        })
+            'button_a': 'Video A',
+            'button_b': 'Video B',
+            'question':
+                "Between Video A and B, which one has better visual quality?",
+            'choices':
+                ['A is better',
+                 'A and B are about the same',
+                 'B is better',
+                 ]
+            })
         context = {
             **self.each_context(request),
             **page.context,
@@ -1278,16 +1278,16 @@ class NestSite(ExperimentMixin):
             'video_show_controls': False,
             'video_display_percentage': 100,
             'stimulusvotegroup_id': 0,
-        'button_a': 'Video A',
-        'button_b': 'Video B',
-        'question':
-            "Between Video A and B, which one has better visual quality?",
-        'choices':
-            ['A is better',
-             'A and B are about the same',
-             'B is better',
-             ]
-        })
+            'button_a': 'Video A',
+            'button_b': 'Video B',
+            'question':
+                "Between Video A and B, which one has better visual quality?",
+            'choices':
+                ['A is better',
+                 'A and B are about the same',
+                 'B is better',
+                 ]
+            })
         context = {
             **self.each_context(request),
             **page.context,
@@ -1310,16 +1310,16 @@ class NestSite(ExperimentMixin):
             'video_show_controls': False,
             'video_display_percentage': 100,
             'stimulusvotegroup_id': 0,
-        'button_a': 'Video A',
-        'button_b': 'Video B',
-        'question':
-            "Between Video A and B, which one has better visual quality?",
-        'choices':
-            ['A is better',
-             'A and B are about the same',
-             'B is better',
-             ]
-        })
+            'button_a': 'Video A',
+            'button_b': 'Video B',
+            'question':
+                "Between Video A and B, which one has better visual quality?",
+            'choices':
+                ['A is better',
+                 'A and B are about the same',
+                 'B is better',
+                 ]
+            })
         context = {
             **self.each_context(request),
             **page.context,
@@ -1342,16 +1342,16 @@ class NestSite(ExperimentMixin):
             'video_show_controls': False,
             'video_display_percentage': 100,
             'stimulusvotegroup_id': 0,
-        'button_a': 'Video A',
-        'button_b': 'Video B',
-        'question':
-            "Between Video A and B, which one has better visual quality?",
-        'choices':
-            ['A is better',
-             'A and B are about the same',
-             'B is better',
-             ]
-        })
+            'button_a': 'Video A',
+            'button_b': 'Video B',
+            'question':
+                "Between Video A and B, which one has better visual quality?",
+            'choices':
+                ['A is better',
+                 'A and B are about the same',
+                 'B is better',
+                 ]
+            })
         context = {
             **self.each_context(request),
             **page.context,
