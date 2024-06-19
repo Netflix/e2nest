@@ -651,10 +651,11 @@ class NestSite(ExperimentMixin):
             'template_version': 'standard',
             't_gray': 2000,
             'num_plays': 2, 'min_num_plays': 0,
-            'button': 'Watch the video',
+            'button': '<message that I can customize>',
             'video_show_controls': False,
             'video_display_percentage': 75,
             'stimulusvotegroup_id': 0,
+            "text_color": "#FFFFFF"
         })
         context = {
             **self.each_context(request),
@@ -1635,6 +1636,8 @@ class NestSite(ExperimentMixin):
                     sgid: int = next_step['context']['stimulusgroup_id']
                     video_display_percentage = ec.experiment_config. \
                         stimulus_config.get_video_display_percentage(sgid)
+                    pre_message: str = ec.experiment_config. \
+                        stimulus_config.get_pre_message(sgid)
                     assert video_display_percentage is not None
 
                     svgid = self._get_matched_single_stimulusvotegroup_id(ec, next_step)
@@ -1645,6 +1648,14 @@ class NestSite(ExperimentMixin):
                          'stimulusvotegroup_id': svgid,
                          **ec.experiment_config.round_context,
                          }
+
+                    # add special logic to acr standard mode only: customize
+                    # the button text through stimulus_config.get_pre_message.
+                    # this will be displayed as banner before the video is
+                    # played.
+                    if ec.experiment_config.methodology == 'acr' and d['template_version'] == 'standard':
+                        if pre_message is not None:
+                            d['button'] = pre_message
 
                     if ec.experiment_config.methodology.startswith('acr'):
                         sid = self._get_matched_single_stimulus_id(ec, svgid)

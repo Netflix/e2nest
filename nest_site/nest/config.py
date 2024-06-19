@@ -165,6 +165,17 @@ class StimulusConfig(object):
         else:
             return None
 
+    def get_pre_message(self, stimulusgroup_id: int) -> Optional[str]:
+        sg: dict
+        for sg in self.stimulusgroups:
+            if sg['stimulusgroup_id'] == stimulusgroup_id:
+                if 'pre_message' in sg:
+                    return sg['pre_message']
+                else:
+                    return None
+        else:
+            return None
+
 
 class ExperimentConfig(object):
 
