@@ -1649,11 +1649,11 @@ class NestSite(ExperimentMixin):
                          **ec.experiment_config.round_context,
                          }
 
-                    # add special logic to acr standard mode only: customize
-                    # the button text through stimulus_config.get_pre_message.
-                    # this will be displayed as banner before the video is
+                    # add special logic to acr only: customize the button text
+                    # through stimulus_config.get_pre_message. For acr standard
+                    # mode, this will be displayed as banner before the video is
                     # played.
-                    if ec.experiment_config.methodology == 'acr' and d['template_version'] == 'standard':
+                    if ec.experiment_config.methodology == 'acr':
                         if pre_message is not None:
                             d['button'] = pre_message
 
