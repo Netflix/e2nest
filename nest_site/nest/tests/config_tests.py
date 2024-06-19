@@ -46,15 +46,17 @@ class TestStimulusConfig(TestCase):
                 {'info': {'flavors': ['training']}, 'stimulusgroup_id': 0, 'stimulusvotegroup_ids': [0]},
                 {'stimulusgroup_id': 4, 'stimulusvotegroup_ids': [1]},
                 {'stimulusgroup_id': 2, 'stimulusvotegroup_ids': [0]},
-                {'stimulusgroup_id': 3, 'stimulusvotegroup_ids': [0], 'video_display_percentage': 30},
+                {'stimulusgroup_id': 3, 'stimulusvotegroup_ids': [0], 'video_display_percentage': 30, 'pre_message': 'hello'},
                 {'info': {'flavors': ['decoy']}, 'stimulusgroup_id': 5, 'stimulusvotegroup_ids': [0]},
             ],
         })
         self.assertEqual(len(scfg.stimulusgroups), 5)
         self.assertEqual(scfg.get_video_display_percentage(3), 30)
+        self.assertEqual(scfg.get_pre_message(3), 'hello')
         self.assertEqual(scfg.get_video_display_percentage(4), 100)
         self.assertEqual(scfg.get_video_display_percentage(5), 100)
         self.assertEqual(scfg.get_video_display_percentage(6), None)
+        self.assertEqual(scfg.get_pre_message(6), None)
 
     def test_stim_config_with_public_path(self):
         scfg = StimulusConfig({

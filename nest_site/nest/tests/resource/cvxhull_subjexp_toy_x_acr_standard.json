@@ -8,13 +8,13 @@
         ],
         "stimuli": [
             {
-                "path": "/media/mp4/samples/Meridian/Meridian_A__8_18_8_23__SdrVvhevce2pVE__3840_2160__6000_enable_audio_False_vmaf103.58_phonevmaf104.85_psnr50.40_kbps6702.77.mp4",
+                "path": "/media/mp4/samples/SolLevante/SolLevante10k_B__0_7_0_12__SdrVvhevce2pVE__960_540__500_enable_audio_False_vmaf27.22_phonevmaf42.03_psnr25.61_kbps642.42.mp4",
                 "stimulus_id": 0,
                 "type": "video/mp4",
                 "content_id": 0
             },
             {
-                "path": "/media/mp4/samples/Meridian/Meridian_A__8_18_8_23__SdrVvhevce2pVE__960_540__500_enable_audio_False_vmaf87.25_phonevmaf98.62_psnr45.35_kbps559.20.mp4",
+                "path": "/media/mp4/samples/Sparks/Sparks_A__2_0_2_5__SdrVvhevce2pVE__1920_1080__3000_enable_audio_False_vmaf76.41_phonevmaf92.39_psnr35.21_kbps3088.96.mp4",
                 "stimulus_id": 1,
                 "type": "video/mp4",
                 "content_id": 0
@@ -39,13 +39,17 @@
                 "stimulusvotegroup_ids": [
                     0
                 ],
-                "stimulusgroup_id": 0
+                "stimulusgroup_id": 0,
+                "video_display_percentage": 100,
+                "pre_message": "Imagine you are watching a live event..."
             },
             {
                 "stimulusvotegroup_ids": [
                     1
                 ],
-                "stimulusgroup_id": 1
+                "stimulusgroup_id": 1,
+                "video_display_percentage": 100,
+                "pre_message": "Imagine you are watching a recorded event..."
             }
         ]
     },
