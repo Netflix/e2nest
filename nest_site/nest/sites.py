@@ -284,6 +284,7 @@ class NestSite(ExperimentMixin):
             path('acr_demo/', self.acr_demo, name='acr_demo'),
             path('acr5c_demo/', self.acr5c_demo, name='acr5c_demo'),
             path('acr5c_standard_demo/', self.acr5c_standard_demo, name='acr5c_standard_demo'),
+            path('acr_standard_demo/', self.acr_standard_demo, name='acr_standard_demo'),
             path('dcr_demo/', self.dcr_demo, name='dcr_demo'),
             path('dcr_standard_demo/', self.dcr_standard_demo, name='dcr_standard_demo'),
             path('hdr_demo_meridian/', self.hdr_demo_meridian, name='hdr_demo_meridian'),
@@ -627,7 +628,28 @@ class NestSite(ExperimentMixin):
             'instruction_html': """ <p> Rate the video by answering the question below. </p>""",
             'video': os.path.join(MEDIA_URL, "mp4/samples/Meridian/Meridian_A__8_18_8_23__SdrVvhevce2pVE__3840_2160__6000_enable_audio_False_vmaf103.58_phonevmaf104.85_psnr50.40_kbps6702.77.mp4"), # noqa E501
             'template_version': 'standard',
-            't_gray': 0,
+            't_gray': 2000,
+            'num_plays': 2, 'min_num_plays': 0,
+            'button': 'Watch the video',
+            'video_show_controls': False,
+            'video_display_percentage': 75,
+            'stimulusvotegroup_id': 0,
+        })
+        context = {
+            **self.each_context(request),
+            **page.context,
+        }
+        request.current_app = self.name
+        return TemplateResponse(request, page.get_template(), context)
+
+    @method_decorator(never_cache)
+    def acr_standard_demo(self, request, extra_context=None):
+        page = AcrPage({
+            'title': "Round 1 of 10",
+            'instruction_html': """ <p> Rate the video by answering the question below. </p>""",
+            'video': os.path.join(MEDIA_URL, "mp4/samples/Meridian/Meridian_A__8_18_8_23__SdrVvhevce2pVE__3840_2160__6000_enable_audio_False_vmaf103.58_phonevmaf104.85_psnr50.40_kbps6702.77.mp4"), # noqa E501
+            'template_version': 'standard',
+            't_gray': 2000,
             'num_plays': 2, 'min_num_plays': 0,
             'button': 'Watch the video',
             'video_show_controls': False,
