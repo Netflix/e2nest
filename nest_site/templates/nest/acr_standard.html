@@ -50,15 +50,8 @@
     window.addEventListener('load', function () {
         container = document.getElementById("container");
         qa = document.getElementById("qa");
-        slider = document.getElementById("myRange");
-        output = document.getElementById("score");
-        output.innerHTML = slider.value; // Display the default slider value
         video = document.getElementsByTagName("video")[0];
         tag = document.getElementById("tag");
-        // Update the current slider value (each time you drag the slider handle)
-        slider.oninput = function() {
-            output.innerHTML = this.value;
-        }
         video.addEventListener("ended", function() {
             decide_whats_next();
          });

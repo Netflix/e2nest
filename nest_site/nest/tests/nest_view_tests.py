@@ -535,6 +535,71 @@ class TestViewsWithWriteDataset(TestCase):
         login = self.client.login(username='staff', password='pass')
         self.assertTrue(login)
 
+    def test_step_session_acr_standard(self):
+        ec = ExperimentUtils._create_experiment_from_config(
+            source_config_filepath=NestConfig.tests_resource_path('cvxhull_subjexp_toy_x_acr_standard.json'),
+            is_test=True,
+            random_seed=1,
+            experiment_title='nest_view_tests.TestViewsWithWriteDataset.test_step_session_acr_standard')
+
+        subj: Subject = Subject.create_by_username('user')
+        ec.add_session(subj)
+
+        login = self.client.login(username='user', password='pass')
+        self.assertTrue(login)
+
+        response = self.client.get(reverse('nest:status'))
+        self.assertEqual(response.status_code, 200)
+
+        response = self.client.get(reverse('nest:start_session', kwargs={'session_id': 1}))
+        self.assertEqual(response.status_code, 302)
+
+        response = self.client.get(reverse('nest:step_session', kwargs={'session_id': 1}))
+        self.assertEqual(response.status_code, 200)
+        steps = self.client.session['steps']
+        self.assertEqual(len(steps), 1)
+        self.assertTrue(NestSite._step_is_addition(steps[0]))
+
+        response = self.client.get(reverse('nest:step_session', kwargs={'session_id': 1}))
+        self.assertEqual(response.status_code, 200)
+        response = self.client.post(reverse('nest:step_session', kwargs={'session_id': 1}), {'acr_1': '1'})
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(self.client.session['session_id'], 1)
+        steps = self.client.session['steps']
+        self.assertEqual(len(steps), 2)
+        self.assertFalse(NestSite._step_is_addition(steps[-1]))
+        self.assertEqual(steps[-1]['context']['score'], {'1': 1})
+
+        response = self.client.get(reverse('nest:step_session', kwargs={'session_id': 1}))
+        self.assertEqual(response.status_code, 200)
+        response = self.client.post(reverse('nest:step_session', kwargs={'session_id': 1}), {'acr_0': '4'})
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(self.client.session['session_id'], 1)
+        steps = self.client.session['steps']
+        self.assertEqual(len(steps), 3)
+        self.assertFalse(NestSite._step_is_addition(steps[-1]))
+        self.assertEqual(steps[-1]['context']['score'], {'0': 4})
+
+        response = self.client.get(reverse('nest:cookie'))
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue(""""score": {\n                    "0": 4""" in response.context_data['text_html'])
+
+        self.assertEqual(Vote.objects.count(), 0)
+        response = self.client.get(reverse('nest:step_session', kwargs={'session_id': 1}))
+        self.assertEqual(response.status_code, 200)
+
+        self.assertEqual(Vote.objects.count(), 2)
+        self.assertEqual(FivePointVote.objects.count(), 2)
+        self.assertEqual(Zero2HundredVote.objects.count(), 0)
+
+        self.assertEqual(Vote.objects.first().score, 1)
+        self.assertEqual(Vote.objects.all()[1].score, 4)
+        self.assertEqual(FivePointVote.objects.first().score, 1)
+        self.assertEqual(FivePointVote.objects.all()[1].score, 4)
+
+        login = self.client.login(username='staff', password='pass')
+        self.assertTrue(login)
+
     def test_step_session_dcr(self):
         ec = ExperimentUtils._create_experiment_from_config(
             source_config_filepath=NestConfig.tests_resource_path('cvxhull_subjexp_toy_x_dcr.json'),
