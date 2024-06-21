@@ -704,6 +704,10 @@ class TestValidateConfig(TestCase):
                 NestConfig.tests_resource_path('cvxhull_subjexp_toy_x_acr_standard_2bad.json'))
         self.assertTrue('stimulusvotegroup_id 0 cannot be used by multiple stimulusgroups' in str(e.exception))
 
+    def test_validate_config_acr_standard_2(self):
+        ExperimentUtils.validate_config(
+            NestConfig.tests_resource_path('cvxhull_subjexp_toy_x_acr_standard_2.json'))
+
 
 class TestUserUtils(TestCase):
 
