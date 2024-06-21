@@ -52,6 +52,7 @@ class TestStimulusConfig(TestCase):
             ],
         })
         self.assertEqual(len(scfg.stimulusgroups), 5)
+        self.assertEqual(scfg.stimulusgroup_ids, [0, 4, 2, 3, 5])
         self.assertEqual(scfg.get_video_display_percentage(3), 30)
         self.assertEqual(scfg.get_pre_message(3), 'hello')
         self.assertEqual(scfg.get_super_stimulusgroup_id(3), 1)
@@ -60,6 +61,9 @@ class TestStimulusConfig(TestCase):
         self.assertEqual(scfg.get_video_display_percentage(6), None)
         self.assertEqual(scfg.get_pre_message(6), None)
         self.assertEqual(scfg.get_super_stimulusgroup_id(6), None)
+        with self.assertRaises(AssertionError) as e:
+            _ = scfg.super_stimulusgroup_ids
+        self.assertTrue('super_stimulusgroup_id must be all-present or all-absent' in str(e.exception))
 
     def test_stim_config_with_public_path(self):
         scfg = StimulusConfig({
@@ -98,11 +102,11 @@ class TestStimulusConfig(TestCase):
                 }
             ],
             'stimulusgroups': [
-                {'info': {'flavors': ['training']}, 'stimulusgroup_id': 0, 'stimulusvotegroup_ids': [0]},
-                {'stimulusgroup_id': 4, 'stimulusvotegroup_ids': [1]},
-                {'stimulusgroup_id': 2, 'stimulusvotegroup_ids': [0]},
-                {'stimulusgroup_id': 3, 'stimulusvotegroup_ids': [0], 'video_display_percentage': 30},
-                {'info': {'flavors': ['decoy']}, 'stimulusgroup_id': 5, 'stimulusvotegroup_ids': [0]},
+                {'info': {'flavors': ['training']}, 'stimulusgroup_id': 0, 'stimulusvotegroup_ids': [0], 'super_stimulusgroup_id': 0},
+                {'stimulusgroup_id': 4, 'stimulusvotegroup_ids': [1], 'super_stimulusgroup_id': 0},
+                {'stimulusgroup_id': 2, 'stimulusvotegroup_ids': [0], 'super_stimulusgroup_id': 0},
+                {'stimulusgroup_id': 3, 'stimulusvotegroup_ids': [0], 'video_display_percentage': 30, 'super_stimulusgroup_id': 1},
+                {'info': {'flavors': ['decoy']}, 'stimulusgroup_id': 5, 'stimulusvotegroup_ids': [0], 'super_stimulusgroup_id': 1},
             ],
         })
         self.assertEqual(len(scfg.stimulusgroups), 5)
@@ -110,6 +114,7 @@ class TestStimulusConfig(TestCase):
         self.assertEqual(scfg.get_video_display_percentage(4), 100)
         self.assertEqual(scfg.get_video_display_percentage(5), 100)
         self.assertEqual(scfg.get_video_display_percentage(6), None)
+        self.assertEqual(scfg.super_stimulusgroup_ids, [0, 0, 0, 1, 1])
 
 
 class TestExperimentConfig(TestCase):

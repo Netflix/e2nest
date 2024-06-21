@@ -187,6 +187,17 @@ class StimulusConfig(object):
         else:
             return None
 
+    @property
+    def super_stimulusgroup_ids(self) -> Optional[List[int]]:
+        # check super_stimulusgroup_id is all-present or all-absent
+        super_sg_ids = [sg['super_stimulusgroup_id'] if 'super_stimulusgroup_id' in sg else None for sg in self.stimulusgroups]
+        assert all([ssid is None for ssid in super_sg_ids]) or all([ssid is not None for ssid in super_sg_ids]), \
+            f"super_stimulusgroup_id must be all-present or all-absent, but is {super_sg_ids}."
+        if all([ssid is not None for ssid in super_sg_ids]):
+            return super_sg_ids
+        else:
+            return None
+
 
 class ExperimentConfig(object):
 

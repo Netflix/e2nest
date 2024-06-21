@@ -165,6 +165,7 @@ class ExperimentController(object):
         ordering_so_far = self._get_ordering_so_far()
         stimulusgroup_ids = [sg['stimulusgroup_id'] for sg in
                              self.experiment_config.stimulus_config.stimulusgroups]
+
         d_rid_to_sgid = self._order(
             rounds_per_session=self.experiment_config.rounds_per_session,
             stimulusgroup_ids=stimulusgroup_ids,
