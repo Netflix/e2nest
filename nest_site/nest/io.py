@@ -805,6 +805,14 @@ class ExperimentUtils(object):
                 f"the length of choices ({len(d['choices'])}) does not match " \
                 f"vote_scale {ecfg.vote_scale}"
 
+        # check each svg has a unique corresponding sg since svg:sg is N:1
+        svg_used = set()
+        for sg in scfg.stimulusgroups:
+            for svg in sg['stimulusvotegroup_ids']:
+                assert svg not in svg_used, \
+                    f"stimulusvotegroup_id {svg} cannot be used by multiple stimulusgroups, but is reused by stimulusgroup {sg}."
+                svg_used.add(svg)
+
     @classmethod
     def create_experiment(cls,
                           experiment_config_filepath: str,
