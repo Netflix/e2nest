@@ -163,8 +163,7 @@ class ExperimentController(object):
         is created, so are the corresponding Rounds.
         """
         ordering_so_far = self._get_ordering_so_far()
-        stimulusgroup_ids = [sg['stimulusgroup_id'] for sg in
-                             self.experiment_config.stimulus_config.stimulusgroups]
+        stimulusgroup_ids: List[int] = self.experiment_config.stimulus_config.stimulusgroup_ids
 
         d_rid_to_sgid = self._order(
             rounds_per_session=self.experiment_config.rounds_per_session,
