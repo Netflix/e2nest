@@ -189,6 +189,12 @@ class StimulusConfig(object):
 
     @property
     def super_stimulusgroup_ids(self) -> Optional[List[int]]:
+        """
+        super_stimulusgroup_ids, if present, allows for a hierarchical grouping
+        of stimulusgroups. The randomization of stimulusgroups within a session
+        will then be hierarchical instead of flat: first randomize between
+        super_stimulusgroups, then randomize within each super_stimulusgroup.
+        """
         # check super_stimulusgroup_id is all-present or all-absent
         super_sg_ids = [sg['super_stimulusgroup_id'] if 'super_stimulusgroup_id' in sg else None for sg in self.stimulusgroups]
         assert all([ssid is None for ssid in super_sg_ids]) or all([ssid is not None for ssid in super_sg_ids]), \
