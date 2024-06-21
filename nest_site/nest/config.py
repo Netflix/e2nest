@@ -176,6 +176,17 @@ class StimulusConfig(object):
         else:
             return None
 
+    def get_super_stimulusgroup_id(self, stimulusgroup_id: int) -> Optional[int]:
+        sg: dict
+        for sg in self.stimulusgroups:
+            if sg['stimulusgroup_id'] == stimulusgroup_id:
+                if 'super_stimulusgroup_id' in sg:
+                    return sg['super_stimulusgroup_id']
+                else:
+                    return None
+        else:
+            return None
+
 
 class ExperimentConfig(object):
 

@@ -53,7 +53,8 @@
                 ],
                 "stimulusgroup_id": 0,
                 "video_display_percentage": 100,
-                "pre_message": "Imagine you are watching a live event..."
+                "pre_message": "Imagine you are watching a live event...",
+                "super_stimulusgroup_id": 0
             },
             {
                 "stimulusvotegroup_ids": [
@@ -61,7 +62,8 @@
                 ],
                 "stimulusgroup_id": 1,
                 "video_display_percentage": 100,
-                "pre_message": "Imagine you are watching a recorded event..."
+                "pre_message": "Imagine you are watching a recorded event...",
+                "super_stimulusgroup_id": 1
             },
             {
                 "stimulusvotegroup_ids": [
@@ -69,7 +71,8 @@
                 ],
                 "stimulusgroup_id": 2,
                 "video_display_percentage": 100,
-                "pre_message": "Imagine you are watching a recorded event..."
+                "pre_message": "Imagine you are watching a recorded event...",
+                "super_stimulusgroup_id": 1
             },
             {
                 "stimulusvotegroup_ids": [
@@ -77,7 +80,8 @@
                 ],
                 "stimulusgroup_id": 3,
                 "video_display_percentage": 100,
-                "pre_message": "Imagine you are watching a live event..."
+                "pre_message": "Imagine you are watching a live event...",
+                "super_stimulusgroup_id": 0
             }
         ]
     },
@@ -105,7 +109,7 @@
         ],
         "round_context": {
             "template_version": "standard",
-            "num_plays": 2,
+            "num_plays": 2, "min_num_plays": 0,
             "t_gray": 2000,
             "instruction_html": ""
         }
