@@ -813,6 +813,11 @@ class ExperimentUtils(object):
                     f"stimulusvotegroup_id {svg} cannot be used by multiple stimulusgroups, but is reused by stimulusgroup {sg}."
                 svg_used.add(svg)
 
+        # check super_stimulusgroup_id is all-present or all-absent
+        super_sg_ids = [sg['super_stimulusgroup_id'] if 'super_stimulusgroup_id' in sg else None for sg in scfg.stimulusgroups]
+        assert all([ssid is None for ssid in super_sg_ids]) or all([ssid is not None for ssid in super_sg_ids]), \
+            f"super_stimulusgroup_id must be all-present or all-absent, but is {super_sg_ids}."
+
     @classmethod
     def create_experiment(cls,
                           experiment_config_filepath: str,
