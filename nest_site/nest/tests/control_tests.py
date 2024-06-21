@@ -31,6 +31,26 @@ class TestOrder(TestCase):
                              6: 4,
                              7: 3})
 
+    def test_super_sg(self):
+        d = ExperimentController._order(
+            rounds_per_session=8,
+            stimulusgroup_ids=[4, 3, 2, 1, 0],
+            subject_id=1,
+            ordering_so_far=list(),
+            prioritized=list(),
+            random_seed=3,
+            blocklist_stimulusgroup_ids=list(),
+            super_stimulusgroup_ids=[0, 0, 0, 1, 1]
+        )
+        self.assertEqual(d, {0: 0,
+                             1: 1,
+                             2: 0,
+                             3: 1,
+                             4: 3,
+                             5: 4,
+                             6: 4,
+                             7: 2})
+
     def test_partial_prioritized(self):
         prioritized = [
             {'session_idx': None, 'round_id': 0, 'stimulusgroup_id': 0},
