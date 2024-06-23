@@ -31,6 +31,26 @@ class TestOrder(TestCase):
                              6: 4,
                              7: 3})
 
+    def test_super_sg(self):
+        d = ExperimentController._order(
+            rounds_per_session=8,
+            stimulusgroup_ids=[4, 3, 2, 1, 0],
+            subject_id=1,
+            ordering_so_far=list(),
+            prioritized=list(),
+            random_seed=3,
+            blocklist_stimulusgroup_ids=list(),
+            super_stimulusgroup_ids=[0, 0, 0, 1, 1]
+        )
+        self.assertEqual(d, {0: 0,
+                             1: 1,
+                             2: 0,
+                             3: 1,
+                             4: 3,
+                             5: 4,
+                             6: 4,
+                             7: 2})
+
     def test_partial_prioritized(self):
         prioritized = [
             {'session_idx': None, 'round_id': 0, 'stimulusgroup_id': 0},
@@ -56,6 +76,33 @@ class TestOrder(TestCase):
                              5: 4,
                              6: 0,
                              7: 4})
+
+    def test_partial_prioritized_super_sg(self):
+        prioritized = [
+            {'session_idx': None, 'round_id': 0, 'stimulusgroup_id': 0},
+            {'session_idx': 0, 'round_id': 5, 'stimulusgroup_id': 4},
+            {'session_idx': 1, 'round_id': 5, 'stimulusgroup_id': 4},
+            {'session_idx': 2, 'round_id': 5, 'stimulusgroup_id': 4},
+        ]
+
+        d = ExperimentController._order(
+            rounds_per_session=8,
+            stimulusgroup_ids=list(range(5)),
+            subject_id=1,
+            ordering_so_far=list(),
+            prioritized=prioritized,
+            random_seed=3,
+            blocklist_stimulusgroup_ids=list(),
+            super_stimulusgroup_ids=[0, 0, 0, 1, 1]
+        )
+        self.assertEqual(d, {0: 0,
+                             1: 2,
+                             2: 1,
+                             3: 0,
+                             4: 4,
+                             5: 4,
+                             6: 3,
+                             7: 3})
 
     def test_partial_prioritized2(self):
         prioritized = [
@@ -84,6 +131,34 @@ class TestOrder(TestCase):
                              6: 4,
                              7: 1})
 
+    def test_partial_prioritized2_super_sg(self):
+        prioritized = [
+            {'session_idx': None, 'round_id': 0, 'stimulusgroup_id': 4},
+            {'session_idx': 0, 'round_id': None, 'stimulusgroup_id': 0},
+            {'session_idx': 1, 'round_id': 5, 'stimulusgroup_id': 0},
+            {'session_idx': 2, 'round_id': 5, 'stimulusgroup_id': 0},
+        ]
+
+        d = ExperimentController._order(
+            rounds_per_session=8,
+            stimulusgroup_ids=[4, 3, 2, 1, 0],
+            subject_id=1,
+            ordering_so_far=list(),
+            prioritized=prioritized,
+            random_seed=3,
+            blocklist_stimulusgroup_ids=list(),
+            super_stimulusgroup_ids=[0, 0, 0, 1, 1]
+        )
+        # 'round_id': None means it could randomly appear among the rounds
+        self.assertEqual(d, {0: 4,
+                             1: 2,
+                             2: 3,
+                             3: 4,
+                             4: 1,
+                             5: 0,
+                             6: 1,
+                             7: 0})
+
     def test_partial_prioritized3(self):
         prioritized = [
             {'session_idx': None, 'round_id': 0, 'stimulusgroup_id': 4},
@@ -104,7 +179,9 @@ class TestOrder(TestCase):
         )
         # 'round_id': None means it could randomly appear among the rounds
         # included in blocklist_stimulusgroup_ids means it won't appears in
-        # other rounds rather than specified in the prioritized list
+        # other rounds rather than specified in the prioritized list.
+        # in this example, sg 0 appears once due to the second row of the
+        # prioritized list, and then it's blocked for the rest of the rounds
         self.assertEqual(d, {0: 4,
                              1: 1,
                              2: 2,
@@ -112,6 +189,34 @@ class TestOrder(TestCase):
                              4: 1,
                              5: 0,
                              6: 4,
+                             7: 2})
+
+    def test_partial_prioritized3_super_sg(self):
+        prioritized = [
+            {'session_idx': None, 'round_id': 0, 'stimulusgroup_id': 4},
+            {'session_idx': 0, 'round_id': None, 'stimulusgroup_id': 0},
+            {'session_idx': 1, 'round_id': 5, 'stimulusgroup_id': 0},
+            {'session_idx': 2, 'round_id': 5, 'stimulusgroup_id': 0},
+        ]
+        blacklist_sgids = [0]
+
+        d = ExperimentController._order(
+            rounds_per_session=8,
+            stimulusgroup_ids=[4, 3, 2, 1, 0],
+            subject_id=1,
+            ordering_so_far=list(),
+            prioritized=prioritized,
+            random_seed=3,
+            blocklist_stimulusgroup_ids=blacklist_sgids,
+            super_stimulusgroup_ids=[0, 0, 0, 1, 1]
+        )
+        self.assertEqual(d, {0: 4,
+                             1: 1,
+                             2: 0,
+                             3: 1,
+                             4: 4,
+                             5: 3,
+                             6: 2,
                              7: 2})
 
     def test_full_prioritized(self):
@@ -134,6 +239,37 @@ class TestOrder(TestCase):
             prioritized=prioritized,
             random_seed=3,
             blocklist_stimulusgroup_ids=list(),
+        )
+        self.assertEqual(d, {0: 0,
+                             1: 4,
+                             2: 2,
+                             3: 4,
+                             4: 2,
+                             5: 4,
+                             6: 2,
+                             7: 4})
+
+    def test_full_prioritized_super_sg(self):
+        prioritized = [
+            {'session_idx': None, 'round_id': 0, 'stimulusgroup_id': 0},
+            {'session_idx': 0, 'round_id': 1, 'stimulusgroup_id': 4},
+            {'session_idx': 0, 'round_id': 2, 'stimulusgroup_id': 2},
+            {'session_idx': 0, 'round_id': 3, 'stimulusgroup_id': 4},
+            {'session_idx': 0, 'round_id': 4, 'stimulusgroup_id': 2},
+            {'session_idx': 0, 'round_id': 5, 'stimulusgroup_id': 4},
+            {'session_idx': 0, 'round_id': 6, 'stimulusgroup_id': 2},
+            {'session_idx': 0, 'round_id': 7, 'stimulusgroup_id': 4},
+        ]
+
+        d = ExperimentController._order(
+            rounds_per_session=8,
+            stimulusgroup_ids=list(range(5)),
+            subject_id=1,
+            ordering_so_far=list(),
+            prioritized=prioritized,
+            random_seed=3,
+            blocklist_stimulusgroup_ids=list(),
+            super_stimulusgroup_ids=[0, 0, 0, 1, 1]
         )
         self.assertEqual(d, {0: 0,
                              1: 4,

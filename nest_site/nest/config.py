@@ -176,6 +176,45 @@ class StimulusConfig(object):
         else:
             return None
 
+    def get_text_color(self, stimulusgroup_id: int) -> Optional[str]:
+        sg: dict
+        for sg in self.stimulusgroups:
+            if sg['stimulusgroup_id'] == stimulusgroup_id:
+                if 'text_color' in sg:
+                    return sg['text_color']
+                else:
+                    return None
+        else:
+            return None
+
+    def get_super_stimulusgroup_id(self, stimulusgroup_id: int) -> Optional[int]:
+        sg: dict
+        for sg in self.stimulusgroups:
+            if sg['stimulusgroup_id'] == stimulusgroup_id:
+                if 'super_stimulusgroup_id' in sg:
+                    return sg['super_stimulusgroup_id']
+                else:
+                    return None
+        else:
+            return None
+
+    @property
+    def super_stimulusgroup_ids(self) -> Optional[List[int]]:
+        """
+        super_stimulusgroup_ids, if present, allows for a hierarchical grouping
+        of stimulusgroups. The randomization of stimulusgroups within a session
+        will then be hierarchical instead of flat: first randomize between
+        super_stimulusgroups, then randomize within each super_stimulusgroup.
+        """
+        # check super_stimulusgroup_id is all-present or all-absent
+        super_sg_ids = [sg['super_stimulusgroup_id'] if 'super_stimulusgroup_id' in sg else None for sg in self.stimulusgroups]
+        assert all([ssid is None for ssid in super_sg_ids]) or all([ssid is not None for ssid in super_sg_ids]), \
+            f"super_stimulusgroup_id must be all-present or all-absent, but is {super_sg_ids}."
+        if all([ssid is not None for ssid in super_sg_ids]):
+            return super_sg_ids
+        else:
+            return None
+
 
 class ExperimentConfig(object):
 

@@ -708,6 +708,12 @@ class TestValidateConfig(TestCase):
         ExperimentUtils.validate_config(
             NestConfig.tests_resource_path('cvxhull_subjexp_toy_x_acr_standard_2.json'))
 
+    def test_validate_config_acr_standard_2bad_supersg(self):
+        with self.assertRaises(AssertionError) as e:
+            ExperimentUtils.validate_config(
+                NestConfig.tests_resource_path('cvxhull_subjexp_toy_x_acr_standard_2bad_supersg.json'))
+        self.assertTrue('super_stimulusgroup_id must be all-present or all-absent' in str(e.exception))
+
 
 class TestUserUtils(TestCase):
 

@@ -163,8 +163,9 @@ class ExperimentController(object):
         is created, so are the corresponding Rounds.
         """
         ordering_so_far = self._get_ordering_so_far()
-        stimulusgroup_ids = [sg['stimulusgroup_id'] for sg in
-                             self.experiment_config.stimulus_config.stimulusgroups]
+        stimulusgroup_ids: List[int] = self.experiment_config.stimulus_config.stimulusgroup_ids
+        super_sg_ids = self.experiment_config.stimulus_config.super_stimulusgroup_ids
+
         d_rid_to_sgid = self._order(
             rounds_per_session=self.experiment_config.rounds_per_session,
             stimulusgroup_ids=stimulusgroup_ids,
@@ -173,6 +174,7 @@ class ExperimentController(object):
             prioritized=self.experiment_config.prioritized,
             random_seed=self.randgen.randint(0, 2**16),
             blocklist_stimulusgroup_ids=self.experiment_config.blocklist_stimulusgroup_ids,
+            super_stimulusgroup_ids=super_sg_ids,
         )
 
         sess = Session(experiment=self.experiment, subject=subject)
@@ -231,7 +233,7 @@ class ExperimentController(object):
         return od
 
     @staticmethod
-    def _order(
+    def _order(  # noqa C901
             rounds_per_session: int,
             stimulusgroup_ids: List[int],
             subject_id: int,
@@ -239,11 +241,23 @@ class ExperimentController(object):
             prioritized: List[dict],
             random_seed: Optional[int],
             blocklist_stimulusgroup_ids: List[int],
+            super_stimulusgroup_ids: Optional[List[int]] = None,
     ):
         """
         return new stimulusgroup assignment in the format of:
         dict: round_id -> stimulusgroup_id
+
+        super_stimulusgroup_ids, if present, allows for a hierarchical grouping
+        of stimulusgroups. The randomization of stimulusgroups within a session
+        will then be hierarchical instead of flat: first randomize between
+        super_stimulusgroups, then randomize within each super_stimulusgroup.
         """
+
+        if super_stimulusgroup_ids is not None:
+            assert len(super_stimulusgroup_ids) == len(stimulusgroup_ids)
+            sgid_to_super = dict(zip(stimulusgroup_ids, super_stimulusgroup_ids))
+        else:
+            sgid_to_super = dict()
 
         SUBJECT_WEIGHT = 5
 
@@ -316,7 +330,23 @@ class ExperimentController(object):
             sgidx_candidates.remove(sgidx)
 
         # lastly, randomly assign sgidx in l to different rid
-        random.shuffle(l_sgid)
+        if super_stimulusgroup_ids is None:
+            random.shuffle(l_sgid)
+        else:
+            # first, randomize the order of list(set(super_stimulusgroup_ids))
+            l_sgid_new = list()
+            unique_super_sgids = list(set(super_stimulusgroup_ids))
+            random.shuffle(unique_super_sgids)
+            for super_sgid in unique_super_sgids:
+                # second, randomize within each super_sgid
+                cur_l = list()
+                for sgid in l_sgid:
+                    if sgid_to_super[sgid] == super_sgid:
+                        cur_l.append(sgid)
+                random.shuffle(cur_l)
+                l_sgid_new += cur_l
+            l_sgid = l_sgid_new
+
         for rid in range(rounds_per_session):
             if rid in d_rid_to_sgid:
                 continue
