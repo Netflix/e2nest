@@ -3,7 +3,15 @@
         "contents": [
             {
                 "content_id": 0,
-                "name": "CTS3E1_B__15_55_16_0"
+                "name": "SolLevante"
+            },
+            {
+                "content_id": 1,
+                "name": "Sparks"
+            },
+            {
+                "content_id": 2,
+                "name": "Meridian"
             }
         ],
         "stimuli": [
@@ -17,7 +25,13 @@
                 "path": "/media/mp4/samples/Sparks/Sparks_A__2_0_2_5__SdrVvhevce2pVE__1920_1080__3000_enable_audio_False_vmaf76.41_phonevmaf92.39_psnr35.21_kbps3088.96.mp4",
                 "stimulus_id": 1,
                 "type": "video/mp4",
-                "content_id": 0
+                "content_id": 1
+            },
+            {
+                "path": "/media/mp4/samples/Meridian/Meridian_A__8_18_8_23__SdrVvhevce2pVE__1920_1080__3000_enable_audio_False_vmaf95.93_phonevmaf100.00_psnr50.59_kbps3092.62.mp4",
+                "stimulus_id": 2,
+                "type": "video/mp4",
+                "content_id": 2
             }
         ],
         "stimulusvotegroups": [
@@ -29,13 +43,13 @@
             },
             {
                 "stimulus_ids": [
-                    1
+                    0
                 ],
                 "stimulusvotegroup_id": 1
             },
             {
                 "stimulus_ids": [
-                    0
+                    1
                 ],
                 "stimulusvotegroup_id": 2
             },
@@ -44,6 +58,18 @@
                     1
                 ],
                 "stimulusvotegroup_id": 3
+            },
+            {
+                "stimulus_ids": [
+                    2
+                ],
+                "stimulusvotegroup_id": 4
+            },
+            {
+                "stimulus_ids": [
+                    2
+                ],
+                "stimulusvotegroup_id": 5
             }
         ],
         "stimulusgroups": [
@@ -71,8 +97,8 @@
                 ],
                 "stimulusgroup_id": 2,
                 "video_display_percentage": 100,
-                "pre_message": "Imagine you are watching a recorded event...",
-                "super_stimulusgroup_id": 1
+                "pre_message": "Imagine you are watching a live event...",
+                "super_stimulusgroup_id": 0
             },
             {
                 "stimulusvotegroup_ids": [
@@ -80,8 +106,26 @@
                 ],
                 "stimulusgroup_id": 3,
                 "video_display_percentage": 100,
+                "pre_message": "Imagine you are watching a recorded event...",
+                "super_stimulusgroup_id": 1
+            },
+            {
+                "stimulusvotegroup_ids": [
+                    4
+                ],
+                "stimulusgroup_id": 4,
+                "video_display_percentage": 100,
                 "pre_message": "Imagine you are watching a live event...",
                 "super_stimulusgroup_id": 0
+            },
+            {
+                "stimulusvotegroup_ids": [
+                    5
+                ],
+                "stimulusgroup_id": 5,
+                "video_display_percentage": 100,
+                "pre_message": "Imagine you are watching a recorded event...",
+                "super_stimulusgroup_id": 1
             }
         ]
     },
@@ -90,7 +134,7 @@
         "description": "convex hull subject test",
         "methodology": "acr",
         "vote_scale": "FIVE_POINT",
-        "rounds_per_session": 4,
+        "rounds_per_session": 6,
         "random_seed": null,
         "prioritized": [],
         "blocklist_stimulusgroup_ids": [],
@@ -109,7 +153,7 @@
         ],
         "round_context": {
             "template_version": "standard",
-            "num_plays": 2, "min_num_plays": 0,
+            "num_plays": 1, "min_num_plays": 0,
             "t_gray": 2000,
             "instruction_html": ""
         }
