@@ -233,7 +233,7 @@ class ExperimentController(object):
         return od
 
     @staticmethod
-    def _order(
+    def _order(  # noqa C901
             rounds_per_session: int,
             stimulusgroup_ids: List[int],
             subject_id: int,
@@ -242,7 +242,7 @@ class ExperimentController(object):
             random_seed: Optional[int],
             blocklist_stimulusgroup_ids: List[int],
             super_stimulusgroup_ids: Optional[List[int]] = None,
-    ):  # noqa C901
+    ):
         """
         return new stimulusgroup assignment in the format of:
         dict: round_id -> stimulusgroup_id
