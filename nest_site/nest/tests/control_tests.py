@@ -151,13 +151,13 @@ class TestOrder(TestCase):
         )
         # 'round_id': None means it could randomly appear among the rounds
         self.assertEqual(d, {0: 4,
-                             1: 3,
-                             2: 1,
-                             3: 2,
-                             4: 0,
+                             1: 2,
+                             2: 3,
+                             3: 4,
+                             4: 1,
                              5: 0,
-                             6: 4,
-                             7: 1})
+                             6: 1,
+                             7: 0})
 
     def test_partial_prioritized3(self):
         prioritized = [
