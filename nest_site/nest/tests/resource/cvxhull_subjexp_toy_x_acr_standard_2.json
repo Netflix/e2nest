@@ -79,8 +79,9 @@
                 ],
                 "stimulusgroup_id": 0,
                 "video_display_percentage": 100,
-                "pre_message": "Imagine you are watching a live event...",
-                "super_stimulusgroup_id": 0
+                "pre_message": "Imagine you are watching the following events as they’re airing live on Netflix and are happening in real life.",
+                "super_stimulusgroup_id": 0,
+                "text_color": "#0000FF"
             },
             {
                 "stimulusvotegroup_ids": [
@@ -88,8 +89,9 @@
                 ],
                 "stimulusgroup_id": 1,
                 "video_display_percentage": 100,
-                "pre_message": "Imagine you are watching a recorded event...",
-                "super_stimulusgroup_id": 1
+                "pre_message": "Imagine you are watching the following events on Netflix after they’ve already aired and happened in real life.",
+                "super_stimulusgroup_id": 1,
+                "text_color": "#990000"
             },
             {
                 "stimulusvotegroup_ids": [
@@ -97,8 +99,9 @@
                 ],
                 "stimulusgroup_id": 2,
                 "video_display_percentage": 100,
-                "pre_message": "Imagine you are watching a live event...",
-                "super_stimulusgroup_id": 0
+                "pre_message": "Imagine you are watching the following events as they’re airing live on Netflix and are happening in real life.",
+                "super_stimulusgroup_id": 0,
+                "text_color": "#0000FF"
             },
             {
                 "stimulusvotegroup_ids": [
@@ -106,8 +109,9 @@
                 ],
                 "stimulusgroup_id": 3,
                 "video_display_percentage": 100,
-                "pre_message": "Imagine you are watching a recorded event...",
-                "super_stimulusgroup_id": 1
+                "pre_message": "Imagine you are watching the following events on Netflix after they’ve already aired and happened in real life.",
+                "super_stimulusgroup_id": 1,
+                "text_color": "#990000"
             },
             {
                 "stimulusvotegroup_ids": [
@@ -115,8 +119,9 @@
                 ],
                 "stimulusgroup_id": 4,
                 "video_display_percentage": 100,
-                "pre_message": "Imagine you are watching a live event...",
-                "super_stimulusgroup_id": 0
+                "pre_message": "Imagine you are watching the following events as they’re airing live on Netflix and are happening in real life.",
+                "super_stimulusgroup_id": 0,
+                "text_color": "#0000FF"
             },
             {
                 "stimulusvotegroup_ids": [
@@ -124,8 +129,9 @@
                 ],
                 "stimulusgroup_id": 5,
                 "video_display_percentage": 100,
-                "pre_message": "Imagine you are watching a recorded event...",
-                "super_stimulusgroup_id": 1
+                "pre_message": "Imagine you are watching the following events on Netflix after they’ve already aired and happened in real life.",
+                "super_stimulusgroup_id": 1,
+                "text_color": "#990000"
             }
         ]
     },
@@ -145,17 +151,30 @@
                     "before_or_after": "before"
                 },
                 "context": {
-                    "title": "Instruction",
-                    "text_html": " <p> In this session, you will be asked to evaluate the annoyance caused by presence of banding artifact in a set of videos. </p>  <p> If you don't know what banding artifacts are, it would be good idea to contact the author <b>ptandon@catflix.com</b> before proceeding with the test. </p>  <p> There are two phases, a training and a testing phase. In the training, you will see 6 videos and will be asked to rate the presence of banding artifacts. The videos are chosen to span the scale and there is an expected score for each of the video to provide an anchor for the testing videos. </p>  <p> Next, the testing phase will start and at this point, your scores will be recorded.</b> </p>  <p> To play a video, click on the <b>\"Play Video\"</b> button. </p>  <p> <b style='color:red !important;'>Please, maintain the viewing distance of approximately 1.5 times the monitor height.</b> </p>  <p> Video clips will loop over, <b>press \"space\" key or double click mouse </b> to terminate the video. A slider will appear and you will be able to rate annoyance caused by the presence of banding in the video on the 0-100 scale, qualitatively from unwatchable to imperceptible. Please try to focus only on the banding artifacts. For all clips rate the worst case banding seen during video playback, even for videos with multiple scenes. </p>   <p> Once you have scored the video, click the \"Next\" button to fetch next video and repeat. </p>  <p> Progress is shown for training and testing cases on top, near instructions. </p> ",
-                    "actions_html": "\n            <p>\n                <a class=\"button\" href=\"{action_url}\"  id=\"start\">Start Test</a>\n            </p>\n            "
+                    "title": "Instructions",
+                    "text_html": " <p> In this session, you will be asked to rate the visual quality of 80 brief videos. Afterwards you will complete a survey about your viewing habits and preferences. </p> ",
+                    "actions_html": "\n            <p>\n                <a class=\"button\" href=\"{action_url}\"  id=\"start\">Next</a>\n            </p>\n            "
+                }
+            },
+            {
+                "position": {
+                    "round_id": 0,
+                    "before_or_after": "before"
+                },
+                "context": {
+                    "title": "Instructions",
+                    "text_html": " <p> After you watch each video, a slider will appear which you can use to rate the visual quality, on a 0-100 scale from \"bad\" to \"excellent\". </p> <p> For some of these videos, you’ll be asked to imagine that you’re viewing the event as it’s airing <b>live on Netflix</b> and happening in real life. </p> <p> For other video clips, we’ll ask you to imagine that you’re viewing the event after it has already aired and happened in real life, and is now <b>available for viewing on Netflix</b>. </p>",
+                    "actions_html": "\n            <p>\n                <a class=\"button\" href=\"{action_url}\"  id=\"start\">Next</a>\n            </p>\n            "
                 }
             }
         ],
         "round_context": {
             "template_version": "standard",
             "num_plays": 1, "min_num_plays": 0,
-            "t_gray": 2000,
-            "instruction_html": ""
+            "t_gray": 4000,
+            "instruction_html": "",
+            "text_fontsize": "50px",
+            "text_color": "#FFFFFF"
         }
     }
 }
