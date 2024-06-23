@@ -176,6 +176,17 @@ class StimulusConfig(object):
         else:
             return None
 
+    def get_text_color(self, stimulusgroup_id: int) -> Optional[str]:
+        sg: dict
+        for sg in self.stimulusgroups:
+            if sg['stimulusgroup_id'] == stimulusgroup_id:
+                if 'text_color' in sg:
+                    return sg['text_color']
+                else:
+                    return None
+        else:
+            return None
+
     def get_super_stimulusgroup_id(self, stimulusgroup_id: int) -> Optional[int]:
         sg: dict
         for sg in self.stimulusgroups:

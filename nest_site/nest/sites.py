@@ -655,7 +655,8 @@ class NestSite(ExperimentMixin):
             'video_show_controls': False,
             'video_display_percentage': 75,
             'stimulusvotegroup_id': 0,
-            "text_color": "#FFFFFF"
+            "text_color": "#0000FF",
+            "text_fontsize": "50px",
         })
         context = {
             **self.each_context(request),
@@ -1638,6 +1639,8 @@ class NestSite(ExperimentMixin):
                         stimulus_config.get_video_display_percentage(sgid)
                     pre_message: str = ec.experiment_config. \
                         stimulus_config.get_pre_message(sgid)
+                    text_color: str = ec.experiment_config. \
+                        stimulus_config.get_text_color(sgid)
                     assert video_display_percentage is not None
 
                     svgid = self._get_matched_single_stimulusvotegroup_id(ec, next_step)
@@ -1656,6 +1659,10 @@ class NestSite(ExperimentMixin):
                     if ec.experiment_config.methodology == 'acr':
                         if pre_message is not None:
                             d['button'] = pre_message
+                        if text_color is not None:
+                            # `text_color` could appear in round_context, but
+                            # it can be overriden here.
+                            d['text_color'] = text_color
 
                     if ec.experiment_config.methodology.startswith('acr'):
                         sid = self._get_matched_single_stimulus_id(ec, svgid)
