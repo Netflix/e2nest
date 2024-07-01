@@ -461,3 +461,7 @@ def validate_xml(html):
     except etree.XMLSyntaxError:
         return False
     return True
+
+
+def DummyClass(object):
+    pass

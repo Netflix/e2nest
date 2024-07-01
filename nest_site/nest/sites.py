@@ -25,7 +25,7 @@ from django.views.generic import RedirectView
 try:
     from e2nestprivate.sites import NestSitePrivateMixin
 except ImportError:
-    import object as NestSitePrivateMixin
+    from helpers import DummyClass as NestSitePrivateMixin
 from nest_site.settings import MEDIA_URL
 from sureal.dataset_reader import DatasetReader
 
