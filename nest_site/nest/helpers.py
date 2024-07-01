@@ -463,5 +463,5 @@ def validate_xml(html):
     return True
 
 
-def DummyClass(object):
+class DummyClass(object):
     pass
