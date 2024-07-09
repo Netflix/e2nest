@@ -62,6 +62,9 @@
         const current = btns.findIndex(btn => btn.checked);
         btns[Math.max(current - 1, 0)].checked = true;
     }
+    function press_submit() {
+        document.getElementById("submit").click();
+    }
     window.addEventListener('load', function () {
         container = document.getElementById("container");
         qa = document.getElementById("qa");
@@ -87,6 +90,9 @@
         }
         else if (e.key === "ArrowDown" && qa.style.display === "block") {
             go_to_next_button();
+        }
+        else if (e.key === "Enter" && qa.style.display === "block") {
+            press_submit();
         }
     });
     document.addEventListener("dblclick", (e) => {
