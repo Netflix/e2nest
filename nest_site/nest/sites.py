@@ -548,7 +548,18 @@ class NestSite(ExperimentMixin, NestSitePrivateMixin):
         }, indent=4)
         text_html = f"""<p> {cookie_json} </p>"""
         actions_html = f""" <p> <a class="button" href="{proceed_url}"  id="start">Main page</a> </p>"""
-        page = GenericPage({'title': title, 'text_html': text_html, 'actions_html': actions_html})
+        script_html = \
+            """
+            function press_submit() {
+                document.getElementById("start").click();
+            }
+            document.addEventListener("keydown", (e) => {
+            if (e.key === "Enter") {
+                    press_submit();
+                }
+            });
+            """
+        page = GenericPage({'title': title, 'text_html': text_html, 'actions_html': actions_html, 'script_html': script_html})
         context = {**self.each_context(request), **page.context}
         request.current_app = self.name
         return TemplateResponse(request, page.get_template(), context)
@@ -574,10 +585,22 @@ class NestSite(ExperimentMixin, NestSitePrivateMixin):
                 <a class="button" href="{reverse_lazy('nest:instruction_demo')}"  id="start">Start Evaluation</a>
             </p>
             """
+        script_html = \
+            """
+            function press_submit() {
+                document.getElementById("start").click();
+            }
+            document.addEventListener("keydown", (e) => {
+            if (e.key === "Enter") {
+                    press_submit();
+                }
+            });
+            """
         page = GenericPage({
             'title': title,
             'text_html': text_html,
             'actions_html': actions_html,
+            'script_html': script_html,
         })
         context = {
             **self.each_context(request),
@@ -1015,7 +1038,18 @@ class NestSite(ExperimentMixin, NestSitePrivateMixin):
             proceed_url = reverse('nest:status')
             text_html = """ <p> To start the test, you must first enable cookie in your browser. </p> """  # noqa E501
             actions_html = f""" <p> <a class="button" href="{proceed_url}"  id="start">Back to Main Page</a> </p> """  # noqa E501
-            page = GenericPage({'title': title, 'text_html': text_html, 'actions_html': actions_html})
+            script_html = \
+                """
+                function press_submit() {
+                    document.getElementById("start").click();
+                }
+                document.addEventListener("keydown", (e) => {
+                if (e.key === "Enter") {
+                        press_submit();
+                    }
+                });
+                """
+            page = GenericPage({'title': title, 'text_html': text_html, 'actions_html': actions_html, 'script_html': script_html})  # noqa E501
             context = {**self.each_context(request), **page.context}
             request.current_app = self.name
             return TemplateResponse(request, page.get_template(), context)
@@ -1045,7 +1079,18 @@ class NestSite(ExperimentMixin, NestSitePrivateMixin):
                 text_html = """ <p> You have already completely this session ({}, ID {}). </p> """. \
                     format(session.experiment.title, session_id)
                 actions_html = f""" <p> <a class="button" href="{proceed_url}"  id="start">Main page</a> </p>"""
-                page = GenericPage({'title': title, 'text_html': text_html, 'actions_html': actions_html})
+                script_html = \
+                    """
+                    function press_submit() {
+                        document.getElementById("start").click();
+                    }
+                    document.addEventListener("keydown", (e) => {
+                    if (e.key === "Enter") {
+                            press_submit();
+                        }
+                    });
+                    """
+                page = GenericPage({'title': title, 'text_html': text_html, 'actions_html': actions_html, 'script_html': script_html})  # noqa E501
                 context = {**self.each_context(request), **page.context}
                 request.current_app = self.name
                 return TemplateResponse(request, page.get_template(), context)
@@ -1170,7 +1215,18 @@ class NestSite(ExperimentMixin, NestSitePrivateMixin):
             else:
                 text_html = """ <p> You have completed the test. </p> """
             actions_html = f""" <p> <a class="button" href="{proceed_url}"  id="start">Done</a> </p>"""
-            page = GenericPage({'title': title, 'text_html': text_html, 'actions_html': actions_html})
+            script_html = \
+                """
+                function press_submit() {
+                    document.getElementById("start").click();
+                }
+                document.addEventListener("keydown", (e) => {
+                if (e.key === "Enter") {
+                        press_submit();
+                    }
+                });
+                """
+            page = GenericPage({'title': title, 'text_html': text_html, 'actions_html': actions_html, 'script_html': script_html})  # noqa E501
             context = {**self.each_context(request), **page.context}
             request.current_app = self.name
             response = TemplateResponse(request, page.get_template(), context)
@@ -1184,12 +1240,16 @@ class NestSite(ExperimentMixin, NestSitePrivateMixin):
         step_is_addition = self._step_is_addition(next_step)
         if step_is_addition:
             action_html_template = next_step['context']['actions_html']
+            script_html_template = next_step['context']['script_html'] if 'script_html' in next_step['context'] else None
             assert '{action_url}' in action_html_template
             action_html = action_html_template.format(
                 action_url=reverse("nest:step_session", kwargs={'session_id': session_id}))
-            page = GenericPage({'title': next_step['context']['title'],
-                                'text_html': next_step['context']['text_html'],
-                                'actions_html': action_html})
+            page_input = {'title': next_step['context']['title'],
+                          'text_html': next_step['context']['text_html'],
+                          'actions_html': action_html}
+            if script_html_template is not None:
+                page_input['script_html'] = script_html_template
+            page = GenericPage(page_input)
             context = {**self.each_context(request), **page.context}
             request.current_app = self.name
             response = TemplateResponse(request, page.get_template(), context)
