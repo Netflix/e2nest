@@ -47,6 +47,21 @@
             show_gray_and_play(t_gray);
         }
     }
+    function check_middle_button() {
+        const btns = [...document.querySelectorAll('input[name="acr_{{stimulusvotegroup_id}}"]')];
+        const middle = Math.floor(btns.length / 2);
+        btns[middle].checked = true;
+    }
+    function go_to_next_button() {
+        const btns = [...document.querySelectorAll('input[name="acr_{{stimulusvotegroup_id}}"]')];
+        const current = btns.findIndex(btn => btn.checked);
+        btns[Math.min(current + 1, btns.length - 1)].checked = true;
+    }
+    function go_to_prev_button() {
+        const btns = [...document.querySelectorAll('input[name="acr_{{stimulusvotegroup_id}}"]')];
+        const current = btns.findIndex(btn => btn.checked);
+        btns[Math.max(current - 1, 0)].checked = true;
+    }
     window.addEventListener('load', function () {
         container = document.getElementById("container");
         qa = document.getElementById("qa");
@@ -55,6 +70,7 @@
         video.addEventListener("ended", function() {
             decide_whats_next();
          });
+        check_middle_button();
         show_gray_and_play(t_gray);
     })
     document.addEventListener("keydown", (e) => {
@@ -65,6 +81,12 @@
             document.body.style.backgroundColor = "white";
             container.style.display = "block";
             qa.style.display = "block";
+        }
+        else if (e.key === "ArrowUp" && qa.style.display === "block") {
+            go_to_prev_button();
+        }
+        else if (e.key === "ArrowDown" && qa.style.display === "block") {
+            go_to_next_button();
         }
     });
     document.addEventListener("dblclick", (e) => {

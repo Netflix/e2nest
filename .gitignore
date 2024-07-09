@@ -33,3 +33,4 @@ out/
 db.sqlite3
 migrations/
 media/
+nohup.out
