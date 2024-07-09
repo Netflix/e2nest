@@ -79,7 +79,7 @@
                 ],
                 "stimulusgroup_id": 0,
                 "video_display_percentage": 100,
-                "pre_message": "Imagine you are watching the following events as they’re airing live on Netflix and are happening in real life.",
+                "pre_message": "Imagine you are watching the following event live on Netflix as it’s happening now.",
                 "super_stimulusgroup_id": 0,
                 "text_color": "#0000FF"
             },
@@ -89,7 +89,7 @@
                 ],
                 "stimulusgroup_id": 1,
                 "video_display_percentage": 100,
-                "pre_message": "Imagine you are watching the following events on Netflix after they’ve already aired and happened in real life.",
+                "pre_message": "Imagine you are watching the following event on Netflix after it has already happened.",
                 "super_stimulusgroup_id": 1,
                 "text_color": "#990000"
             },
@@ -99,7 +99,7 @@
                 ],
                 "stimulusgroup_id": 2,
                 "video_display_percentage": 100,
-                "pre_message": "Imagine you are watching the following events as they’re airing live on Netflix and are happening in real life.",
+                "pre_message": "Imagine you are watching the following event live on Netflix as it’s happening now.",
                 "super_stimulusgroup_id": 0,
                 "text_color": "#0000FF"
             },
@@ -109,7 +109,7 @@
                 ],
                 "stimulusgroup_id": 3,
                 "video_display_percentage": 100,
-                "pre_message": "Imagine you are watching the following events on Netflix after they’ve already aired and happened in real life.",
+                "pre_message": "Imagine you are watching the following event on Netflix after it has already happened.",
                 "super_stimulusgroup_id": 1,
                 "text_color": "#990000"
             },
@@ -119,7 +119,7 @@
                 ],
                 "stimulusgroup_id": 4,
                 "video_display_percentage": 100,
-                "pre_message": "Imagine you are watching the following events as they’re airing live on Netflix and are happening in real life.",
+                "pre_message": "Imagine you are watching the following event live on Netflix as it’s happening now.",
                 "super_stimulusgroup_id": 0,
                 "text_color": "#0000FF"
             },
@@ -129,7 +129,7 @@
                 ],
                 "stimulusgroup_id": 5,
                 "video_display_percentage": 100,
-                "pre_message": "Imagine you are watching the following events on Netflix after they’ve already aired and happened in real life.",
+                "pre_message": "Imagine you are watching the following event on Netflix after it has already happened.",
                 "super_stimulusgroup_id": 1,
                 "text_color": "#990000"
             }
@@ -153,7 +153,8 @@
                 "context": {
                     "title": "Instructions",
                     "text_html": " <p> In this session, you will be asked to rate the visual quality of 80 brief videos. Afterwards you will complete a survey about your viewing habits and preferences. </p> ",
-                    "actions_html": "\n            <p>\n                <a class=\"button\" href=\"{action_url}\"  id=\"start\">Next</a>\n            </p>\n            "
+                    "actions_html": "\n            <p>\n                <a class=\"button\" href=\"{action_url}\"  id=\"start\">Next</a>\n            </p>\n            ",
+                    "script_html": "\nfunction press_submit() {\n    document.getElementById(\"start\").click();\n}\ndocument.addEventListener(\"keydown\", (e) => {\nif (e.key ===\"Enter\") {\n        press_submit();\n    }\n});\n"
                 }
             },
             {
@@ -163,8 +164,9 @@
                 },
                 "context": {
                     "title": "Instructions",
-                    "text_html": " <p> After you watch each video, a slider will appear which you can use to rate the visual quality, on a 0-100 scale from \"bad\" to \"excellent\". </p> <p> For some of these videos, you’ll be asked to imagine that you’re viewing the event as it’s airing <b>live on Netflix</b> and happening in real life. </p> <p> For other video clips, we’ll ask you to imagine that you’re viewing the event after it has already aired and happened in real life, and is now <b>available for viewing on Netflix</b>. </p>",
-                    "actions_html": "\n            <p>\n                <a class=\"button\" href=\"{action_url}\"  id=\"start\">Next</a>\n            </p>\n            "
+                    "text_html": " <p> After you watch each video, a voting page will appear which you can use to rate the visual quality, on a 1-5 scale from \"bad\" to \"excellent\". </p> <p> For some of these videos, you’ll be asked to imagine that you’re viewing the event as it’s airing <b>live on Netflix and it's happening now</b>. </p> <p> For other video clips, we’ll ask you to imagine that you’re viewing the event <b>on Netflix after it has already happened</b>. </p>",
+                    "actions_html": "\n            <p>\n                <a class=\"button\" href=\"{action_url}\"  id=\"start\">Next</a>\n            </p>\n            ",
+                    "script_html": "\nfunction press_submit() {\n    document.getElementById(\"start\").click();\n}\ndocument.addEventListener(\"keydown\", (e) => {\nif (e.key ===\"Enter\") {\n        press_submit();\n    }\n});\n"
                 }
             }
         ],
