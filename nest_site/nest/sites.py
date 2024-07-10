@@ -1325,9 +1325,9 @@ class NestSite(ExperimentMixin, NestSitePrivateMixin):
                                     d['text_color'] = text_color
                             else:
                                 if text_color is not None:
-                                    d['instruction_html'] += f"<p> <b><font color='{text_color}'>{pre_message}</font></b> </p>"  # enrich the instruction_html in round_context
+                                    d['instruction_html'] += f"<p> <b><font color='{text_color}'>{pre_message}</font></b> </p>"  # enrich the instruction_html in round_context  # noqa E501
                                 else:
-                                    d['instruction_html'] += f"<p> <b>{pre_message}</b> </p>"  # enrich the instruction_html in round_context
+                                    d['instruction_html'] += f"<p> <b>{pre_message}</b> </p>"  # enrich the instruction_html in round_context  # noqa E501
 
                     if ec.experiment_config.methodology.startswith('acr'):
                         sid = self._get_matched_single_stimulus_id(ec, svgid)
