@@ -853,7 +853,7 @@ class ExperimentUtils(object):
         """
         target_config_filepath = NestSite.get_experiment_config_filepath(
             experiment_title, is_test=is_test)
-        assert os.path.exists(target_config_filepath)
+        assert os.path.exists(target_config_filepath), f"target config file {target_config_filepath} does not exist."
         exp: Experiment = Experiment.objects.get(title=experiment_title)
         exp.delete()
         os.remove(target_config_filepath)

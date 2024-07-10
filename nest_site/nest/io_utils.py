@@ -36,7 +36,7 @@ class ExperimentConfigFileUtils(object):
         return content_id
 
     @staticmethod
-    def add_to_stimulusgroup_dict(stimulusvotegroup_ids, d_stimulusgroups):
+    def add_to_stimulusgroup_dict(stimulusvotegroup_ids, d_stimulusgroups, extra_dict: dict = None):
         if str(stimulusvotegroup_ids) in d_stimulusgroups:
             stimulusgroup_id = d_stimulusgroups[str(stimulusvotegroup_ids)][
                 'stimulusgroup_id']
@@ -45,6 +45,8 @@ class ExperimentConfigFileUtils(object):
             d_stimulusgroups[str(stimulusvotegroup_ids)] = {
                 'stimulusvotegroup_ids': stimulusvotegroup_ids,
                 'stimulusgroup_id': stimulusgroup_id}
+            if extra_dict is not None:
+                d_stimulusgroups[str(stimulusvotegroup_ids)].update(extra_dict)
         return stimulusgroup_id
 
     @staticmethod
