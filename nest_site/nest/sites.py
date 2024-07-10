@@ -1317,11 +1317,17 @@ class NestSite(ExperimentMixin, NestSitePrivateMixin):
                     # played.
                     if ec.experiment_config.methodology == 'acr':
                         if pre_message is not None:
-                            d['button'] = pre_message
-                        if text_color is not None:
-                            # `text_color` could appear in round_context, but
-                            # it can be overriden here.
-                            d['text_color'] = text_color
+                            if 'template_version' in ec.experiment_config.round_context and ec.experiment_config.round_context['template_version'] == 'standard':  # noqa E501
+                                d['button'] = pre_message
+                                if text_color is not None:
+                                    # `text_color` could appear in round_context, but
+                                    # it can be overriden here.
+                                    d['text_color'] = text_color
+                            else:
+                                if text_color is not None:
+                                    d['instruction_html'] += f"<p> <b><font color='{text_color}'>{pre_message}</font></b> </p>"  # enrich the instruction_html in round_context
+                                else:
+                                    d['instruction_html'] += f"<p> <b>{pre_message}</b> </p>"  # enrich the instruction_html in round_context
 
                     if ec.experiment_config.methodology.startswith('acr'):
                         sid = self._get_matched_single_stimulus_id(ec, svgid)
