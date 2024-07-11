@@ -213,7 +213,7 @@
         "round_context": {
             "template_version": "standard",
             "num_plays": 1, "min_num_plays": 0,
-            "t_gray": 3000,
+            "t_gray": 500,
             "instruction_html": "",
             "text_fontsize": "50px",
             "text_color": "#FFFFFF"

@@ -789,3 +789,73 @@ class TestBrowserWithWriteDataset(StaticLiveServerTestCase, LoginMixin):
         self.assertEqual(Vote.objects.all()[1].score, value2)
         self.assertEqual(CcrFivePointVote.objects.first().score, value)
         self.assertEqual(CcrFivePointVote.objects.all()[1].score, value2)
+
+    def test_step_session_acr_standard(self):
+        ec = ExperimentUtils._create_experiment_from_config(
+            source_config_filepath=NestConfig.tests_resource_path('cvxhull_subjexp_toy_x_acr_standard_2.json'),
+            is_test=False,
+            random_seed=1,
+            experiment_title=self.EXPERIMENT_TITLE)
+
+        subj: Subject = Subject.create_by_username('user')
+        sess = ec.add_session(subj)
+
+        self.login()
+        self.browser.get(self.live_server_url + reverse('nest:start_session', kwargs={'session_id': sess.id}))
+        self.assertTrue('Instructions' in self.browser.page_source)
+        self.browser.find_element(by='id', value='start').click()
+        self.assertTrue('Instructions' in self.browser.page_source)
+
+        self.browser.find_element(by='tag name', value="body").send_keys(Keys.ENTER)
+        self.assertTrue('Instructions' in self.browser.page_source)
+        self.browser.find_element(by='id', value='start').click()
+
+        sleep(0.6)
+        self.browser.find_element(by='tag name', value="body").send_keys(Keys.SPACE)
+        self.assertTrue('Round 1 of 6' in self.browser.page_source)
+        self.browser.find_element(by='id', value='radio_acr1').click()
+        self.browser.find_element(by='id', value='submit').click()
+
+        sleep(0.6)
+        self.browser.find_element(by='tag name', value="body").send_keys(Keys.SPACE)
+        self.assertTrue('Round 2 of 6' in self.browser.page_source)
+        self.browser.find_element(by='id', value='radio_acr1').click()
+        self.browser.find_element(by='id', value='submit').click()
+
+        sleep(0.6)
+        self.browser.find_element(by='tag name', value="body").send_keys(Keys.SPACE)
+        self.assertTrue('Round 3 of 6' in self.browser.page_source)
+        self.browser.find_element(by='id', value='radio_acr1').click()
+        self.browser.find_element(by='id', value='submit').click()
+
+        self.assertTrue('Instructions' in self.browser.page_source)
+        self.browser.find_element(by='id', value='start').click()
+
+        sleep(0.6)
+        self.browser.find_element(by='tag name', value="body").send_keys(Keys.SPACE)
+        self.assertTrue('Round 4 of 6' in self.browser.page_source)
+        self.browser.find_element(by='id', value='radio_acr1').click()
+        self.browser.find_element(by='id', value='submit').click()
+
+        sleep(0.6)
+        self.browser.find_element(by='tag name', value="body").send_keys(Keys.SPACE)
+        self.assertTrue('Round 5 of 6' in self.browser.page_source)
+        self.browser.find_element(by='id', value='radio_acr1').click()
+        self.browser.find_element(by='id', value='submit').click()
+
+        sleep(0.6)
+        self.browser.find_element(by='tag name', value="body").send_keys(Keys.SPACE)
+        self.assertTrue('Round 6 of 6' in self.browser.page_source)
+        self.browser.find_element(by='id', value='radio_acr1').click()
+        self.browser.find_element(by='id', value='submit').click()
+
+        self.assertTrue('Test done' in self.browser.page_source)
+
+        self.assertEqual(Vote.objects.count(), 6)
+        self.assertEqual(FivePointVote.objects.count(), 6)
+        self.assertEqual(Zero2HundredVote.objects.count(), 0)
+
+        self.assertEqual(Vote.objects.first().score, 1)
+        self.assertEqual(Vote.objects.all()[1].score, 1)
+        self.assertEqual(FivePointVote.objects.first().score, 1)
+        self.assertEqual(FivePointVote.objects.all()[1].score, 1)
