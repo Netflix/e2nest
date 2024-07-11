@@ -1118,19 +1118,28 @@ class NestSite(ExperimentMixin, NestSitePrivateMixin):
             assert 'position' in sperf and 'position' in splan
             assert 'round_id' in sperf['position'] and 'round_id' in splan['position']
             assert sperf['position']['round_id'] == splan['position']['round_id']
-            if 'before_or_after' in sperf['position']:
-                assert 'before_or_after' in splan['position']
+            if self._step_is_addition(sperf):
+                assert self._step_is_addition(splan)
                 assert sperf['position']['before_or_after'] == \
                        splan['position']['before_or_after']
-            assert 'context' in splan
-            if 'stimulusgroup_id' in splan['context']:
-                assert 'context' in sperf and 'stimulusgroup_id' in sperf['context']
-                assert sperf['context']['stimulusgroup_id'] == \
-                       splan['context']['stimulusgroup_id']
-            if 'before_or_after' in splan['position']:
-                assert 'title' in splan['context']
-                assert 'text_html' in splan['context']
-                assert 'actions_html' in splan['context']
+                assert 'context' in splan or 'super_stimulusgroup_context_list' in splan
+                if 'context' in splan:
+                    assert 'title' in splan['context']
+                    assert 'text_html' in splan['context']
+                    assert 'actions_html' in splan['context']
+                elif 'super_stimulusgroup_context_list' in splan:
+                    for context in splan['super_stimulusgroup_context_list']:
+                        assert 'title' in context
+                        assert 'text_html' in context
+                        assert 'actions_html' in context
+                else:
+                    assert False
+            else:
+                assert 'context' in splan
+                if 'stimulusgroup_id' in splan['context']:
+                    assert 'context' in sperf and 'stimulusgroup_id' in sperf['context']
+                    assert sperf['context']['stimulusgroup_id'] == \
+                           splan['context']['stimulusgroup_id']
             # title, text_html, actions_html are ignored when step is addition
 
         if len(steps_performed) == len(steps_planned):
@@ -1239,13 +1248,31 @@ class NestSite(ExperimentMixin, NestSitePrivateMixin):
         next_step = steps_planned[len(steps_performed)]
         step_is_addition = self._step_is_addition(next_step)
         if step_is_addition:
-            action_html_template = next_step['context']['actions_html']
-            script_html_template = next_step['context']['script_html'] if 'script_html' in next_step['context'] else None
+
+            if 'context' in next_step:
+                context = next_step['context']
+            elif 'super_stimulusgroup_context_list' in next_step:
+                # find out which one to use, depending on the step assoicated with this additional step
+                if next_step['position']['before_or_after'] == 'before':
+                    associated_step = steps_planned[len(steps_performed) + 1]  # associated step is the next one
+                else:
+                    associated_step = steps_planned[len(steps_performed) - 1]  # associated step is the previous one
+                assert not self._step_is_addition(associated_step)
+                stimulusgroup_id = associated_step['context']['stimulusgroup_id']
+                stimulusgroup = ec.experiment_config.stimulus_config.stimulusgroups[stimulusgroup_id]
+                assert 'super_stimulusgroup_id' in stimulusgroup
+                context = next_step['super_stimulusgroup_context_list'][stimulusgroup['super_stimulusgroup_id']]
+            else:
+                assert False
+
+            action_html_template = context['actions_html']
+            script_html_template = context['script_html'] if 'script_html' in context else None
+
             assert '{action_url}' in action_html_template
             action_html = action_html_template.format(
                 action_url=reverse("nest:step_session", kwargs={'session_id': session_id}))
-            page_input = {'title': next_step['context']['title'],
-                          'text_html': next_step['context']['text_html'],
+            page_input = {'title': context['title'],
+                          'text_html': context['text_html'],
                           'actions_html': action_html}
             if script_html_template is not None:
                 page_input['script_html'] = script_html_template
@@ -1254,7 +1281,14 @@ class NestSite(ExperimentMixin, NestSitePrivateMixin):
             request.current_app = self.name
             response = TemplateResponse(request, page.get_template(), context)
 
-            del next_step['context']  # avoid context (title...) in cookie
+            # avoid context (title...) in cookie
+            if 'context' in next_step:
+                del next_step['context']
+            elif 'super_stimulusgroup_context_list' in next_step:
+                del next_step['super_stimulusgroup_context_list']
+            else:
+                assert False
+
             self._set_session_cookie(request, {
                 'steps': steps_performed + [next_step],
                 'session_id': session_id})
