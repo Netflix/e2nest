@@ -446,13 +446,32 @@ class ExperimentConfig(object):
             assert 0 <= addition['position']['round_id'] < self.rounds_per_session
             assert 'before_or_after' in addition['position']
             assert addition['position']['before_or_after'] in ['before', 'after']
-            assert 'context' in addition
-            assert 'title' in addition['context']
-            assert 'text_html' in addition['context']
-            assert 'actions_html' in addition['context']
-            assert '{action_url}' in addition['context']['actions_html'], \
-                "expect '{action_url}' in actions_html as template to be" \
-                "filled during page rendering"
+            assert 'context' in addition or 'super_stimulusgroup_context_list' in addition
+            if 'context' in addition:
+                assert 'title' in addition['context']
+                assert 'text_html' in addition['context']
+                assert 'actions_html' in addition['context']
+                assert '{action_url}' in addition['context']['actions_html'], \
+                    "expect '{action_url}' in actions_html as template to be" \
+                    "filled during page rendering"
+            elif 'super_stimulusgroup_context_list' in addition:
+                assert isinstance(addition['super_stimulusgroup_context_list'], list)
+                for context in addition['super_stimulusgroup_context_list']:
+                    assert 'title' in context
+                    assert 'text_html' in context
+                    assert 'actions_html' in context
+                    assert '{action_url}' in context['actions_html'], \
+                        "expect '{action_url}' in actions_html as template to be" \
+                        "filled during page rendering"
+                # also need to assess that stimulusgroups each has super_stimulusgroup_id
+                # and that the indices matches super_stimulusgroup_context_list
+                for stimulusgroup in self.stimulus_config.stimulusgroups:
+                    assert 'super_stimulusgroup_id' in stimulusgroup
+                    assert isinstance(stimulusgroup['super_stimulusgroup_id'], int)
+                super_stimulusgroup_ids = sorted(list(set([stimulusgroup['super_stimulusgroup_id'] for stimulusgroup in self.stimulus_config.stimulusgroups])))  # noqa E501
+                assert len(super_stimulusgroup_ids) == len(addition['super_stimulusgroup_context_list']), \
+                    f"expect the number of super_stimulusgroup_ids to match the number of super_stimulusgroup_context_list, but got: {super_stimulusgroup_ids} vs {addition['super_stimulusgroup_context_list']}"  # noqa E501
+                assert super_stimulusgroup_ids == list(range(len(super_stimulusgroup_ids))), f"expect super_stimulusgroup_ids is in the form of {list(range(len(super_stimulusgroup_ids)))}, but got: {super_stimulusgroup_ids}"  # noqa E501
 
     def _assert_round_context(self):
         assert isinstance(self.round_context, dict)

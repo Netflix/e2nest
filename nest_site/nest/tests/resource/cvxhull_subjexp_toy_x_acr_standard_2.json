@@ -168,12 +168,52 @@
                     "actions_html": "\n            <p>\n                <a class=\"button\" href=\"{action_url}\"  id=\"start\">Next</a>\n            </p>\n            ",
                     "script_html": "\nfunction press_submit() {\n    document.getElementById(\"start\").click();\n}\ndocument.addEventListener(\"keydown\", (e) => {\nif (e.key ===\"Enter\") {\n        press_submit();\n    }\n});\n"
                 }
+            },
+            {
+                "position": {
+                    "round_id": 0,
+                    "before_or_after": "before"
+                },
+                "super_stimulusgroup_context_list": [
+                    {
+                        "title": "Instructions",
+                        "text_html": " <p> Imagine you are watching the following event live on Netflix as it’s happening now. </p> ",
+                        "actions_html": "\n            <p>\n                <a class=\"button\" href=\"{action_url}\"  id=\"start\">Next</a>\n            </p>\n            ",
+                        "script_html": "\nfunction press_submit() {\n    document.getElementById(\"start\").click();\n}\ndocument.addEventListener(\"keydown\", (e) => {\nif (e.key ===\"Enter\") {\n        press_submit();\n    }\n});\n"
+                    },
+                    {
+                        "title": "Instructions",
+                        "text_html": " <p> Imagine you are watching the following event on Netflix after it has already happened. </p> ",
+                        "actions_html": "\n            <p>\n                <a class=\"button\" href=\"{action_url}\"  id=\"start\">Next</a>\n            </p>\n            ",
+                        "script_html": "\nfunction press_submit() {\n    document.getElementById(\"start\").click();\n}\ndocument.addEventListener(\"keydown\", (e) => {\nif (e.key ===\"Enter\") {\n        press_submit();\n    }\n});\n"
+                    }
+                ]
+            },
+            {
+                "position": {
+                    "round_id": 3,
+                    "before_or_after": "before"
+                },
+                "super_stimulusgroup_context_list": [
+                    {
+                        "title": "Instructions",
+                        "text_html": " <p> Imagine you are watching the following event live on Netflix as it’s happening now. </p> ",
+                        "actions_html": "\n            <p>\n                <a class=\"button\" href=\"{action_url}\"  id=\"start\">Next</a>\n            </p>\n            ",
+                        "script_html": "\nfunction press_submit() {\n    document.getElementById(\"start\").click();\n}\ndocument.addEventListener(\"keydown\", (e) => {\nif (e.key ===\"Enter\") {\n        press_submit();\n    }\n});\n"
+                    },
+                    {
+                        "title": "Instructions",
+                        "text_html": " <p> Imagine you are watching the following event on Netflix after it has already happened. </p> ",
+                        "actions_html": "\n            <p>\n                <a class=\"button\" href=\"{action_url}\"  id=\"start\">Next</a>\n            </p>\n            ",
+                        "script_html": "\nfunction press_submit() {\n    document.getElementById(\"start\").click();\n}\ndocument.addEventListener(\"keydown\", (e) => {\nif (e.key ===\"Enter\") {\n        press_submit();\n    }\n});\n"
+                    }
+                ]
             }
         ],
         "round_context": {
             "template_version": "standard",
             "num_plays": 1, "min_num_plays": 0,
-            "t_gray": 4000,
+            "t_gray": 3000,
             "instruction_html": "",
             "text_fontsize": "50px",
             "text_color": "#FFFFFF"
