@@ -24,7 +24,7 @@
         slider = document.getElementById("myRange");
         output = document.getElementById("score");
         output.innerHTML = slider.value; // Display the default slider value
-        video = document.getElementsByTagName("video")[0];
+        video = document.getElementById("video");
         document.getElementById('{{ video }}').addEventListener("click", function() {
             play_video('{{ video }}');
         });
@@ -95,5 +95,5 @@
 {% endblock %}
 
 {% block extrabody %}
-<video {% if video_show_controls %} controls {% endif %} loop controlsList="nodownload nofullscreen noremoteplayback"></video>
+<video id="video" {% if video_show_controls %} controls {% endif %} loop controlsList="nodownload nofullscreen noremoteplayback"></video>
 {% endblock %}

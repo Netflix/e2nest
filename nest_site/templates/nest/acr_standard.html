@@ -68,7 +68,7 @@
     window.addEventListener('load', function () {
         container = document.getElementById("container");
         qa = document.getElementById("qa");
-        video = document.getElementsByTagName("video")[0];
+        video = document.getElementById("video");
         tag = document.getElementById("tag");
         video.addEventListener("ended", function() {
             decide_whats_next();
@@ -143,7 +143,7 @@
 {% endblock %}
 
 {% block extrabody %}
-<video {% if video_show_controls %} controls {% endif %} controlsList="nodownload nofullscreen noremoteplayback"></video>
+<video id="video" {% if video_show_controls %} controls {% endif %} controlsList="nodownload nofullscreen noremoteplayback"></video>
  <div id="tag">
     <p> {{ button }} </p>
 </div>

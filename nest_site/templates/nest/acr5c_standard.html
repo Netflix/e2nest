@@ -53,7 +53,7 @@
         slider = document.getElementById("myRange");
         output = document.getElementById("score");
         output.innerHTML = slider.value; // Display the default slider value
-        video = document.getElementsByTagName("video")[0];
+        video = document.getElementById("video");
         tag = document.getElementById("tag");
         // Update the current slider value (each time you drag the slider handle)
         slider.oninput = function() {
@@ -125,7 +125,7 @@
 {% endblock %}
 
 {% block extrabody %}
-<video {% if video_show_controls %} controls {% endif %} controlsList="nodownload nofullscreen noremoteplayback"></video>
+<video id="video" {% if video_show_controls %} controls {% endif %} controlsList="nodownload nofullscreen noremoteplayback"></video>
  <div id="tag">
     <p> {{ button }} </p>
 </div>
