@@ -37,38 +37,7 @@
         ctx.scale(scaleFactor, scaleFactor);
     }
     function draw() {
-
-        const ctx = canvas.getContext('2d');
-        ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear the canvas
-
-        // Define the rectangle size and position in percentage
-        const rectWidthPercent = 20; // 20% of the canvas width
-        const rectHeightPercent = 20; // 20% of the canvas height
-        const rectXPercent = 80; // 80% of the canvas width for the lower right corner
-        const rectYPercent = 80; // 80% of the canvas height for the lower right corner
-
-        // Calculate the actual size and position
-        const rectWidth = (rectWidthPercent / 100) * canvas.width;
-        const rectHeight = (rectHeightPercent / 100) * canvas.height;
-        const rectX = (rectXPercent / 100) * canvas.width;
-        const rectY = (rectYPercent / 100) * canvas.height;
-
-        // Draw the rectangle
-        ctx.fillStyle = 'rgba(20, 20, 20, 0.95)';
-        ctx.fillRect(rectX, rectY, rectWidth, rectHeight);
-
-        // Calculate the center of the rectangle for the text
-        const text = 'LIVE';
-        const fontSize = 40
-        ctx.font = fontSize + 'px Arial'; // Font size and family
-        ctx.fillStyle = 'white'; // Text color
-        const textWidth = ctx.measureText(text).width;
-        const textHeight = ctx.measureText(text).height;
-        const textX = rectX + (rectWidth - textWidth) / 2;
-        const textY = rectY + (rectHeight + fontSize) / 2;
-
-        // Draw the text
-        ctx.fillText(text, textX, textY);
+        {% if overlay_on_video_js %}{{overlay_on_video_js|safe}}{% endif %}
     }
     function updateCanvas() {
         setCanvasResolution();
