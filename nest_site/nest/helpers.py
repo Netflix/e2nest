@@ -465,3 +465,19 @@ def validate_xml(html):
 
 class DummyClass(object):
     pass
+
+
+def add_items_to_dict(original_dict, new_items):
+    """
+    Add new items to a dictionary.
+
+    Parameters:
+    original_dict (dict): The original dictionary.
+    new_items (dict): A dictionary containing the new items to add.
+
+    Returns:
+    dict: The updated dictionary.
+    """
+    updated_dict = original_dict.copy()  # Create a copy of the original dictionary
+    updated_dict.update(new_items)  # Add new items to the dictionary
+    return updated_dict
