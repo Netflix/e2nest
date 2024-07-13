@@ -125,6 +125,8 @@ class AcrPage(Page, PageWithVideoMixin, ABC):  # TODO: generalize AcrPage to sup
                     'text_color must in the format of #0000FF'
             if 'text_vert_perc' in self.context:
                 assert 0 <= self.context['text_vert_perc'] <= 100
+            if 'overlay_on_video_js' in self.context:
+                assert isinstance(self.context['overlay_on_video_js'], str)
 
     @override(Page)
     def get_template(self):

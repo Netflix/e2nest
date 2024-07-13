@@ -5,6 +5,7 @@
 {% block extrastyle %}
 <style>
     video { position:fixed; top:{{ 100|sub:video_display_percentage|div:2 }}%; left:{{ 100|sub:video_display_percentage|div:2  }}%; height:{{ video_display_percentage }}%; width:{{ video_display_percentage }}%; display:none; }
+    canvas { position:fixed; top:{{ 100|sub:video_display_percentage|div:2 }}%; left:{{ 100|sub:video_display_percentage|div:2  }}%; height:{{ video_display_percentage }}%; width:{{ video_display_percentage }}%; display:none; }
     #qa { margin: 30px 0; display:none; }
     #tag { position:absolute; left:50%; top:{% if text_vert_perc %}{{text_vert_perc}}{% else %}33{% endif %}%; width:800px; height:100px; margin-left:-400px; margin-top:-50px; text-align:center; font-size: {% if text_fontsize %} {{ text_fontsize }} {% else %} 100px {% endif %}; display:none; color: {% if text_color %} {{ text_color }} {% else %} #a40404 {% endif %}}
 </style>
@@ -20,10 +21,28 @@
             container.style.display = "none";
             tag.style.display = "none";
             video.style.display = "block";
+            canvas.style.display = "block";
             document.body.style.backgroundColor = "black";
             video.setAttribute('src', url);
             video.play();
         }
+    }
+    function setCanvasResolution() {
+        const ctx = canvas.getContext('2d');
+        const scaleFactor = 1; // Adjust for higher resolution
+        const rect = canvas.getBoundingClientRect();
+
+        canvas.width = rect.width * scaleFactor;
+        canvas.height = rect.height * scaleFactor;
+        ctx.scale(scaleFactor, scaleFactor);
+    }
+    function draw() {
+        {% if overlay_on_video_js %}{{overlay_on_video_js|safe}}{% endif %}
+    }
+    function updateCanvas() {
+        setCanvasResolution();
+        draw();
+        requestAnimationFrame(updateCanvas);
     }
     function show_gray_and_play(t) {
         container.style.display = "none";
@@ -39,6 +58,7 @@
     }
     function decide_whats_next(){
         video.style.display = "none";
+        canvas.style.display = "none";
         if(played === plays) { {# video played required number of times #}
             document.body.style.backgroundColor = "white";
             container.style.display = "block";
@@ -70,9 +90,16 @@
         qa = document.getElementById("qa");
         video = document.getElementById("video");
         tag = document.getElementById("tag");
-        video.addEventListener("ended", function() {
+        canvas = document.getElementById("canvas");
+        window.addEventListener('resize', function() {
+            setCanvasResolution();
+        });
+        video.addEventListener('play', function() {
+            updateCanvas();
+        });
+        video.addEventListener("ended", function () {
             decide_whats_next();
-         });
+        });
         check_middle_button();
         show_gray_and_play(t_gray);
     })
@@ -81,6 +108,7 @@
             && played > {% if min_num_plays is not None %} {{ min_num_plays }} {% else %} {{ num_plays }} {% endif %}) {
             video.pause()
             video.style.display = "none";
+            canvas.style.display = "none";
             document.body.style.backgroundColor = "white";
             container.style.display = "block";
             qa.style.display = "block";
@@ -100,6 +128,7 @@
             && played > {% if min_num_plays is not None %} {{ min_num_plays }} {% else %} {{ num_plays }} {% endif %}) {
             video.pause()
             video.style.display = "none";
+            canvas.style.display = "none";
             document.body.style.backgroundColor = "white";
             container.style.display = "block";
             qa.style.display = "block";
@@ -144,6 +173,7 @@
 
 {% block extrabody %}
 <video id="video" {% if video_show_controls %} controls {% endif %} controlsList="nodownload nofullscreen noremoteplayback"></video>
+<canvas id="canvas"></canvas>
  <div id="tag">
     <p> {{ button }} </p>
 </div>
