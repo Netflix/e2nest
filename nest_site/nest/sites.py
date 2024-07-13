@@ -668,8 +668,8 @@ class NestSite(ExperimentMixin, NestSitePrivateMixin):
             'instruction_html': """ <p> Rate the video by answering the question below. </p>""",
             'video': os.path.join(MEDIA_URL, "mp4/samples/Meridian/Meridian_A__8_18_8_23__SdrVvhevce2pVE__3840_2160__6000_enable_audio_False_vmaf103.58_phonevmaf104.85_psnr50.40_kbps6702.77.mp4"), # noqa E501
             'template_version': 'standard',
-            't_gray': 2000,
-            'num_plays': 2, 'min_num_plays': 0,
+            't_gray': 500,
+            'num_plays': 100, 'min_num_plays': 0,
             'button': '<message that I can customize>',
             'video_show_controls': False,
             'video_display_percentage': 75,
