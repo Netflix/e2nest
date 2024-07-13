@@ -27,7 +27,17 @@
             video.play();
         }
     }
+    function setCanvasResolution() {
+        const ctx = canvas.getContext('2d');
+        const scaleFactor = 1; // Adjust for higher resolution
+        const rect = canvas.getBoundingClientRect();
+
+        canvas.width = rect.width * scaleFactor;
+        canvas.height = rect.height * scaleFactor;
+        ctx.scale(scaleFactor, scaleFactor);
+    }
     function draw() {
+
         const ctx = canvas.getContext('2d');
         ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear the canvas
 
@@ -44,14 +54,14 @@
         const rectY = (rectYPercent / 100) * canvas.height;
 
         // Draw the rectangle
-        ctx.fillStyle = 'rgba(20, 20, 20, 1)';
+        ctx.fillStyle = 'rgba(20, 20, 20, 0.95)';
         ctx.fillRect(rectX, rectY, rectWidth, rectHeight);
 
         // Calculate the center of the rectangle for the text
-        const text = 'AVAILABLE NOW';
-        const fontSize = 7
+        const text = 'LIVE';
+        const fontSize = 40
         ctx.font = fontSize + 'px Arial'; // Font size and family
-        ctx.fillStyle = 'gray'; // Text color
+        ctx.fillStyle = 'white'; // Text color
         const textWidth = ctx.measureText(text).width;
         const textHeight = ctx.measureText(text).height;
         const textX = rectX + (rectWidth - textWidth) / 2;
@@ -61,6 +71,7 @@
         ctx.fillText(text, textX, textY);
     }
     function updateCanvas() {
+        setCanvasResolution();
         draw();
         requestAnimationFrame(updateCanvas);
     }
@@ -111,6 +122,9 @@
         video = document.getElementById("video");
         tag = document.getElementById("tag");
         canvas = document.getElementById("canvas");
+        window.addEventListener('resize', function() {
+            setCanvasResolution();
+        });
         video.addEventListener('play', function() {
             updateCanvas();
         });
