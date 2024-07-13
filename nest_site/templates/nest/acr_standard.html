@@ -5,6 +5,7 @@
 {% block extrastyle %}
 <style>
     video { position:fixed; top:{{ 100|sub:video_display_percentage|div:2 }}%; left:{{ 100|sub:video_display_percentage|div:2  }}%; height:{{ video_display_percentage }}%; width:{{ video_display_percentage }}%; display:none; }
+    canvas { position:fixed; top:{{ 100|sub:video_display_percentage|div:2 }}%; left:{{ 100|sub:video_display_percentage|div:2  }}%; height:{{ video_display_percentage }}%; width:{{ video_display_percentage }}%; display:none; }
     #qa { margin: 30px 0; display:none; }
     #tag { position:absolute; left:50%; top:{% if text_vert_perc %}{{text_vert_perc}}{% else %}33{% endif %}%; width:800px; height:100px; margin-left:-400px; margin-top:-50px; text-align:center; font-size: {% if text_fontsize %} {{ text_fontsize }} {% else %} 100px {% endif %}; display:none; color: {% if text_color %} {{ text_color }} {% else %} #a40404 {% endif %}}
 </style>
@@ -20,10 +21,48 @@
             container.style.display = "none";
             tag.style.display = "none";
             video.style.display = "block";
+            canvas.style.display = "block";
             document.body.style.backgroundColor = "black";
             video.setAttribute('src', url);
             video.play();
         }
+    }
+    function draw() {
+        const ctx = canvas.getContext('2d');
+        ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear the canvas
+
+        // Define the rectangle size and position in percentage
+        const rectWidthPercent = 20; // 20% of the canvas width
+        const rectHeightPercent = 20; // 20% of the canvas height
+        const rectXPercent = 80; // 80% of the canvas width for the lower right corner
+        const rectYPercent = 80; // 80% of the canvas height for the lower right corner
+
+        // Calculate the actual size and position
+        const rectWidth = (rectWidthPercent / 100) * canvas.width;
+        const rectHeight = (rectHeightPercent / 100) * canvas.height;
+        const rectX = (rectXPercent / 100) * canvas.width;
+        const rectY = (rectYPercent / 100) * canvas.height;
+
+        // Draw the rectangle
+        ctx.fillStyle = 'rgba(20, 20, 20, 1)';
+        ctx.fillRect(rectX, rectY, rectWidth, rectHeight);
+
+        // Calculate the center of the rectangle for the text
+        const text = 'AVAILABLE NOW';
+        const fontSize = 7
+        ctx.font = fontSize + 'px Arial'; // Font size and family
+        ctx.fillStyle = 'gray'; // Text color
+        const textWidth = ctx.measureText(text).width;
+        const textHeight = ctx.measureText(text).height;
+        const textX = rectX + (rectWidth - textWidth) / 2;
+        const textY = rectY + (rectHeight + fontSize) / 2;
+
+        // Draw the text
+        ctx.fillText(text, textX, textY);
+    }
+    function updateCanvas() {
+        draw();
+        requestAnimationFrame(updateCanvas);
     }
     function show_gray_and_play(t) {
         container.style.display = "none";
@@ -39,6 +78,7 @@
     }
     function decide_whats_next(){
         video.style.display = "none";
+        canvas.style.display = "none";
         if(played === plays) { {# video played required number of times #}
             document.body.style.backgroundColor = "white";
             container.style.display = "block";
@@ -70,9 +110,13 @@
         qa = document.getElementById("qa");
         video = document.getElementById("video");
         tag = document.getElementById("tag");
-        video.addEventListener("ended", function() {
+        canvas = document.getElementById("canvas");
+        video.addEventListener('play', function() {
+            updateCanvas();
+        });
+        video.addEventListener("ended", function () {
             decide_whats_next();
-         });
+        });
         check_middle_button();
         show_gray_and_play(t_gray);
     })
@@ -81,6 +125,7 @@
             && played > {% if min_num_plays is not None %} {{ min_num_plays }} {% else %} {{ num_plays }} {% endif %}) {
             video.pause()
             video.style.display = "none";
+            canvas.style.display = "none";
             document.body.style.backgroundColor = "white";
             container.style.display = "block";
             qa.style.display = "block";
@@ -100,6 +145,7 @@
             && played > {% if min_num_plays is not None %} {{ min_num_plays }} {% else %} {{ num_plays }} {% endif %}) {
             video.pause()
             video.style.display = "none";
+            canvas.style.display = "none";
             document.body.style.backgroundColor = "white";
             container.style.display = "block";
             qa.style.display = "block";
@@ -144,6 +190,7 @@
 
 {% block extrabody %}
 <video id="video" {% if video_show_controls %} controls {% endif %} controlsList="nodownload nofullscreen noremoteplayback"></video>
+<canvas id="canvas"></canvas>
  <div id="tag">
     <p> {{ button }} </p>
 </div>
