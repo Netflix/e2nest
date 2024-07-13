@@ -683,8 +683,8 @@ class NestSite(ExperimentMixin, NestSitePrivateMixin):
         // Define the rectangle size and position in percentage
         const rectWidthPercent = 20; // 20% of the canvas width
         const rectHeightPercent = 20; // 20% of the canvas height
-        const rectXPercent = 80; // 80% of the canvas width for the lower right corner
-        const rectYPercent = 80; // 80% of the canvas height for the lower right corner
+        const rectXPercent = 80; // 80% of the canvas width for the upper right corner
+        const rectYPercent = 0; // 0% of the canvas height for the upper right corner
 
         // Calculate the actual size and position
         const rectWidth = (rectWidthPercent / 100) * canvas.width;
@@ -1367,6 +1367,8 @@ class NestSite(ExperimentMixin, NestSitePrivateMixin):
                         stimulus_config.get_pre_message(sgid)
                     text_color: str = ec.experiment_config. \
                         stimulus_config.get_text_color(sgid)
+                    overlay_on_video_js: str = ec.experiment_config. \
+                        stimulus_config.get_overlay_on_video_js(sgid)
                     assert video_display_percentage is not None
 
                     svgid = self._get_matched_single_stimulusvotegroup_id(ec, next_step)
@@ -1390,6 +1392,8 @@ class NestSite(ExperimentMixin, NestSitePrivateMixin):
                                     # `text_color` could appear in round_context, but
                                     # it can be overriden here.
                                     d['text_color'] = text_color
+                                if overlay_on_video_js is not None:
+                                    d['overlay_on_video_js'] = overlay_on_video_js
                             else:
                                 if text_color is not None:
                                     d['instruction_html'] += f"<p> <b><font color='{text_color}'>{pre_message}</font></b> </p>"  # enrich the instruction_html in round_context  # noqa E501

@@ -187,6 +187,17 @@ class StimulusConfig(object):
         else:
             return None
 
+    def get_overlay_on_video_js(self, stimulusgroup_id: int) -> Optional[str]:
+        sg: dict
+        for sg in self.stimulusgroups:
+            if sg['stimulusgroup_id'] == stimulusgroup_id:
+                if 'overlay_on_video_js' in sg:
+                    return sg['overlay_on_video_js']
+                else:
+                    return None
+        else:
+            return None
+
     def get_super_stimulusgroup_id(self, stimulusgroup_id: int) -> Optional[int]:
         sg: dict
         for sg in self.stimulusgroups:
