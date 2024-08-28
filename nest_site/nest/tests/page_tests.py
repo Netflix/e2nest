@@ -68,6 +68,15 @@ class TestPage(TestCase):
         self.assertEqual(p.context['video_show_controls'], False)
         self.assertEqual(p.context['video_display_percentage'], 100)
 
+    def test_acr5c_page_bad(self):
+        with self.assertRaises(AssertionError):
+            _ = Acr5cPage({
+                'title': "Round 1 of 10",
+                'video': os.path.join(MEDIA_URL, "mp4/samples/Meridian/Meridian_A__8_18_8_23__SdrVvhevce2pVE__3840_2160__6000_enable_audio_False_vmaf103.58_phonevmaf104.85_psnr50.40_kbps6702.77.mp4"),  # noqa E501
+                'stimulusvotegroup_id': 0,
+                'start_seconds': 10
+            })
+
     def test_acr5c_standard_page(self):
         p = Acr5cPage({
             'title': "Round 1 of 10",

@@ -6,7 +6,7 @@ import django
 
 django.setup()
 
-from nest.io import UserUtils, ExperimentUtils  # noqa: E402, I202
+from nest.io import UserUtils, ExperimentUtils  # noqa: E402, I101, I202
 
 
 if __name__ == "__main__":

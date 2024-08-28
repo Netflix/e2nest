@@ -187,6 +187,12 @@ class Acr5cPage(Page, PageWithVideoMixin, ABC):
                     'text_color must in the format of #0000FF'
             if 'text_vert_perc' in self.context:
                 assert 0 <= self.context['text_vert_perc'] <= 100
+        if self.context['template_version'] == 'interactive':
+            assert (('start_seconds' in self.context and 'end_seconds' in self.context)
+                    or ('start_seconds' not in self.context and 'end_seconds' not in self.context))
+            if 'start_seconds' in self.context and 'end_seconds' in self.context:
+                assert self.context['start_seconds'] >= 0
+                assert self.context['end_seconds'] >= self.context['start_seconds']
 
     @override(Page)
     def get_template(self):

@@ -32,6 +32,20 @@
         slider.oninput = function() {
             output.innerHTML = this.value;
         }
+        {% if start_seconds and end_seconds %}
+        const startTime = {{ start_seconds }};
+        const endTime = {{ end_seconds }};
+        video.addEventListener('loadedmetadata', function() {
+            video.currentTime = startTime;
+        });
+
+        video.addEventListener('timeupdate', function() {
+            if (video.currentTime >= endTime) {
+                video.currentTime = startTime; // Reset to start time
+                video.play(); // Start playing again
+            }
+        });
+        {% endif %}
     })
     document.addEventListener("keydown", (e) => {
         if ((e.key === " " || e.key === "Escape") && (video.style.display === "block")) {
