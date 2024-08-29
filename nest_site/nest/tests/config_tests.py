@@ -47,7 +47,7 @@ class TestStimulusConfig(TestCase):
                 {'stimulusgroup_id': 4, 'stimulusvotegroup_ids': [1]},
                 {'stimulusgroup_id': 2, 'stimulusvotegroup_ids': [0]},
                 {'stimulusgroup_id': 3, 'stimulusvotegroup_ids': [0], 'video_display_percentage': 30,
-                 'pre_message': 'hello', 'super_stimulusgroup_id': 1, 'text_color': '#FF0000', 'overlay_on_video_js': """alert("hello")"""},
+                 'pre_message': 'hello', 'start_end_seconds': (2, 3.6), 'super_stimulusgroup_id': 1, 'text_color': '#FF0000', 'overlay_on_video_js': """alert("hello")"""},
                 {'info': {'flavors': ['decoy']}, 'stimulusgroup_id': 5, 'stimulusvotegroup_ids': [0]},
             ],
         })
@@ -55,6 +55,7 @@ class TestStimulusConfig(TestCase):
         self.assertEqual(scfg.stimulusgroup_ids, [0, 4, 2, 3, 5])
         self.assertEqual(scfg.get_video_display_percentage(3), 30)
         self.assertEqual(scfg.get_pre_message(3), 'hello')
+        self.assertEqual(scfg.get_start_end_seconds(3), (2, 3.6))
         self.assertEqual(scfg.get_text_color(3), '#FF0000')
         self.assertEqual(scfg.get_overlay_on_video_js(3), """alert("hello")""")
         self.assertEqual(scfg.get_super_stimulusgroup_id(3), 1)
@@ -62,6 +63,7 @@ class TestStimulusConfig(TestCase):
         self.assertEqual(scfg.get_video_display_percentage(5), 100)
         self.assertEqual(scfg.get_video_display_percentage(6), None)
         self.assertEqual(scfg.get_pre_message(6), None)
+        self.assertEqual(scfg.get_start_end_seconds(6), None)
         self.assertEqual(scfg.get_text_color(6), None)
         self.assertEqual(scfg.get_overlay_on_video_js(6), None)
         self.assertEqual(scfg.get_super_stimulusgroup_id(6), None)

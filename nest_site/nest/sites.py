@@ -7,7 +7,7 @@ import string
 import tempfile
 from functools import update_wrapper
 from time import time
-from typing import Union
+from typing import Union, Optional
 
 from django.apps import apps
 from django.contrib.admin import AdminSite
@@ -1368,6 +1368,8 @@ class NestSite(ExperimentMixin, NestSitePrivateMixin):
                         stimulus_config.get_video_display_percentage(sgid)
                     pre_message: str = ec.experiment_config. \
                         stimulus_config.get_pre_message(sgid)
+                    start_end_seconds: Optional[tuple[int, int]] = \
+                        ec.experiment_config.stimulus_config.get_start_end_seconds(sgid)
                     text_color: str = ec.experiment_config. \
                         stimulus_config.get_text_color(sgid)
                     overlay_on_video_js: str = ec.experiment_config. \
@@ -1382,6 +1384,10 @@ class NestSite(ExperimentMixin, NestSitePrivateMixin):
                          'stimulusvotegroup_id': svgid,
                          **ec.experiment_config.round_context,
                          }
+
+                    if ec.experiment_config.methodology == 'acr5c':
+                        if start_end_seconds is not None:
+                            d['start_seconds'], d['end_seconds'] = start_end_seconds
 
                     # add special logic to acr only: customize the button text
                     # through stimulus_config.get_pre_message. For acr standard
