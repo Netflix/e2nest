@@ -30,6 +30,8 @@ favicon_view = RedirectView.as_view(
 
 def mp4_byterange_view(request, path):
     full_path = os.path.join(settings.MEDIA_ROOT, 'mp4', path)
+    if os.path.commonprefix([full_path, settings.MEDIA_ROOT]) != settings.MEDIA_ROOT:
+        raise FileNotFoundError("File not found: %s" % path)
     response = RangedFileResponse(request, open(full_path, 'rb'), content_type='video/mp4')
     response['Content-Disposition'] = f'attachment; filename="{full_path}"'
     return response
