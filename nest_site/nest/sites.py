@@ -7,7 +7,7 @@ import string
 import tempfile
 from functools import update_wrapper
 from time import time
-from typing import Union, Optional
+from typing import Optional, Union
 
 from django.apps import apps
 from django.contrib.admin import AdminSite
