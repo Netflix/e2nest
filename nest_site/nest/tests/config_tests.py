@@ -47,7 +47,8 @@ class TestStimulusConfig(TestCase):
                 {'stimulusgroup_id': 4, 'stimulusvotegroup_ids': [1]},
                 {'stimulusgroup_id': 2, 'stimulusvotegroup_ids': [0]},
                 {'stimulusgroup_id': 3, 'stimulusvotegroup_ids': [0], 'video_display_percentage': 30,
-                 'pre_message': 'hello', 'start_end_seconds': (2, 3.6), 'super_stimulusgroup_id': 1, 'text_color': '#FF0000', 'overlay_on_video_js': """alert("hello")"""},
+                 'pre_message': 'hello', 'start_end_seconds': (2, 3.6), 'super_stimulusgroup_id': 1,
+                 'text_color': '#FF0000', 'overlay_on_video_js': """alert("hello")"""},
                 {'info': {'flavors': ['decoy']}, 'stimulusgroup_id': 5, 'stimulusvotegroup_ids': [0]},
             ],
         })
