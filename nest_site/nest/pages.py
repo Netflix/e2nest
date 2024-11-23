@@ -392,9 +392,8 @@ class Samviq5dPage(Page, PageWithVideoMixin, ABC):
         assert isinstance(self.context['videos'], list)
         assert len(self.context['videos']) > 0
         assert isinstance(self.context['buttons'], list)
-        assert len(self.context['buttons']) \
-               == len(self.context['videos']) \
-               == len(self.context['stimulusvotegroup_ids'])
+        assert len(self.context['buttons']) == len(self.context['videos']) == len(self.context['stimulusvotegroup_ids']), \
+            f"expected equal length but got: {len(self.context['buttons'])}, {len(self.context['videos'])}, {len(self.context['stimulusvotegroup_ids'])}"  # noqa E501
 
 
 class StatusPage(Page, ABC):
