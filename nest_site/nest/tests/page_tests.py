@@ -59,6 +59,19 @@ class TestPage(TestCase):
         self.assertEqual(p.context['video_show_controls'], False)
         self.assertEqual(p.context['video_display_percentage'], 100)
 
+    def test_acr_reviewable_page(self):
+        p = AcrPage({
+            'title': "Round 1 of 10",
+            'video': '/media/example.mp4',
+            'template_version': 'reviewable',
+            't_gray': 1000,
+            'button': 'Watch the video',
+            'replays_remaining': 5,
+            'stimulusvotegroup_id': 0,
+        })
+        self.assertEqual(p.get_template(), 'nest/acr_reviewable.html')
+        self.assertEqual(p.context['replays_remaining'], 5)
+
     def test_acr5c_page(self):
         p = Acr5cPage({
             'title': "Round 1 of 10",

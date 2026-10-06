@@ -112,6 +112,8 @@ class NestAdminSite(AdminSite, ExperimentMixin):
                                 wrap(self.download_nest), name='download_nest')]
         urlpatterns += [re_path(r'^nestexp/download_nest_csv/(?P<experiment_id>[0-9]+)$',
                                 wrap(self.download_nest_csv), name='download_nest_csv')]
+        urlpatterns += [re_path(r'^nestexp/download_protocol_csv/(?P<experiment_id>[0-9]+)$',
+                                wrap(self.download_protocol_csv), name='download_protocol_csv')]
         urlpatterns += super().get_urls()
         return urlpatterns
 
@@ -189,6 +191,22 @@ class NestAdminSite(AdminSite, ExperimentMixin):
                 with open(tf.name, 'rb') as fh:
                     response = HttpResponse(fh.read(), content_type="text/plain")
                     response['Content-Disposition'] = f'attachment; filename={experiment.title}.vote.csv'
+                    return response
+            raise Http404
+
+    @method_decorator(never_cache)
+    def download_protocol_csv(self, request, experiment_id):
+        from .models import Experiment
+        experiment = Experiment.objects.get(id=experiment_id)
+        ec = self._get_experiment_controller(experiment, request)
+        with tempfile.NamedTemporaryFile(mode='r+t') as tf:
+            ec.denormalize_protocol_responses().to_csv(tf.name, index=False)
+            if os.path.exists(tf.name):
+                with open(tf.name, 'rb') as fh:
+                    response = HttpResponse(
+                        fh.read(), content_type='text/csv')
+                    response['Content-Disposition'] = \
+                        f'attachment; filename={experiment.title}.protocol.csv'
                     return response
             raise Http404
 
@@ -330,7 +348,95 @@ class NestSite(ExperimentMixin, NestSitePrivateMixin):
             'is_popup': False,
         }
 
+    def _email_login_experiments(self, request):
+        """Return experiments that opt into identification by email."""
+        from .models import Experiment
+
+        enabled = []
+        active_title = os.environ.get('NEST_ACTIVE_EMAIL_EXPERIMENT')
+        for experiment in Experiment.objects.order_by('id'):
+            if active_title and experiment.title != active_title:
+                continue
+            try:
+                config = self._load_experiment_config(
+                    experiment.title, request)
+            except (FileNotFoundError, json.JSONDecodeError):
+                continue
+            metadata = config.get('experiment_config', {}).get(
+                'protocol_metadata', {})
+            if metadata.get('email_login_enabled') is True:
+                enabled.append(experiment)
+        return enabled
+
+    def _email_login(self, request, experiments, extra_context=None):
+        """Identify a non-staff study participant by email only."""
+        from django.contrib.auth import get_user_model, login as auth_login
+        from django.core.exceptions import ValidationError
+        from django.core.validators import validate_email
+        from django.db import transaction
+
+        from .models import Session, Subject
+
+        error = None
+        email = request.POST.get('email', '').strip().lower()
+        if request.method == 'POST':
+            try:
+                validate_email(email)
+            except ValidationError:
+                error = 'Please enter a valid email address.'
+
+            if error is None:
+                User = get_user_model()
+                with transaction.atomic():
+                    user = User.objects.filter(
+                        username__iexact=email).first()
+                    if user is None:
+                        user = User(
+                            username=email, email=email, is_active=True,
+                            is_staff=False, is_superuser=False)
+                        user.set_unusable_password()
+                        user.save()
+                    elif user.is_staff or user.is_superuser or \
+                            user.has_usable_password():
+                        error = (
+                            'This email belongs to a password-protected '
+                            'account and cannot be used for study entry.')
+                    elif not user.is_active:
+                        error = 'This participant account is inactive.'
+
+                    if error is None:
+                        subject = Subject.find_by_username(user.username)
+                        if subject is None:
+                            subject = Subject.create_by_username(user.username)
+                        existing_session = Session.objects.filter(
+                            subject=subject,
+                            experiment__in=experiments).order_by(
+                                'create_date').first()
+                        if existing_session is None:
+                            experiment = experiments[-1]
+                            controller = self._get_experiment_controller(
+                                experiment, request)
+                            controller.add_session(subject)
+
+                if error is None:
+                    auth_login(
+                        request, user,
+                        backend='django.contrib.auth.backends.ModelBackend')
+                    return HttpResponseRedirect(
+                        reverse('nest:index', current_app=self.name))
+
+        context = {
+            **self.each_context(request),
+            'title': 'AOM subjective study',
+            'email': email,
+            'error': error,
+        }
+        context.update(extra_context or {})
+        request.current_app = self.name
+        return TemplateResponse(request, 'nest/email_login.html', context)
+
     @method_decorator(never_cache)
+    @method_decorator(csrf_protect)
     def login(self, request, extra_context=None):
         """
         Display the login form for the given HttpRequest.
@@ -339,6 +445,11 @@ class NestSite(ExperimentMixin, NestSitePrivateMixin):
             # Already logged-in, redirect to welcome
             index_path = reverse('nest:index', current_app=self.name)
             return HttpResponseRedirect(index_path)
+
+        email_login_experiments = self._email_login_experiments(request)
+        if email_login_experiments:
+            return self._email_login(
+                request, email_login_experiments, extra_context)
 
         from django.contrib.auth.views import LoginView
         # Since this module gets imported in the application's root package,
@@ -1251,6 +1362,10 @@ class NestSite(ExperimentMixin, NestSitePrivateMixin):
                 response_sec = step['context']['response_sec']
                 assert response_sec != 'none'
                 rnd.response_sec = response_sec
+                rnd.replay_count = step['context'].get('replay_count', 0)
+                rnd.pause_sec = step['context'].get('pause_seconds', 0)
+                rnd.playback_completed = step['context'].get(
+                    'playback_completed', False)
                 rnd.save()
 
             title = 'Test done'
@@ -1312,6 +1427,10 @@ class NestSite(ExperimentMixin, NestSitePrivateMixin):
                           'actions_html': action_html}
             if script_html_template is not None:
                 page_input['script_html'] = script_html_template
+            for optional_html in [
+                    'extrastyle_html', 'extrahead_html', 'extrabody_html']:
+                if optional_html in context:
+                    page_input[optional_html] = context[optional_html]
             page = GenericPage(page_input)
             context = {**self.each_context(request), **page.context}
             request.current_app = self.name
@@ -1384,6 +1503,10 @@ class NestSite(ExperimentMixin, NestSitePrivateMixin):
                          'stimulusvotegroup_id': svgid,
                          **ec.experiment_config.round_context,
                          }
+
+                    if d.get('template_version') == 'reviewable':
+                        replay_limit = d.get('max_replays_per_clip', 0)
+                        d['replays_remaining'] = replay_limit
 
                     if ec.experiment_config.methodology == 'acr5c':
                         if start_end_seconds is not None:
@@ -1645,6 +1768,19 @@ class NestSite(ExperimentMixin, NestSitePrivateMixin):
                     else:
                         next_step['context']['score'] = score_dict
                         next_step['context']['response_sec'] = response_sec
+                        if ec.experiment_config.round_context.get(
+                                'template_version') == 'reviewable':
+                            replay_count = int(request.POST.get(
+                                'replay_count', 0))
+                            playback_completed = request.POST.get(
+                                'playback_completed') == '1'
+                            replay_limit = ec.experiment_config.round_context.get(
+                                'max_replays_per_clip', 0)
+                            assert 0 <= replay_count <= replay_limit
+                            assert playback_completed
+                            next_step['context']['replay_count'] = replay_count
+                            next_step['context']['playback_completed'] = \
+                                playback_completed
                         self._set_session_cookie(request, {
                             'steps': steps_performed + [next_step],
                             'session_id': session_id})

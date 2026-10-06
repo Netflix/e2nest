@@ -8,8 +8,8 @@ from django.urls import reverse
 from nest.config import NestConfig
 from nest.control import ExperimentController
 from nest.io import ExperimentUtils, export_sureal_dataset
-from nest.models import CcrFivePointVote, CcrThreePointVote, ElevenPointVote, FivePointVote, Round, SevenPointVote, \
-    Stimulus, StimulusVoteGroup, Subject, TafcVote, ThreePointVote, Vote, Zero2HundredVote
+from nest.models import CcrFivePointVote, CcrThreePointVote, ElevenPointVote, FivePointVote, Round, Session, \
+    SevenPointVote, Stimulus, StimulusVoteGroup, Subject, TafcVote, ThreePointVote, Vote, Zero2HundredVote
 from nest.sites import NestSite
 
 
@@ -305,6 +305,108 @@ class TestViewsWithWriteDataset(TestCase):
         response = self.client.get(reverse('nest:step_session', kwargs={'session_id': 1}))
         # hit cookie_failed with 200, because delete_test_cookie()
         self.assertEqual(response.status_code, 200)
+
+    def test_av2_acr_hr_reviewable_session(self):
+        config_path = NestConfig.root_path(
+            '..', '..', 'resource', 'experiment_config',
+            'av2_ai_extension_acr_hr_demo.json')
+        experiment_title = \
+            'nest_view_tests.TestViewsWithWriteDataset.test_av2_acr_hr'
+        ec = ExperimentUtils._create_experiment_from_config(
+            source_config_filepath=config_path,
+            is_test=True,
+            random_seed=1,
+            experiment_title=experiment_title)
+        subject = Subject.create_by_username('user')
+        session = ec.add_session(subject)
+
+        self.assertTrue(self.client.login(username='user', password='pass'))
+        self.client.get(reverse(
+            'nest:start_session', kwargs={'session_id': session.id}))
+
+        # Instructions plus two practice pages are additions, not scored rounds.
+        for addition_index in range(3):
+            response = self.client.get(reverse(
+                'nest:step_session', kwargs={'session_id': session.id}))
+            self.assertEqual(response.status_code, 200)
+            if addition_index == 1:
+                self.assertContains(response, 'familiarization-video-1')
+                self.assertContains(response, 'Recommended rating: 4')
+                self.assertContains(response, 'position: fixed')
+                self.assertContains(response, 'type="radio"', count=5)
+
+        for round_index in range(15):
+            response = self.client.get(reverse(
+                'nest:step_session', kwargs={'session_id': session.id}))
+            self.assertEqual(response.status_code, 200)
+            self.assertContains(response, 'Replay video')
+            self.assertNotContains(response, 'Pause for fatigue')
+            rendered = response.content.decode()
+            self.assertLess(
+                rendered.index('Replay video'),
+                rendered.index('Rate the overall picture quality'))
+            self.assertEqual(response.context_data['replays_remaining'], 5)
+            vote_group_id = response.context_data['stimulusvotegroup_id']
+            response = self.client.post(
+                reverse('nest:step_session', kwargs={'session_id': session.id}),
+                {
+                    f'acr_{vote_group_id}': '4',
+                    'replay_count': '5' if round_index == 0 else '0',
+                    'playback_completed': '1',
+                })
+            self.assertEqual(response.status_code, 302)
+
+        response = self.client.get(reverse(
+            'nest:step_session', kwargs={'session_id': session.id}))
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(Vote.objects.count(), 15)
+        self.assertEqual(sum(r.replay_count for r in Round.objects.all()), 5)
+        self.assertEqual(sum(r.pause_sec for r in Round.objects.all()), 0)
+        self.assertTrue(all(
+            r.playback_completed for r in Round.objects.all()))
+
+        self.assertTrue(self.client.login(username='staff', password='pass'))
+        response = self.client.get(reverse(
+            'admin:download_protocol_csv', args=(ec.experiment.id,)))
+        self.assertEqual(response.status_code, 200)
+        csv_export = response.content.decode('utf-8')
+        self.assertIn('test_condition_id', csv_export)
+        self.assertIn('stimulus_role', csv_export)
+        self.assertIn('stimulus_sha256', csv_export)
+
+    def test_aom_email_login_creates_and_reuses_viewer_session(self):
+        config_path = NestConfig.root_path(
+            '..', '..', 'resource', 'experiment_config',
+            'av2_ai_extension_acr_hr_demo.json')
+        experiment_title = \
+            'nest_view_tests.TestViewsWithWriteDataset.test_email_login'
+        experiment = ExperimentUtils._create_experiment_from_config(
+            source_config_filepath=config_path,
+            is_test=True,
+            random_seed=1,
+            experiment_title=experiment_title).experiment
+
+        response = self.client.get(reverse('nest:login'))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'nest/email_login.html')
+        self.assertContains(response, 'name="email"')
+        self.assertNotContains(response, 'name="password"')
+
+        response = self.client.post(
+            reverse('nest:login'), {'email': 'viewer@example.com'})
+        self.assertEqual(response.status_code, 302)
+        viewer = User.objects.get(username='viewer@example.com')
+        self.assertFalse(viewer.has_usable_password())
+        subject = Subject.find_by_username('viewer@example.com')
+        self.assertEqual(Session.objects.filter(
+            subject=subject, experiment=experiment).count(), 1)
+
+        self.client.logout()
+        response = self.client.post(
+            reverse('nest:login'), {'email': 'VIEWER@example.com'})
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(Session.objects.filter(
+            subject=subject, experiment=experiment).count(), 1)
 
     def test_step_session(self):
         ec = ExperimentUtils._create_experiment_from_config(

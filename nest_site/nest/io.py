@@ -771,6 +771,7 @@ class ExperimentUtils(object):
             'buttons': [None], 'button_ref': None,
             'stimulusvotegroup_ids': [None],
             'stimulusvotegroup_id': 0,
+            'replays_remaining': 0,
         }
 
         with open(experiment_config_filepath, 'rt') as fp_source:

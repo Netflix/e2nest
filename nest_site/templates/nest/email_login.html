@@ -1,0 +1,46 @@
+{% extends "nest/base.html" %}
+{% load i18n static %}
+
+{% block extrastyle %}
+<style>
+    .study-entry {
+        float: none !important;
+        width: 100%;
+        max-width: 520px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .study-entry label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 8px;
+    }
+    .study-entry input[type="email"] {
+        box-sizing: border-box;
+        font-size: 16px;
+        padding: 10px;
+        width: 100%;
+    }
+    .study-entry button { margin-top: 16px; }
+    .study-entry .error { color: #ba2121; font-weight: bold; }
+</style>
+{% endblock %}
+
+{% block breadcrumbs %}{% endblock %}
+{% block content_title %}<h1>{{ title }}</h1>{% endblock %}
+
+{% block content %}
+<div id="content-main" class="study-entry">
+    <p>Enter your email address to start or return to the study.</p>
+    <p>Your email is used only to identify your study session.</p>
+    {% if error %}<p class="error">{{ error }}</p>{% endif %}
+    <form method="post" action="{% url 'nest:login' %}">
+        {% csrf_token %}
+        <label for="email">Email address</label>
+        <input id="email" name="email" type="email" value="{{ email }}"
+               placeholder="name@example.com" autocomplete="email"
+               autocapitalize="none" spellcheck="false" required autofocus>
+        <button type="submit" class="button">Continue</button>
+    </form>
+</div>
+{% endblock %}

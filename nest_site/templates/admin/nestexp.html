@@ -12,7 +12,7 @@
 
 {% if experiments %}
     <table>
-        <tr><th>ID</th><th>Title</th><th>Description</th><th>Experimenters</th><th>Dataset</th></tr>
+        <tr><th>ID</th><th>Title</th><th>Description</th><th>Experimenters</th><th>Dataset</th><th>Protocol responses</th></tr>
         {% for experiment in experiments %}
             <tr>
                 <td>{{ experiment.id}}</td>
@@ -24,6 +24,7 @@
                     {% endif %}
                 </td>
                 <td><a href="{% url 'admin:download_sureal' experiment.id %}">Download</a></td>
+                <td><a href="{% url 'admin:download_protocol_csv' experiment.id %}">Download CSV</a></td>
 
             </tr>
         {% endfor %}

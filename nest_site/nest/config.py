@@ -258,6 +258,8 @@ class ExperimentConfig(object):
         assert self.rounds_per_session >= 1
 
         assert self.random_seed is None or isinstance(self.random_seed, int)
+        assert isinstance(self.avoid_consecutive_content, bool)
+        assert isinstance(self.protocol_metadata, dict)
 
         from .models import Vote
         Vote.find_subclass(self.vote_scale)
@@ -337,6 +339,16 @@ class ExperimentConfig(object):
     def random_seed(self):
         return self.config['random_seed'] \
             if 'random_seed' in self.config else None
+
+    @property
+    def avoid_consecutive_content(self):
+        """Avoid adjacent presentations derived from the same source."""
+        return self.config.get('avoid_consecutive_content', False)
+
+    @property
+    def protocol_metadata(self):
+        """Deployment metadata included in the protocol response export."""
+        return self.config.get('protocol_metadata', {})
 
     @property
     def vote_scale(self):

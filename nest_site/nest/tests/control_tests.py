@@ -7,7 +7,62 @@ from nest.config import ExperimentConfig, NestConfig, StimulusConfig
 from nest.control import ExperimentController, SessionStatus
 from nest.helpers import indices
 from nest.models import Content, Experiment, Round, Session, Stimulus, \
-    StimulusGroup, StimulusVoteGroup, Subject
+    FivePointVote, StimulusGroup, StimulusVoteGroup, Subject
+
+
+class TestAv2AcrHrDemo(TestCase):
+
+    @staticmethod
+    def _controller():
+        config_path = NestConfig.root_path(
+            '..', '..', 'resource', 'experiment_config',
+            'av2_ai_extension_acr_hr_demo.json')
+        with open(config_path, 'rt') as config_file:
+            config = json.load(config_file)
+        stimulus_config = StimulusConfig(
+            config['stimulus_config'], skip_path_check=True)
+        experiment_config = ExperimentConfig(
+            stimulus_config, config['experiment_config'])
+        experiment = Experiment.objects.create(
+            title=experiment_config.title,
+            description=experiment_config.description)
+        controller = ExperimentController(experiment, experiment_config)
+        controller.populate_stimuli()
+        return controller
+
+    def test_source_aware_order_and_protocol_export(self):
+        controller = self._controller()
+        subject = Subject.objects.create(name='viewer-1')
+        session = controller.add_session(subject)
+
+        rounds = list(session.round_set.order_by('round_id'))
+        content_ids = [rnd.stimulusgroup.stimuli[0].content.content_id
+                       for rnd in rounds]
+        self.assertEqual(len(rounds), 15)
+        self.assertTrue(all(
+            first != second
+            for first, second in zip(content_ids, content_ids[1:])))
+
+        first_round = rounds[0]
+        first_round.replay_count = 1
+        first_round.pause_sec = 2.5
+        first_round.response_sec = 11.0
+        first_round.playback_completed = True
+        first_round.save()
+        vote_group = first_round.stimulusgroup.stimulusvotegroup_set.get()
+        FivePointVote.objects.create(
+            score=4, round=first_round, stimulusvotegroup=vote_group)
+
+        responses = controller.denormalize_protocol_responses()
+        first_response = responses[
+            responses['presentation_position'] == 0].iloc[0]
+        self.assertEqual(len(responses), 15)
+        self.assertEqual(first_response['site_id'], 'demo-site-a')
+        self.assertEqual(first_response['rating'], 4)
+        self.assertEqual(first_response['replay_count'], 1)
+        self.assertEqual(first_response['pause_duration'], 2.5)
+        self.assertEqual(first_response['playback_validation_status'],
+                         'complete')
 
 
 class TestOrder(TestCase):

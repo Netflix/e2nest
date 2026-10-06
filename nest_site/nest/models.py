@@ -427,6 +427,9 @@ class Round(GenericModel):
                                                      on_delete=models.SET_NULL,
                                                      null=True, blank=True)
     response_sec = models.FloatField('response sec', null=True, blank=True)
+    replay_count = models.PositiveIntegerField('replay count', default=0)
+    pause_sec = models.FloatField('pause sec', default=0)
+    playback_completed = models.BooleanField('playback completed', default=False)
 
     def __str__(self):
         return super().__str__() + " ({}, {}, {})".format(

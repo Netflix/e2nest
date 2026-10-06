@@ -1,0 +1,6 @@
+role,path,source_id,condition_id,label,recommended_rating
+familiarization,dis_videos/14_Knitting_Close_SDR_3840x2160_15000k.mp4,practice-knitting,,Familiarization example 1,4
+familiarization,dis_videos/4_Campfire_SDR_960x540_800k.mp4,practice-campfire,,Familiarization example 2,2
+bridge,ref_videos/9_Face_Close_SDR_3840x2160_50000k.mp4,face-close,hidden-reference,,
+test,dis_videos/9_Face_Close_SDR_1920x1080_3000k.mp4,face-close,anchor-op1,,
+test,dis_videos/9_Face_Close_SDR_2560x1440_10000k.mp4,face-close,ai-extension-op1,,

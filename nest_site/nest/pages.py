@@ -74,7 +74,8 @@ class GenericPage(Page, ABC):
 class AcrPage(Page, PageWithVideoMixin, ABC):  # TODO: generalize AcrPage to support continuous scale, so that there's no need for separate Acr5cPage # noqa E501
     """Absolute Catagory Rating (ACR) page"""
     TEMPLATES = {'interactive': 'nest/acr.html',
-                 'standard': 'nest/acr_standard.html'
+                 'standard': 'nest/acr_standard.html',
+                 'reviewable': 'nest/acr_reviewable.html',
                  }
     DEFAULT_TEMPLATE = 'interactive'
 
@@ -102,14 +103,18 @@ class AcrPage(Page, PageWithVideoMixin, ABC):  # TODO: generalize AcrPage to sup
                                'button', 'video',
                                'question', 'choices',
                                'stimulusvotegroup_id']
-        elif self.context['template_version'] == 'standard':
+        elif self.context['template_version'] in ['standard', 'reviewable']:
             required_fields = ['title', 'instruction_html',
-                               'num_plays', 't_gray',
+                               't_gray',
                                'button', 'video',
                                'question', 'choices',
                                'stimulusvotegroup_id']
+            if self.context['template_version'] == 'standard':
+                required_fields.append('num_plays')
+            else:
+                required_fields.append('replays_remaining')
         else:
-            assert False, 'acr methodology only supports interactive and standard template_version'
+            assert False, 'acr methodology only supports interactive, standard, and reviewable template_version'
 
         for e in required_fields:
             assert e in self.context, f'parameter {e} is required in context'
@@ -119,6 +124,7 @@ class AcrPage(Page, PageWithVideoMixin, ABC):  # TODO: generalize AcrPage to sup
             assert self.context['num_plays'] >= 1
             if 'min_num_plays' in self.context:
                 assert self.context['num_plays'] >= self.context['min_num_plays'] >= 0
+        if self.context['template_version'] in ['standard', 'reviewable']:
             assert self.context['t_gray'] >= 0
             if 'text_color' in self.context:
                 assert len(self.context['text_color']) == 7 and self.context['text_color'].startswith('#'), \
@@ -127,6 +133,8 @@ class AcrPage(Page, PageWithVideoMixin, ABC):  # TODO: generalize AcrPage to sup
                 assert 0 <= self.context['text_vert_perc'] <= 100
             if 'overlay_on_video_js' in self.context:
                 assert isinstance(self.context['overlay_on_video_js'], str)
+        if self.context['template_version'] == 'reviewable':
+            assert self.context['replays_remaining'] >= 0
 
     @override(Page)
     def get_template(self):

@@ -176,6 +176,8 @@ class ExperimentController(object):
             blocklist_stimulusgroup_ids=self.experiment_config.blocklist_stimulusgroup_ids,
             super_stimulusgroup_ids=super_sg_ids,
         )
+        if self.experiment_config.avoid_consecutive_content:
+            d_rid_to_sgid = self._avoid_adjacent_content(d_rid_to_sgid)
 
         sess = Session(experiment=self.experiment, subject=subject)
         sess.save()
@@ -187,6 +189,67 @@ class ExperimentController(object):
                       stimulusgroup=sg)
             r.save()
         return sess
+
+    def _avoid_adjacent_content(self, round_to_stimulusgroup):
+        """Reorder selected ACR stimuli so adjacent rounds use different sources.
+
+        This changes presentation order only; it does not change which stimuli
+        were selected for the session.
+        """
+        stimulus_config = self.experiment_config.stimulus_config
+        stimuli = {s['stimulus_id']: s for s in stimulus_config.stimuli}
+        vote_groups = {
+            svg['stimulusvotegroup_id']: svg
+            for svg in stimulus_config.stimulusvotegroups
+        }
+        content_by_group = {}
+        for group in stimulus_config.stimulusgroups:
+            content_ids = set()
+            for vote_group_id in group['stimulusvotegroup_ids']:
+                for stimulus_id in vote_groups[vote_group_id]['stimulus_ids']:
+                    content_ids.add(stimuli[stimulus_id]['content_id'])
+            if len(content_ids) == 1:
+                content_by_group[group['stimulusgroup_id']] = content_ids.pop()
+
+        remaining = [round_to_stimulusgroup[rid]
+                     for rid in sorted(round_to_stimulusgroup)]
+        reordered = []
+        while remaining:
+            previous_content = content_by_group.get(reordered[-1]) \
+                if reordered else None
+            eligible_contents = {
+                content_by_group.get(group_id)
+                for group_id in remaining
+                if content_by_group.get(group_id) != previous_content
+            }
+            if eligible_contents:
+                remaining_counts = {
+                    content_id: sum(
+                        content_by_group.get(group_id) == content_id
+                        for group_id in remaining
+                    )
+                    for content_id in eligible_contents
+                }
+                selected_content = max(
+                    eligible_contents,
+                    key=lambda content_id: (
+                        remaining_counts[content_id],
+                        -next(
+                            i for i, group_id in enumerate(remaining)
+                            if content_by_group.get(group_id) == content_id
+                        ),
+                    ),
+                )
+                candidate_index = next(
+                    i for i, group_id in enumerate(remaining)
+                    if content_by_group.get(group_id) == selected_content
+                )
+            else:
+                candidate_index = 0
+            reordered.append(remaining.pop(candidate_index))
+
+        return {round_id: group_id
+                for round_id, group_id in enumerate(reordered)}
 
     @transaction.atomic
     def delete_session(self, session_id):
@@ -655,4 +718,69 @@ class ExperimentController(object):
                         row['sid2'] = sid2
                         row['path2'] = path2
                     rows.append(row)
+        return pandas.DataFrame(rows)
+
+    def denormalize_protocol_responses(self) -> pandas.DataFrame:
+        """Export individual responses using the AV2 protocol field schema."""
+        stimulus_config = self.experiment_config.stimulus_config
+        stimuli = {s['stimulus_id']: s for s in stimulus_config.stimuli}
+        vote_groups = {
+            svg['stimulusvotegroup_id']: svg
+            for svg in stimulus_config.stimulusvotegroups
+        }
+        metadata = self.experiment_config.protocol_metadata
+        rows = []
+
+        for session in self.experiment.session_set.all():
+            votes = Vote.objects.filter(round__session=session)
+            vote_dates = [vote.create_date for vote in votes]
+            session_end = max(vote_dates).isoformat() if vote_dates else None
+            completion_status = self.get_session_status(session).name.lower()
+
+            for rnd in session.round_set.order_by('round_id'):
+                for vote_group in rnd.stimulusgroup.stimulusvotegroup_set.all():
+                    stimulus_ids = vote_groups[
+                        vote_group.stimulusvotegroup_id]['stimulus_ids']
+                    stimulus = stimuli[stimulus_ids[0]]
+                    try:
+                        vote = Vote.objects.get(
+                            round=rnd, stimulusvotegroup=vote_group)
+                        rating = vote.score
+                        rating_timestamp = vote.create_date.isoformat()
+                    except Vote.DoesNotExist:
+                        rating = None
+                        rating_timestamp = None
+
+                    rows.append({
+                        'experiment_id': self.experiment.title,
+                        'anonymized_viewer_id': session.subject.get_subject_name(),
+                        'site_id': metadata.get('site_id'),
+                        'protocol_version': metadata.get('protocol_version'),
+                        'session_id': session.id,
+                        'playlist_id': session.id,
+                        'stimulus_id': stimulus['stimulus_id'],
+                        'source_id': stimulus.get(
+                            'source_id', stimulus['content_id']),
+                        'stimulus_role': stimulus.get(
+                            'stimulus_role', 'test'),
+                        'test_condition_id': stimulus.get('condition_id'),
+                        'stimulus_sha256': stimulus.get('sha256'),
+                        'presentation_position': rnd.round_id,
+                        'rating': rating,
+                        'rating_timestamp': rating_timestamp,
+                        'playback_validation_status': 'complete'
+                        if rnd.playback_completed else 'not_verified',
+                        'replay_count': rnd.replay_count,
+                        'pause_duration': rnd.pause_sec,
+                        'response_duration': rnd.response_sec,
+                        'playback_software_version': metadata.get(
+                            'playback_software_version'),
+                        'media_delivery_mode': metadata.get(
+                            'media_delivery_mode'),
+                        'session_start': session.create_date.isoformat(),
+                        'session_end': session_end,
+                        'completion_status': completion_status,
+                        'stimulus_path': stimulus['path'],
+                    })
+
         return pandas.DataFrame(rows)

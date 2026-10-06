@@ -1,4 +1,4 @@
-from setuptools import setup
+from setuptools import find_packages, setup
 
 
 setup(
@@ -7,5 +7,11 @@ setup(
     versioning="distance",
     author="Zhi Li (zli@netflix.com), Lukas Krasula (lkrasula@netflix.com)",
     url="https://github.com/Netflix/e2nest",
-    py_modules=['nest_site'],
+    package_dir={'': 'nest_site'},
+    packages=find_packages(where='nest_site'),
+    entry_points={
+        'console_scripts': [
+            'subjective_study_aom=nest.subjective_study_aom:main',
+        ],
+    },
 )

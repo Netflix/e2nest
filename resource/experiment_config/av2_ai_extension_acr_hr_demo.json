@@ -1,0 +1,219 @@
+{
+  "stimulus_config": {
+    "contents": [
+      {"content_id": 0, "name": "Face Close"},
+      {"content_id": 1, "name": "Dancing"},
+      {"content_id": 2, "name": "Walking Forest"}
+    ],
+    "stimuli": [
+      {
+        "stimulus_id": 0,
+        "content_id": 0,
+        "condition_id": "hidden-reference",
+        "type": "video/mp4",
+        "path": "http://localhost:8093/ref_videos/9_Face_Close_SDR_3840x2160_50000k.mp4"
+      },
+      {
+        "stimulus_id": 1,
+        "content_id": 0,
+        "condition_id": "anchor-standin-op1",
+        "type": "video/mp4",
+        "path": "http://localhost:8093/dis_videos/9_Face_Close_SDR_1920x1080_3000k.mp4"
+      },
+      {
+        "stimulus_id": 2,
+        "content_id": 0,
+        "condition_id": "ai-extension-standin-op1",
+        "type": "video/mp4",
+        "path": "http://localhost:8093/dis_videos/9_Face_Close_SDR_2560x1440_10000k.mp4"
+      },
+      {
+        "stimulus_id": 3,
+        "content_id": 0,
+        "condition_id": "anchor-standin-op2",
+        "type": "video/mp4",
+        "path": "http://localhost:8093/dis_videos/9_Face_Close_SDR_3840x2160_6000k.mp4"
+      },
+      {
+        "stimulus_id": 4,
+        "content_id": 0,
+        "condition_id": "ai-extension-standin-op2",
+        "type": "video/mp4",
+        "path": "http://localhost:8093/dis_videos/9_Face_Close_SDR_3840x2160_15000k.mp4"
+      },
+      {
+        "stimulus_id": 5,
+        "content_id": 1,
+        "condition_id": "hidden-reference",
+        "type": "video/mp4",
+        "path": "http://localhost:8093/ref_videos/7_Dancing_SDR_3840x2160_50000k.mp4"
+      },
+      {
+        "stimulus_id": 6,
+        "content_id": 1,
+        "condition_id": "anchor-standin-op1",
+        "type": "video/mp4",
+        "path": "http://localhost:8093/dis_videos/7_Dancing_SDR_1920x1080_3000k.mp4"
+      },
+      {
+        "stimulus_id": 7,
+        "content_id": 1,
+        "condition_id": "ai-extension-standin-op1",
+        "type": "video/mp4",
+        "path": "http://localhost:8093/dis_videos/7_Dancing_SDR_2560x1440_10000k.mp4"
+      },
+      {
+        "stimulus_id": 8,
+        "content_id": 1,
+        "condition_id": "anchor-standin-op2",
+        "type": "video/mp4",
+        "path": "http://localhost:8093/dis_videos/7_Dancing_SDR_3840x2160_6000k.mp4"
+      },
+      {
+        "stimulus_id": 9,
+        "content_id": 1,
+        "condition_id": "ai-extension-standin-op2",
+        "type": "video/mp4",
+        "path": "http://localhost:8093/dis_videos/7_Dancing_SDR_3840x2160_15000k.mp4"
+      },
+      {
+        "stimulus_id": 10,
+        "content_id": 2,
+        "condition_id": "hidden-reference",
+        "type": "video/mp4",
+        "path": "http://localhost:8093/ref_videos/29_Walking_Forest_SDR_3840x2160_50000k.mp4"
+      },
+      {
+        "stimulus_id": 11,
+        "content_id": 2,
+        "condition_id": "anchor-standin-op1",
+        "type": "video/mp4",
+        "path": "http://localhost:8093/dis_videos/29_Walking_Forest_SDR_1920x1080_3000k.mp4"
+      },
+      {
+        "stimulus_id": 12,
+        "content_id": 2,
+        "condition_id": "ai-extension-standin-op1",
+        "type": "video/mp4",
+        "path": "http://localhost:8093/dis_videos/29_Walking_Forest_SDR_2560x1440_10000k.mp4"
+      },
+      {
+        "stimulus_id": 13,
+        "content_id": 2,
+        "condition_id": "anchor-standin-op2",
+        "type": "video/mp4",
+        "path": "http://localhost:8093/dis_videos/29_Walking_Forest_SDR_3840x2160_6000k.mp4"
+      },
+      {
+        "stimulus_id": 14,
+        "content_id": 2,
+        "condition_id": "ai-extension-standin-op2",
+        "type": "video/mp4",
+        "path": "http://localhost:8093/dis_videos/29_Walking_Forest_SDR_3840x2160_15000k.mp4"
+      }
+    ],
+    "stimulusvotegroups": [
+      {"stimulusvotegroup_id": 0, "stimulus_ids": [0]},
+      {"stimulusvotegroup_id": 1, "stimulus_ids": [1]},
+      {"stimulusvotegroup_id": 2, "stimulus_ids": [2]},
+      {"stimulusvotegroup_id": 3, "stimulus_ids": [3]},
+      {"stimulusvotegroup_id": 4, "stimulus_ids": [4]},
+      {"stimulusvotegroup_id": 5, "stimulus_ids": [5]},
+      {"stimulusvotegroup_id": 6, "stimulus_ids": [6]},
+      {"stimulusvotegroup_id": 7, "stimulus_ids": [7]},
+      {"stimulusvotegroup_id": 8, "stimulus_ids": [8]},
+      {"stimulusvotegroup_id": 9, "stimulus_ids": [9]},
+      {"stimulusvotegroup_id": 10, "stimulus_ids": [10]},
+      {"stimulusvotegroup_id": 11, "stimulus_ids": [11]},
+      {"stimulusvotegroup_id": 12, "stimulus_ids": [12]},
+      {"stimulusvotegroup_id": 13, "stimulus_ids": [13]},
+      {"stimulusvotegroup_id": 14, "stimulus_ids": [14]}
+    ],
+    "stimulusgroups": [
+      {"stimulusgroup_id": 0, "stimulusvotegroup_ids": [0]},
+      {"stimulusgroup_id": 1, "stimulusvotegroup_ids": [1]},
+      {"stimulusgroup_id": 2, "stimulusvotegroup_ids": [2]},
+      {"stimulusgroup_id": 3, "stimulusvotegroup_ids": [3]},
+      {"stimulusgroup_id": 4, "stimulusvotegroup_ids": [4]},
+      {"stimulusgroup_id": 5, "stimulusvotegroup_ids": [5]},
+      {"stimulusgroup_id": 6, "stimulusvotegroup_ids": [6]},
+      {"stimulusgroup_id": 7, "stimulusvotegroup_ids": [7]},
+      {"stimulusgroup_id": 8, "stimulusvotegroup_ids": [8]},
+      {"stimulusgroup_id": 9, "stimulusvotegroup_ids": [9]},
+      {"stimulusgroup_id": 10, "stimulusvotegroup_ids": [10]},
+      {"stimulusgroup_id": 11, "stimulusvotegroup_ids": [11]},
+      {"stimulusgroup_id": 12, "stimulusvotegroup_ids": [12]},
+      {"stimulusgroup_id": 13, "stimulusvotegroup_ids": [13]},
+      {"stimulusgroup_id": 14, "stimulusvotegroup_ids": [14]}
+    ]
+  },
+  "experiment_config": {
+    "title": "av2_ai_extension_acr_hr_demo",
+    "description": "PoC of the proposed AV2 AI-extension ACR-HR workflow. Encoded SDR conditions are stand-ins and are not AV2 or AI-extension outputs.",
+    "methodology": "acr",
+    "vote_scale": "FIVE_POINT",
+    "rounds_per_session": 15,
+    "random_seed": null,
+    "avoid_consecutive_content": true,
+    "prioritized": [],
+    "blocklist_stimulusgroup_ids": [],
+    "protocol_metadata": {
+      "site_id": "demo-site-a",
+      "protocol_version": "av2-ai-extension-acr-hr-poc-v1",
+      "playback_software_version": "e2nest-av2-demo-v1",
+      "media_delivery_mode": "local-media",
+      "email_login_enabled": true
+    },
+    "additions": [
+      {
+        "position": {"round_id": 0, "before_or_after": "before"},
+        "context": {
+          "title": "Instructions",
+          "text_html": "<p>You will rate the overall picture quality of each video from <b>Bad</b> to <b>Excellent</b>. Some videos may contain plausible-looking changes; penalize altered structure, text, faces, unstable detail, and temporal inconsistency.</p><p>Each scored clip plays once. At the rating screen, you may replay that clip up to five times.</p><p><b>Demo note:</b> the encoded conditions in this PoC are stand-ins used to demonstrate the workflow. They are not AV2 or AI-extension outputs.</p>",
+          "actions_html": "<p><a class=\"button\" href=\"{action_url}\" id=\"start\">Continue to practice</a></p>"
+        }
+      },
+      {
+        "position": {"round_id": 0, "before_or_after": "before"},
+        "context": {
+          "title": "Practice example 1 of 2",
+          "text_html": "<p>This example is for familiarization only. Its score is not recorded. A recommended calibration rating will appear after playback.</p><p><button type=\"button\" class=\"button\" id=\"familiarization-play-1\">Play video</button></p><div id=\"familiarization-rating-1\" style=\"display:none\"><p>How would you rate the overall picture quality?</p><div><input type=\"radio\" name=\"familiarization-choice-1\" id=\"familiarization-choice-1-5\" value=\"5\"><label for=\"familiarization-choice-1-5\">5 &ndash; Excellent</label></div><div><input type=\"radio\" name=\"familiarization-choice-1\" id=\"familiarization-choice-1-4\" value=\"4\"><label for=\"familiarization-choice-1-4\">4 &ndash; Good</label></div><div><input type=\"radio\" name=\"familiarization-choice-1\" id=\"familiarization-choice-1-3\" value=\"3\"><label for=\"familiarization-choice-1-3\">3 &ndash; Fair</label></div><div><input type=\"radio\" name=\"familiarization-choice-1\" id=\"familiarization-choice-1-2\" value=\"2\"><label for=\"familiarization-choice-1-2\">2 &ndash; Poor</label></div><div><input type=\"radio\" name=\"familiarization-choice-1\" id=\"familiarization-choice-1-1\" value=\"1\"><label for=\"familiarization-choice-1-1\">1 &ndash; Bad</label></div></div><p id=\"familiarization-recommendation-1\" style=\"display:none\"><b>Recommended rating: 4 &ndash; Good.</b></p><p id=\"familiarization-status-1\" style=\"display:none\"></p>",
+          "actions_html": "<p id=\"familiarization-continue-1\" style=\"display:none\"><a class=\"button\" href=\"{action_url}\" id=\"start\">Next practice example</a></p>",
+          "extrastyle_html": "#familiarization-video-1 { position: fixed; inset: 0; width: 100vw; height: 100vh; object-fit: contain; background: black; display: none; z-index: 10000; }",
+          "extrabody_html": "<video id=\"familiarization-video-1\" playsinline muted preload=\"auto\" controlsList=\"nodownload nofullscreen noremoteplayback\" src=\"http://localhost:8093/dis_videos/14_Knitting_Close_SDR_3840x2160_15000k.mp4\"></video>",
+          "script_html": "window.addEventListener(\"load\", function () {var video = document.getElementById(\"familiarization-video-1\");var play = document.getElementById(\"familiarization-play-1\");var proceed = document.getElementById(\"familiarization-continue-1\");var status = document.getElementById(\"familiarization-status-1\");var recommendation = document.getElementById(\"familiarization-recommendation-1\");var ratingPanel = document.getElementById(\"familiarization-rating-1\");var container = document.getElementById(\"container\");var finishPlayback = function (playedSuccessfully) {video.pause(); video.style.display = \"none\";document.body.style.backgroundColor = \"white\";container.style.display = \"block\";play.disabled = true;if (playedSuccessfully) {ratingPanel.style.display = \"block\";recommendation.style.display = \"block\";proceed.style.display = \"block\";}else { proceed.style.display = \"block\"; }};play.addEventListener(\"click\", function () {container.style.display = \"none\";document.body.style.backgroundColor = \"black\";video.style.display = \"block\"; video.currentTime = 0;var playback = video.play();if (playback !== undefined) {playback.catch(function () {status.textContent = \"The video could not be played. You may continue.\";status.style.display = \"block\"; finishPlayback(false);});}});video.addEventListener(\"ended\", function () { finishPlayback(true); });video.addEventListener(\"error\", function () {status.textContent = \"The video could not be played. You may continue.\";status.style.display = \"block\"; finishPlayback(false);});});"
+        }
+      },
+      {
+        "position": {"round_id": 0, "before_or_after": "before"},
+        "context": {
+          "title": "Practice example 2 of 2",
+          "text_html": "<p>This example is for familiarization only. Its score is not recorded. A recommended calibration rating will appear after playback.</p><p><button type=\"button\" class=\"button\" id=\"familiarization-play-2\">Play video</button></p><div id=\"familiarization-rating-2\" style=\"display:none\"><p>How would you rate the overall picture quality?</p><div><input type=\"radio\" name=\"familiarization-choice-2\" id=\"familiarization-choice-2-5\" value=\"5\"><label for=\"familiarization-choice-2-5\">5 &ndash; Excellent</label></div><div><input type=\"radio\" name=\"familiarization-choice-2\" id=\"familiarization-choice-2-4\" value=\"4\"><label for=\"familiarization-choice-2-4\">4 &ndash; Good</label></div><div><input type=\"radio\" name=\"familiarization-choice-2\" id=\"familiarization-choice-2-3\" value=\"3\"><label for=\"familiarization-choice-2-3\">3 &ndash; Fair</label></div><div><input type=\"radio\" name=\"familiarization-choice-2\" id=\"familiarization-choice-2-2\" value=\"2\"><label for=\"familiarization-choice-2-2\">2 &ndash; Poor</label></div><div><input type=\"radio\" name=\"familiarization-choice-2\" id=\"familiarization-choice-2-1\" value=\"1\"><label for=\"familiarization-choice-2-1\">1 &ndash; Bad</label></div></div><p id=\"familiarization-recommendation-2\" style=\"display:none\"><b>Recommended rating: 2 &ndash; Poor.</b></p><p id=\"familiarization-status-2\" style=\"display:none\"></p>",
+          "actions_html": "<p id=\"familiarization-continue-2\" style=\"display:none\"><a class=\"button\" href=\"{action_url}\" id=\"start\">Start scored session</a></p>",
+          "extrastyle_html": "#familiarization-video-2 { position: fixed; inset: 0; width: 100vw; height: 100vh; object-fit: contain; background: black; display: none; z-index: 10000; }",
+          "extrabody_html": "<video id=\"familiarization-video-2\" playsinline muted preload=\"auto\" controlsList=\"nodownload nofullscreen noremoteplayback\" src=\"http://localhost:8093/dis_videos/4_Campfire_SDR_960x540_800k.mp4\"></video>",
+          "script_html": "window.addEventListener(\"load\", function () {var video = document.getElementById(\"familiarization-video-2\");var play = document.getElementById(\"familiarization-play-2\");var proceed = document.getElementById(\"familiarization-continue-2\");var status = document.getElementById(\"familiarization-status-2\");var recommendation = document.getElementById(\"familiarization-recommendation-2\");var ratingPanel = document.getElementById(\"familiarization-rating-2\");var container = document.getElementById(\"container\");var finishPlayback = function (playedSuccessfully) {video.pause(); video.style.display = \"none\";document.body.style.backgroundColor = \"white\";container.style.display = \"block\";play.disabled = true;if (playedSuccessfully) {ratingPanel.style.display = \"block\";recommendation.style.display = \"block\";proceed.style.display = \"block\";}else { proceed.style.display = \"block\"; }};play.addEventListener(\"click\", function () {container.style.display = \"none\";document.body.style.backgroundColor = \"black\";video.style.display = \"block\"; video.currentTime = 0;var playback = video.play();if (playback !== undefined) {playback.catch(function () {status.textContent = \"The video could not be played. You may continue.\";status.style.display = \"block\"; finishPlayback(false);});}});video.addEventListener(\"ended\", function () { finishPlayback(true); });video.addEventListener(\"error\", function () {status.textContent = \"The video could not be played. You may continue.\";status.style.display = \"block\"; finishPlayback(false);});});"
+        }
+      }
+    ],
+    "round_context": {
+      "template_version": "reviewable",
+      "t_gray": 1000,
+      "video_display_percentage": 100,
+      "video_show_controls": false,
+      "max_replays_per_clip": 5,
+      "instruction_html": "",
+      "question": "Rate the overall picture quality of this video.",
+      "choices": [
+        "5 - Excellent",
+        "4 - Good",
+        "3 - Fair",
+        "2 - Poor",
+        "1 - Bad"
+      ]
+    },
+    "done_context": {
+      "text_html": "<p>You have completed the AV2 AI-extension ACR-HR demonstration.</p>"
+    }
+  }
+}
